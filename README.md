@@ -5,6 +5,10 @@
     <img src="/screenshots/Screenshot_20180826-145938.png" width="200px"</img> 
     <img src="/screenshots/Screenshot_20180826-145339.png" width="200px"</img> 
     <img src="/screenshots/Screenshot_20180826-154219.png" width="200px"</img> 
+    <img src="/screenshots/Screenshot_20180826-142715.png" width="200px"</img>
+    <img src="/screenshots/Screenshot_20180826-143006.png" width="200px"</img> 
+ 
+
 </div>
 
 
