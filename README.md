@@ -1,3 +1,15 @@
+<div align="center">
+    <img src="/screenshots/Screenshot_20180826-142649.png" width="400px"</img> 
+    <img src="/screenshots/Screenshot_20180826-142928.png" width="400px"</img> 
+    <img src="/screenshots/Screenshot_20180826-145339.png" width="400px"</img> 
+    <img src="/screenshots/Screenshot_20180826-145938.png" width="400px"</img> 
+    <img src="/screenshots/Screenshot_20180826-145339.png" width="400px"</img> 
+    <img src="/screenshots/Screenshot_20180826-154219.png" width="400px"</img> 
+</div>
+
+
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
