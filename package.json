@@ -13,7 +13,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "prettify": "prettier --write . "
   },
   "jest": {
     "preset": "jest-expo"
@@ -39,6 +40,7 @@
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.3.1",
     "react-navigation-material-bottom-tabs": "^0.1.2",
-    "react-navigation-redux-helpers": "^2.0.2"
+    "react-navigation-redux-helpers": "^2.0.2",
+    "prettier": "2.1.1"
   }
 }

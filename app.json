@@ -1,42 +1,32 @@
 {
   "expo": {
     "sdkVersion": "27.0.0",
-    "android":{
-      "package":"com.ruvunald.myTaxiApp1",
-      "versionCode":1,
-      "permissions":[],
-      "icon":"./Components/Images/icon.png",
+    "android": {
+      "package": "com.ruvunald.myTaxiApp1",
+      "versionCode": 1,
+      "permissions": [],
+      "icon": "./Components/Images/icon.png",
       "config": {
-        
         "branch": {
-          
           "apiKey": "AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY"
-         
         },
-        
+
         "googleMaps": {
-          
-          "apiKey":"AIzaSyCJd2JfeBR0Tft2E51ltbV4qRVJw23NBEU"
+          "apiKey": "AIzaSyCJd2JfeBR0Tft2E51ltbV4qRVJw23NBEU"
         },
-     
+
         "googleSignIn": {
-          
           "apiKey": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs",
-  
-          
+
           "certificateHash": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs"
         }
-    },
-    "splash": {
-      
-      "backgroundColor": "#ffffff",
+      },
+      "splash": {
+        "backgroundColor": "#ffffff",
 
-     
-      "image":"./Components/Images/icon.png",
-      "resizeMode": "cover"
-
+        "image": "./Components/Images/icon.png",
+        "resizeMode": "cover"
+      }
     }
-    
   }
-}
 }

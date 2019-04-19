@@ -16,74 +16,47 @@ import RiderRegLog from './components/rider/RiderRegLog';
 import * as firebase from 'firebase';
 import ApiKeys from './components/constants/ApiKeys';
 
-
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     firebase.initializeApp(ApiKeys.FirebaseConfig);
   }
   render() {
-    return (
-      <View style={styles.container}>
-          
-      </View>
-    );
+    return <View style={styles.container} />;
   }
 }
 
 //
 const AuthStack = createStackNavigator({
-      Home:RiderDriverScreenChoice,
-      //rider
-      RiderScreen:RiderRegLog,
-      RiderReg:RiderRegister,
-      RiderLog:RiderLogin,
-      RiderVerifyNum:RiderVerifyNumber,
-      RiderResetPassWord:RiderForgotPassword,
-      //driver
-      DriverScreen:DriverRegLog,
-      DriverLog:DriverLogin ,
-      DriverReg:DriverRegister,
-
-
-
-/*},
-{
-  navigationOptions: {
-         headerStyle: {
-             backgroundColor: '#000',
-         },
-         headerTitleStyle: {
-             color: '#fff',
-         },
-         headerBackTitleStyle: {
-             color: '#fff',
-         },
-         headerTintColor: '#fff',
-
- }*/
-}
-
-
-);
-const AuthStackRider= createStackNavigator({ Rider:RiderHome });
-const AuthStackDriver= createStackNavigator({ Driver:DriverHome });
+  Home: RiderDriverScreenChoice,
+  //rider
+  RiderScreen: RiderRegLog,
+  RiderReg: RiderRegister,
+  RiderLog: RiderLogin,
+  RiderVerifyNum: RiderVerifyNumber,
+  RiderResetPassWord: RiderForgotPassword,
+  //driver
+  DriverScreen: DriverRegLog,
+  DriverLog: DriverLogin,
+  DriverReg: DriverRegister,
+});
+const AuthStackRider = createStackNavigator({ Rider: RiderHome });
+const AuthStackDriver = createStackNavigator({ Driver: DriverHome });
 export default createSwitchNavigator(
   {
-      AuthLoading:AuthLoadingScreen,
-      App1: AuthStackRider,
-      App2: AuthStackDriver,
-      Auth: AuthStack,
+    AuthLoading: AuthLoadingScreen,
+    App1: AuthStackRider,
+    App2: AuthStackDriver,
+    Auth: AuthStack,
   },
   {
-      initialRouteName: 'AuthLoading',
-  }
+    initialRouteName: 'AuthLoading',
+  },
 );
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: '#1E88E5',
-
+    flex: 1,
+    backgroundColor: '#1E88E5',
   },
 });
