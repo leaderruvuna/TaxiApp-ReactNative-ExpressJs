@@ -1,5 +1,6 @@
 import React from 'react';
-import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import RiderHome from './src/rider/RiderHome';
 import RiderLogin from './src/rider/RiderLogin';
@@ -27,31 +28,36 @@ class App extends React.Component {
 }
 
 //
-const AuthStack = createStackNavigator({
-	Home: RiderDriverScreenChoice,
-	//rider
-	RiderScreen: RiderRegLog,
-	RiderReg: RiderRegister,
-	RiderLog: RiderLogin,
-	RiderVerifyNum: RiderVerifyNumber,
-	RiderResetPassWord: RiderForgotPassword,
-	//driver
-	DriverScreen: DriverRegLog,
-	DriverLog: DriverLogin,
-	DriverReg: DriverRegister
-});
-const AuthStackRider = createStackNavigator({ Rider: RiderHome });
-const AuthStackDriver = createStackNavigator({ Driver: DriverHome });
-export default createSwitchNavigator(
-	{
-		AuthLoading: AuthLoadingScreen,
-		App1: AuthStackRider,
-		App2: AuthStackDriver,
-		Auth: AuthStack
-	},
-	{
-		initialRouteName: 'AuthLoading'
-	}
+const AuthStack = createAppContainer(
+	createStackNavigator({
+		Home: { screen: RiderHome },
+		//rider
+		RiderScreen: { screen: RiderRegLog },
+		RiderReg: { screen: RiderRegister },
+		//RiderLog: { screen: RiderLogin },
+		RiderVerifyNum: { screen: RiderVerifyNumber },
+		RiderResetPassWord: { screen: RiderForgotPassword },
+		//driver
+		DriverScreen: { screen: DriverRegLog },
+		DriverLog: { screen: DriverLogin },
+		DriverReg: { screen: DriverRegister }
+		// Rider: { screen: RiderHome }
+	})
+);
+const AuthStackRider = createStackNavigator({ Rider: { screen: RiderHome } });
+const AuthStackDriver = createStackNavigator({ Driver: { screen: DriverHome } });
+export default createAppContainer(
+	createSwitchNavigator(
+		{
+			AuthLoading: AuthLoadingScreen,
+			App1: AuthStackRider,
+			App2: AuthStackDriver,
+			Auth: AuthStack
+		},
+		{
+			initialRouteName: 'AuthLoading'
+		}
+	)
 );
 
 const styles = StyleSheet.create({
@@ -60,3 +66,5 @@ const styles = StyleSheet.create({
 		backgroundColor: '#1E88E5'
 	}
 });
+
+// export default AuthStack;
