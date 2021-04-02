@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, AsyncStorage, Image, YellowBox } from 'react-native';
-import { createDrawerNavigator, DrawerItems, createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import DriverHomeContents from './DriverHomeContents';
 import DriverEarnings from './DriverEarnings';
 import DriverRatings from './DriverRatings';
