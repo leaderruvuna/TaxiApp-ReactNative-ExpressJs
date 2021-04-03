@@ -18,53 +18,55 @@ import * as firebase from 'firebase';
 import ApiKeys from './src/constants/ApiKeys';
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-		firebase.initializeApp(ApiKeys.FirebaseConfig);
-	}
-	render() {
-		return <View style={styles.container} />;
-	}
+   constructor(props) {
+      super(props);
+      firebase.initializeApp(ApiKeys.FirebaseConfig);
+   }
+   render() {
+      return <View style={styles.container} />;
+   }
 }
 
 //
 const AuthStack = createAppContainer(
-	createStackNavigator({
-		Home: { screen: RiderHome },
-		//rider
-		RiderScreen: { screen: RiderRegLog },
-		RiderReg: { screen: RiderRegister },
-		//RiderLog: { screen: RiderLogin },
-		RiderVerifyNum: { screen: RiderVerifyNumber },
-		RiderResetPassWord: { screen: RiderForgotPassword },
-		//driver
-		DriverScreen: { screen: DriverRegLog },
-		DriverLog: { screen: DriverLogin },
-		DriverReg: { screen: DriverRegister }
-		// Rider: { screen: RiderHome }
-	})
+   createStackNavigator({
+      Home: { screen: RiderHome },
+      //rider
+      RiderScreen: { screen: RiderRegLog },
+      RiderReg: { screen: RiderRegister },
+      //RiderLog: { screen: RiderLogin },
+      RiderVerifyNum: { screen: RiderVerifyNumber },
+      RiderResetPassWord: { screen: RiderForgotPassword },
+      //driver
+      DriverScreen: { screen: DriverRegLog },
+      DriverLog: { screen: DriverLogin },
+      DriverReg: { screen: DriverRegister },
+      // Rider: { screen: RiderHome }
+   }),
 );
 const AuthStackRider = createStackNavigator({ Rider: { screen: RiderHome } });
-const AuthStackDriver = createStackNavigator({ Driver: { screen: DriverHome } });
+const AuthStackDriver = createStackNavigator({
+   Driver: { screen: DriverHome },
+});
 export default createAppContainer(
-	createSwitchNavigator(
-		{
-			AuthLoading: AuthLoadingScreen,
-			App1: AuthStackRider,
-			App2: AuthStackDriver,
-			Auth: AuthStack
-		},
-		{
-			initialRouteName: 'AuthLoading'
-		}
-	)
+   createSwitchNavigator(
+      {
+         AuthLoading: AuthLoadingScreen,
+         App1: AuthStackRider,
+         App2: AuthStackDriver,
+         Auth: AuthStack,
+      },
+      {
+         initialRouteName: 'AuthLoading',
+      },
+   ),
 );
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#1E88E5'
-	}
+   container: {
+      flex: 1,
+      backgroundColor: '#1E88E5',
+   },
 });
 
 // export default AuthStack;

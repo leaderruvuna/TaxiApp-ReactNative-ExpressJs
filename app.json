@@ -1,33 +1,33 @@
 {
-  "expo": {
-    "sdkVersion": "40.0.0",
-    "platforms": ["android", "ios"],
-    "android": {
-      "package": "com.ruvunald.myTaxiApp1",
-      "versionCode": 1,
-      "permissions": [],
-      "icon": "./src/Images/icon.png",
-      "config": {
-        "branch": {
-          "apiKey": "AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY"
-        },
+   "expo": {
+      "sdkVersion": "40.0.0",
+      "platforms": ["android", "ios"],
+      "android": {
+         "package": "com.ruvunald.myTaxiApp1",
+         "versionCode": 1,
+         "permissions": [],
+         "icon": "./src/Images/icon.png",
+         "config": {
+            "branch": {
+               "apiKey": "AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY"
+            },
 
-        "googleMaps": {
-          "apiKey": "AIzaSyCJd2JfeBR0Tft2E51ltbV4qRVJw23NBEU"
-        },
+            "googleMaps": {
+               "apiKey": "AIzaSyCJd2JfeBR0Tft2E51ltbV4qRVJw23NBEU"
+            },
 
-        "googleSignIn": {
-          "apiKey": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs",
+            "googleSignIn": {
+               "apiKey": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs",
 
-          "certificateHash": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs"
-        }
-      },
-      "splash": {
-        "backgroundColor": "#ffffff",
+               "certificateHash": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs"
+            }
+         },
+         "splash": {
+            "backgroundColor": "#ffffff",
 
-        "image": "./src/Images/icon.png",
-        "resizeMode": "cover"
+            "image": "./src/Images/icon.png",
+            "resizeMode": "cover"
+         }
       }
-    }
-  }
+   }
 }
