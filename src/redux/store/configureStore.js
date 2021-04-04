@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 
-import rootReducers from 'src/redux/reducers';
-import sagas from 'src/redux/sagas';
+import rootReducers from '../reducers';
+import sagas from '../sagas';
 
 const config = {
   key: 'root',
