@@ -1,70 +1,76 @@
 {
-  "name": "myTaxiApp",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "react-native-scripts": "2.0.1",
-    "jest-expo": "~40.0.0",
-    "react-test-renderer": "16.3.1"
-  },
-  "main": "node_modules/expo/AppEntry.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject",
-    "prettify": "prettier --write . "
-  },
-  "jest": {
-    "preset": "jest-expo"
-  },
-  "resolutions": {
-    "grpc": "^1.12.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-transform-react-jsx",
-      "@babel/plugin-proposal-class-properties"
-    ]
-  },
-  "dependencies": {
-    "@babel/plugin-transform-react-jsx": "^7.13.12",
-    "@react-native-community/masked-view": "^0.1.10",
-    "babel-loader": "^8.2.2",
-    "cleanup-dependencies": "0.0.6",
-    "expo": "~40.0.0",
-    "expo-status-bar": "~1.0.3",
-    "firebase": "^4.6.2",
-    "native-base": "^2.15.2",
-    "prettier": "2.1.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-    "react-native-bem-check-box": "^1.0.0",
-    "react-native-check-box": "^2.1.0",
-    "react-native-geocoding": "^0.3.0",
-    "react-native-gesture-handler": "^1.10.3",
-    "react-native-google-places-autocomplete": "^1.3.6",
-    "react-native-image-slider": "^2.0.3",
-    "react-native-maps": "^0.21.0",
-    "react-native-material-textfield": "^0.12.0",
-    "react-native-paper": "^4.7.2",
-    "react-native-phone-input": "^0.2.1",
-    "react-native-reanimated": "^2.1.0",
-    "react-native-restart": "0.0.6",
-    "react-native-restart-android": "0.0.7",
-    "react-native-screens": "^3.0.0",
-    "react-native-simple-toast": "0.0.8",
-    "react-native-vector-icons": "^4.6.0",
-    "react-native-web": "~0.13.12",
-    "react-navigation": "^4.4.4",
-    "react-navigation-drawer": "^2.7.0",
-    "react-navigation-material-bottom-tabs": "^2.3.4",
-    "react-navigation-redux-helpers": "^4.0.1",
-    "react-navigation-stack": "^2.10.4"
-  }
+   "name": "myTaxiApp",
+   "version": "0.1.0",
+   "private": true,
+   "devDependencies": {
+      "react-native-scripts": "2.0.1",
+      "jest-expo": "~40.0.0",
+      "react-test-renderer": "16.3.1"
+   },
+   "main": "node_modules/expo/AppEntry.js",
+   "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "web": "expo start --web",
+      "eject": "expo eject",
+      "prettify": "prettier --write . "
+   },
+   "jest": {
+      "preset": "jest-expo"
+   },
+   "resolutions": {
+      "grpc": "^1.12.0"
+   },
+   "babel": {
+      "presets": [
+         "@babel/preset-env"
+      ],
+      "plugins": [
+         "@babel/plugin-transform-react-jsx",
+         "@babel/plugin-proposal-class-properties"
+      ]
+   },
+   "dependencies": {
+      "@babel/plugin-transform-react-jsx": "^7.13.12",
+      "@react-native-community/masked-view": "^0.1.10",
+      "@react-native-community/async-storage": "^1.10.0",
+      "babel-loader": "^8.2.2",
+      "cleanup-dependencies": "0.0.6",
+      "expo": "~40.0.0",
+      "expo-status-bar": "~1.0.3",
+      "firebase": "^4.6.2",
+      "native-base": "^2.15.2",
+      "prettier": "2.1.1",
+      "react": "16.13.1",
+      "react-dom": "16.13.1",
+      "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+      "react-native-bem-check-box": "^1.0.0",
+      "react-native-check-box": "^2.1.0",
+      "react-native-geocoding": "^0.3.0",
+      "react-native-gesture-handler": "^1.10.3",
+      "react-native-google-places-autocomplete": "^1.3.6",
+      "react-native-image-slider": "^2.0.3",
+      "react-native-maps": "^0.21.0",
+      "react-native-material-textfield": "^0.12.0",
+      "react-native-paper": "^4.7.2",
+      "react-native-phone-input": "^0.2.1",
+      "react-native-reanimated": "^2.1.0",
+      "react-native-restart": "0.0.6",
+      "react-native-restart-android": "0.0.7",
+      "react-native-screens": "^3.0.0",
+      "react-native-simple-toast": "0.0.8",
+      "react-native-vector-icons": "^4.6.0",
+      "react-native-web": "~0.13.12",
+      "react-navigation": "^4.4.4",
+      "react-navigation-drawer": "^2.7.0",
+      "react-navigation-material-bottom-tabs": "^2.3.4",
+      "react-navigation-redux-helpers": "^4.0.1",
+      "react-navigation-stack": "^2.10.4",
+      "react-redux": "^7.2.0",
+      "redux": "^4.0.5",
+      "redux-logger": "^3.0.6",
+      "redux-persist": "^6.0.0",
+      "redux-saga": "^1.1.3"
+   }
 }
