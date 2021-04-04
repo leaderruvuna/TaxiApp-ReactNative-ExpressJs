@@ -6,7 +6,7 @@
          "package": "com.ruvunald.myTaxiApp1",
          "versionCode": 1,
          "permissions": [],
-         "icon": "./src/Images/icon.png",
+         "icon": "./src/assets/Images/icon.png",
          "config": {
             "branch": {
                "apiKey": "AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY"
@@ -25,7 +25,7 @@
          "splash": {
             "backgroundColor": "#ffffff",
 
-            "image": "./src/Images/icon.png",
+            "image": "./src/assets/Images/icon.png",
             "resizeMode": "cover"
          }
       }
