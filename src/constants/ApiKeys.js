@@ -7,4 +7,5 @@ export default {
       storageBucket: 'mytaxiapp-5ad6d.appspot.com',
       messagingSenderId: '70593916704',
    },
+   GoolePlaces: 'AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY',
 };

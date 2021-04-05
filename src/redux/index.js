@@ -13,21 +13,21 @@ import configureStore from './store/configureStore';
 const { persistor, store } = configureStore();
 
 const theme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-  },
+   ...DefaultTheme,
+   roundness: 2,
+   colors: {
+      ...DefaultTheme.colors,
+   },
 };
 
 export default function Entrypoint() {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <PaperProvider theme={theme}>
-          <Navigator />
-        </PaperProvider>
-      </PersistGate>
-    </Provider>
-  );
+   return (
+      <Provider store={store}>
+         <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+            <PaperProvider theme={theme}>
+               <Navigator />
+            </PaperProvider>
+         </PersistGate>
+      </Provider>
+   );
 }
