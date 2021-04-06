@@ -11,7 +11,7 @@ import {
 import { Content, Container, Header, Left, Icon, Body } from 'native-base';
 import styles from './styles/notifications';
 
-export default function RiderNotifications(props) {
+export default RiderNotifications = props => {
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
          <Image
@@ -65,4 +65,4 @@ export default function RiderNotifications(props) {
          <Content />
       </Container>
    );
-}
+};

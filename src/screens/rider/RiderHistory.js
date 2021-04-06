@@ -11,7 +11,7 @@ import {
 import { Content, Container, Header, Left, Icon, Body } from 'native-base';
 import styles from './styles/history';
 
-export default function RiderHistory() {
+export default RiderHistory = () => {
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
          <Image
@@ -64,4 +64,4 @@ export default function RiderHistory() {
          <Content />
       </Container>
    );
-}
+};

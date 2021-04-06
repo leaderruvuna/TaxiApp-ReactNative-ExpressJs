@@ -15,7 +15,7 @@ import PhoneInput from 'react-native-phone-input';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/login';
 
-export default function RiderLogin(props) {
+export default RiderLogin = props => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [color, setColor] = useState('');
@@ -122,7 +122,7 @@ export default function RiderLogin(props) {
          </View>
       </View>
    );
-}
+};
 
 _signInAsync = async (email, password, setColor, props) => {
    //await AsyncStorage.setItem('userToken', 'rider');

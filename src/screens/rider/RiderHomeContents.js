@@ -30,7 +30,7 @@ const LONGITUDE = 0;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export default function RiderHomeContents(props) {
+export default RiderHomeContents = props => {
    const [firstName, setFristName] = useState('');
    const [lastName, setLastName] = useState('');
    const [driverId, setDriverId] = useState('');
@@ -348,6 +348,6 @@ export default function RiderHomeContents(props) {
          </Footer>
       </Container>
    );
-}
+};
 
 AppRegistry.registerComponent('RiderHomeContents', () => RiderHomeContents);

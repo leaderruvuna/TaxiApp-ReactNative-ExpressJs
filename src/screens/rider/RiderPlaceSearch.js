@@ -13,7 +13,7 @@ const workPlace = {
    geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
 };
 
-export default function GooglePlacesInput() {
+export default GooglePlacesInput = () => {
    return (
       <GooglePlacesAutocomplete
          placeholder="Search"
@@ -62,4 +62,4 @@ export default function GooglePlacesInput() {
          renderRightButton={() => <Text />}
       />
    );
-}
+};

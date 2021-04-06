@@ -22,7 +22,7 @@ import CheckBox from 'react-native-check-box';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/payments';
 
-export default function RiderPayments(props) {
+export default RiderPayments = props => {
    const [mobileMoney, setMobileMoney] = useState('');
    const [cash, setCash] = useState('');
    const [bitcoin, setBitcoin] = useState('');
@@ -258,7 +258,7 @@ export default function RiderPayments(props) {
          </Content>
       </Container>
    );
-}
+};
 
 _addPayments = async () => {
    Alert.alert(

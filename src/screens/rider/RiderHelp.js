@@ -21,7 +21,7 @@ import {
 } from 'native-base';
 import styles from './styles/helps';
 
-export default function RiderHelp() {
+export default RiderHelp = () => {
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
          <Image
@@ -76,4 +76,4 @@ export default function RiderHelp() {
          <Content />
       </Container>
    );
-}
+};

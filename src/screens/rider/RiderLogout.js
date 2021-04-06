@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 
-export default function RiderLogout() {
+export default RiderLogout = () => {
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
          <Image
@@ -17,4 +17,4 @@ export default function RiderLogout() {
         <StatusBar barStyle="default" />*/}
       </View>
    );
-}
+};

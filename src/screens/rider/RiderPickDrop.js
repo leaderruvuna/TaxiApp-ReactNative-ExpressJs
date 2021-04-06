@@ -29,7 +29,7 @@ const workPlace = {
    description: 'Work',
    geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
 };
-export default function RiderPickDrop() {
+export default RiderPickDrop = () => {
    return (
       <Container>
          <Header
@@ -87,7 +87,7 @@ export default function RiderPickDrop() {
          </Content>
       </Container>
    );
-}
+};
 
 const GooglePlacesInput = () => {
    return (

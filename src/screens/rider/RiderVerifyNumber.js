@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import PhoneInput from 'react-native-phone-input';
 
-export default function RiderVerifyNumber() {
+export default RiderVerifyNumber = () => {
    const [username, setUsername] = useState('');
    const [firstname, setFirstname] = useState('');
    const [lastname, setLastname] = useState('');
@@ -86,7 +86,7 @@ export default function RiderVerifyNumber() {
          </View>
       </KeyboardAvoidingView>
    );
-}
+};
 _signInAsync = async () => {
    //await AsyncStorage.setItem('userToken', 'rider');
    //this.props.navigation.navigate('App1');

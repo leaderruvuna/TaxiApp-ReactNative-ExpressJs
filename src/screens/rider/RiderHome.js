@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, AsyncStorage } from 'react-native';
-import RiderHomeDrawer from '../../navigation/NavigationDrawer';
+import { RiderHomeDrawer } from '../../navigation/NavigationDrawer';
 import styles from './styles/home';
-export default function RiderHome() {
+export default RiderHome = () => {
    const navigationOptions = {
       header: null,
    };
@@ -11,7 +11,7 @@ export default function RiderHome() {
          <RiderHomeDrawer />
       </View>
    );
-}
+};
 _signOutAsync = async () => {
    await AsyncStorage.clear();
    this.props.navigation.navigate('Auth');

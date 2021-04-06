@@ -33,7 +33,7 @@ const workPlace = {
    geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
 };
 
-export default function RiderPickUp(props) {
+export default RiderPickUp = props => {
    const [pickupName, setPickupName] = useState('');
    const [pickupLatitude, setPickupLatitude] = useState('');
    const [pickupLongitude, setPickupLongitude] = useState('');
@@ -120,7 +120,7 @@ export default function RiderPickUp(props) {
          </KeyboardAvoidingView>
       </Container>
    );
-}
+};
 
 _validatePickUpAndDropOffLocations = () => {
    if (

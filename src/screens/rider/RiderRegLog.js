@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import styles from './styles/reglog';
 
-export default function RiderRegLog() {
+export default RiderRegLog = () => {
    const navigationOptions = {
       headerStyle: {
          backgroundColor: '#42A5F5',
@@ -106,7 +106,7 @@ export default function RiderRegLog() {
          </View>
       </View>
    );
-}
+};
 _navigateRiderLogin = async () => {
    this.props.navigation.navigate('RiderLog');
 };

@@ -3,11 +3,12 @@ import { StyleSheet } from 'react-native';
 export default styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#42A5F5',
+      backgroundColor: '#ffffff',
       justifyContent: 'center',
       alignItems: 'center',
    },
-   rideDriveButtonContent: {
+   DriveButtonContent: {
+      //backgroundColor:"#ffffff",
       backgroundColor: '#ffffff',
       height: 250,
       width: 320,
@@ -16,10 +17,9 @@ export default styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
    },
-   rideDriveLogoContent: {
+   DriveLogoContent: {
       backgroundColor: '#42A5F5',
-      height: 900,
-      marginTop: -50,
+      height: 570,
       width: 400,
       borderBottomLeftRadius: 120,
       borderBottomRightRadius: 120,
@@ -32,9 +32,9 @@ export default styles = StyleSheet.create({
       backgroundColor: '#ffffff',
       height: 10,
       width: 320,
-      marginTop: 80,
+      marginTop: 50,
    },
-   Ridebutton: {
+   DriverRegister: {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#42A5F5',
@@ -42,7 +42,7 @@ export default styles = StyleSheet.create({
       width: 155,
       marginLeft: 13,
    },
-   Drivebutton: {
+   DriverLogin: {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#ffffff',

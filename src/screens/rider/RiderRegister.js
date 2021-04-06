@@ -17,7 +17,7 @@ import PhoneInput from 'react-native-phone-input';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/register';
 
-export default function RiderRegister() {
+export default RiderRegister = () => {
    const [firstname, setFirstname] = useState('');
    const [lastname, setLastname] = useState('');
    const [password, setPassword] = useState('');
@@ -151,7 +151,7 @@ export default function RiderRegister() {
          </View>
       </KeyboardAvoidingView>
    );
-}
+};
 
 _VerifyAsync = async (props, firstname, email, mobile, lastname, password) => {
    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

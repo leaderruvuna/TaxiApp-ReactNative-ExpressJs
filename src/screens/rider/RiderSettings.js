@@ -9,7 +9,7 @@ import {
 import { Content, Container, Header, Left, Icon, Body } from 'native-base';
 import styles from './styles/settings';
 
-export default function RiderSettings() {
+export default RiderSettings = () => {
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
          <Image
@@ -69,4 +69,4 @@ export default function RiderSettings() {
          </Content>
       </Container>
    );
-}
+};

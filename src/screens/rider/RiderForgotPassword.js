@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import styles from './styles/resetpassword';
 
-export default function RiderForgotPassword() {
+export default RiderForgotPassword = () => {
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const [firstname, setFirstname] = useState('');
@@ -71,7 +71,7 @@ export default function RiderForgotPassword() {
          </View>
       </KeyboardAvoidingView>
    );
-}
+};
 _resetPassWords = async () => {
    //await AsyncStorage.setItem('userToken', 'rider');
    //this.props.navigation.navigate('App1');
