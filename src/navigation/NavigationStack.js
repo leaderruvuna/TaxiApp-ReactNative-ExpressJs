@@ -44,4 +44,4 @@ const RiderHomeStackNav = createStackNavigator(
       },
    },
 );
-export { AuthStack, AuthStackDriver, AuthStackRider , RiderHomeStackNav };
+export { AuthStack, AuthStackDriver, AuthStackRider, RiderHomeStackNav };

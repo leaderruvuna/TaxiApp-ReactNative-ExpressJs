@@ -1,12 +1,7 @@
 import React from 'react';
 import { DrawerItems } from 'react-navigation-drawer';
-import {
-    Content,
-    Container,
-    Header,
-    Body,
- } from 'native-base';
-import { Image, Text} from 'react-native';
+import { Content, Container, Header, Body } from 'native-base';
+import { Image, Text } from 'react-native';
 
 export default customDrawerContentComponent = props => (
    <Container>

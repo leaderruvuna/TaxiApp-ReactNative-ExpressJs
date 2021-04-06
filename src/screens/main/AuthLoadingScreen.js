@@ -6,16 +6,15 @@ import {
    StyleSheet,
    View,
 } from 'react-native';
-import * as firebase from 'firebase';
-import ApiKeys from '../../constants/ApiKeys';
-export default class AuthLoadingScreen extends React.Component {
-   constructor(props) {
-      super(props);
-      this._bootstrapAsync();
-      if (!firebase.apps.length) {
-         firebase.initializeApp(ApiKeys.FirebaseConfig);
-      }
-   }
+
+export default AuthLoadingScreen = () => {
+   // constructor(props) {
+   //    super(props);
+   //    this._bootstrapAsync();
+   //    if (!firebase.apps.length) {
+   //       firebase.initializeApp(ApiKeys.FirebaseConfig);
+   //    }
+   // }
 
    // Fetch the token from storage then navigate to our appropriate place
    _bootstrapAsync = async () => {
@@ -50,12 +49,10 @@ export default class AuthLoadingScreen extends React.Component {
    };
 
    // Render any loading content that you like here
-   render() {
-      return (
-         <View style={{ backgroundColor: 'red' }}>
-            <ActivityIndicator size="large" />
-            <StatusBar barStyle="default" />
-         </View>
-      );
-   }
-}
+   return (
+      <View style={{ backgroundColor: 'red' }}>
+         <ActivityIndicator size="large" />
+         <StatusBar barStyle="default" />
+      </View>
+   );
+};

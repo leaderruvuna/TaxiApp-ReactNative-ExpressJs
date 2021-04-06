@@ -18,6 +18,9 @@ import {
    Body,
 } from 'native-base';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import styles from './styles/drop';
+import apiKey from '../../constants/ApiKeys';
+
 const homePlace = {
    description: 'Home',
    geometry: { location: { lat: 48.8152937, lng: 2.4597668 } },
@@ -26,78 +29,66 @@ const workPlace = {
    description: 'Work',
    geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
 };
-export default class RiderPickDrop extends React.Component {
-   render() {
-      return (
-         <Container>
-            <Header
-               style={{
-                  backgroundColor: '#42A5F5',
-                  height: 75,
-               }}
-            >
-               <Left>
-                  <TouchableHighlight
-                     style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 50,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: 20,
-                     }}
-                     onPress={() => this.props.navigation.navigate('Home')}
-                  >
-                     <Icon
-                        name="arrow-back"
-                        style={{
-                           color: '#ffffff',
-                        }}
-                     />
-                  </TouchableHighlight>
-               </Left>
-               <Body>
-                  <Text
+export default RiderPickDrop = () => {
+   return (
+      <Container>
+         <Header
+            style={{
+               backgroundColor: '#42A5F5',
+               height: 75,
+            }}
+         >
+            <Left>
+               <TouchableHighlight
+                  style={{
+                     width: 50,
+                     height: 50,
+                     borderRadius: 50,
+                     alignItems: 'center',
+                     justifyContent: 'center',
+                     marginTop: 20,
+                  }}
+                  onPress={() => props.navigation.navigate('Home')}
+               >
+                  <Icon
+                     name="arrow-back"
                      style={{
                         color: '#ffffff',
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        marginTop: 20,
-                     }}
-                  >
-                     PickUp
-                  </Text>
-               </Body>
-            </Header>
-
-            <Content>
-               <View
-                  style={{
-                     justifyContent: 'center',
-                  }}
-               >
-                  <GooglePlacesInput
-                     style={{
-                        marginTop: 200,
                      }}
                   />
-               </View>
-            </Content>
-         </Container>
-      );
-   }
-}
+               </TouchableHighlight>
+            </Left>
+            <Body>
+               <Text
+                  style={{
+                     color: '#ffffff',
+                     fontSize: 20,
+                     fontWeight: 'bold',
+                     marginTop: 20,
+                  }}
+               >
+                  PickUp
+               </Text>
+            </Body>
+         </Header>
 
-const styles = StyleSheet.create({
-   containerView: {
-      flex: 1,
-      backgroundColor: '#ffffff',
-   },
-   map: {
-      height: 600,
-      marginTop: 0,
-   },
-});
+         <Content>
+            <View
+               style={{
+                  justifyContent: 'center',
+               }}
+            >
+               <GooglePlacesInput
+                  style={{
+                     marginTop: 200,
+                  }}
+               />
+            </View>
+         </Content>
+      </Container>
+   );
+};
+
 const GooglePlacesInput = () => {
    return (
       <GooglePlacesAutocomplete
@@ -113,7 +104,7 @@ const GooglePlacesInput = () => {
          }}
          getDefaultValue={() => ''}
          query={{
-            key: 'AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY',
+            key: apiKey.GoolePlaces,
             language: 'en',
             types: 'geocode',
          }}
@@ -139,9 +130,7 @@ const GooglePlacesInput = () => {
          filterReverseGeocodingByTypes={[
             'locality',
             'administrative_area_level_3',
-         ]} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
-         /*predefinedPlaces={[homePlace, workPlace]}*/
-
+         ]}
          debounce={200}
          renderLeftButton={() => (
             <Icon name="search" style={styles.searchIcon} />

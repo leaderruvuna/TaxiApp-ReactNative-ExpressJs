@@ -3,22 +3,14 @@ import {
    StyleSheet,
    Text,
    View,
-   Button,
-   AsyncStorage,
    Image,
    TouchableHighlight,
 } from 'react-native';
-import {
-   Content,
-   Container,
-   Header,
-   Left,
-   Icon,
-   Footer,
-   Body,
-} from 'native-base';
-export default class RiderSettings extends React.Component {
-   static navigationOptions = {
+import { Content, Container, Header, Left, Icon, Body } from 'native-base';
+import styles from './styles/settings';
+
+export default RiderSettings = () => {
+   const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
          <Image
             source={require('../../assets/Images/settings.png')}
@@ -26,68 +18,55 @@ export default class RiderSettings extends React.Component {
          />
       ),
    };
-   render() {
-      return (
-         <Container>
-            <Header
-               style={{
-                  backgroundColor: '#42A5F5',
-                  height: 75,
-               }}
-            >
-               <Left>
-                  <TouchableHighlight
-                     style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 50,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: 20,
-                     }}
-                     onPress={() => this.props.navigation.navigate('Home')}
-                  >
-                     <Icon
-                        name="arrow-back"
-                        style={{
-                           color: '#ffffff',
-                        }}
-                     />
-                  </TouchableHighlight>
-               </Left>
-               <Body>
-                  <Text
+   return (
+      <Container>
+         <Header
+            style={{
+               backgroundColor: '#42A5F5',
+               height: 75,
+            }}
+         >
+            <Left>
+               <TouchableHighlight
+                  style={{
+                     width: 50,
+                     height: 50,
+                     borderRadius: 50,
+                     alignItems: 'center',
+                     justifyContent: 'center',
+                     marginTop: 20,
+                  }}
+                  onPress={() => this.props.navigation.navigate('Home')}
+               >
+                  <Icon
+                     name="arrow-back"
                      style={{
                         color: '#ffffff',
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        marginTop: 20,
                      }}
-                  >
-                     Settings
-                  </Text>
-               </Body>
-            </Header>
-
-            <Content>
-               <View
+                  />
+               </TouchableHighlight>
+            </Left>
+            <Body>
+               <Text
                   style={{
-                     justifyContent: 'center',
+                     color: '#ffffff',
+                     fontSize: 20,
+                     fontWeight: 'bold',
+                     marginTop: 20,
                   }}
-               />
-            </Content>
-         </Container>
-      );
-   }
-}
+               >
+                  Settings
+               </Text>
+            </Body>
+         </Header>
 
-const styles = StyleSheet.create({
-   containerView: {
-      flex: 1,
-      backgroundColor: '#ffffff',
-   },
-   map: {
-      height: 600,
-      marginTop: 0,
-   },
-});
+         <Content>
+            <View
+               style={{
+                  justifyContent: 'center',
+               }}
+            />
+         </Content>
+      </Container>
+   );
+};
