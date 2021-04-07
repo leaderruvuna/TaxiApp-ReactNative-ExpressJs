@@ -3,7 +3,7 @@
  */
 import * as types from './types';
 
-export function requestLogin(username, password) {
+export const requestLogin=(username, password)=>{
   return {
     type: types.LOGIN_REQUEST,
     username,
@@ -11,32 +11,32 @@ export function requestLogin(username, password) {
   };
 }
 
-export function loginFailed() {
+export const  loginFailed=()=> {
   return {
     type: types.LOGIN_FAILED,
   };
 }
 
-export function onLoginResponse(response) {
+export const onLoginResponse=(response)=>{
   return {
     type: types.LOGIN_RESPONSE,
     response,
   };
 }
 
-export function enableLoader() {
+export const enableLoader=()=> {
   return {
     type: types.LOGIN_ENABLE_LOADER,
   };
 }
 
-export function disableLoader() {
+export const disableLoader=()=> {
   return {
     type: types.LOGIN_DISABLE_LOADER,
   };
 }
 
-export function logOut() {
+export const logOut=()=> {
   return {
     type: types.LOG_OUT,
   };
