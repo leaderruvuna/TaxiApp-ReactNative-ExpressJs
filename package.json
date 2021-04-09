@@ -33,7 +33,8 @@
    },
    "dependencies": {
       "@babel/plugin-transform-react-jsx": "^7.13.12",
-      "@react-native-community/masked-view": "^0.1.10",
+      "@expo/vector-icons": "^12.0.4",
+      "@react-native-clipboard/clipboard": "^1.7.0",
       "@react-native-community/async-storage": "^1.10.0",
       "babel-loader": "^8.2.2",
       "cleanup-dependencies": "0.0.6",
@@ -53,6 +54,7 @@
       "react-native-image-slider": "^2.0.3",
       "react-native-maps": "^0.21.0",
       "react-native-material-textfield": "^0.12.0",
+      "react-native-otp-textinput": "0.0.8",
       "react-native-paper": "^4.7.2",
       "react-native-phone-input": "^0.2.1",
       "react-native-reanimated": "^2.1.0",

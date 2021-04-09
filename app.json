@@ -6,7 +6,6 @@
          "package": "com.ruvunald.myTaxiApp1",
          "versionCode": 1,
          "permissions": [],
-         "icon": "./src/assets/Images/icon.png",
          "config": {
             "branch": {
                "apiKey": "AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY"
