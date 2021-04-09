@@ -3,6 +3,6 @@
  */
 import NavigationService from '../navigation/NavigationService';
 
-export function navigateToHome(params) {
+export const navigateToHome = params => {
    NavigationService.navigate('Home', params);
-}
+};

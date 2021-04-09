@@ -10,29 +10,40 @@ export default styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
    },
-
-   textInputln: {
-      alignSelf: 'stretch',
-      width: 170,
-      paddingLeft: 34,
-      marginLeft: 5,
-      backgroundColor: '#fff',
+   verifyContainer: {
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      flexDirection: 'row',
+      width: '100%',
+      paddingHorizontal: 10,
+      paddingVertical: 5,
    },
-   VerifyNumber: {
-      alignSelf: 'stretch',
-      width: 350,
-      paddingLeft: 40,
-      paddingBottom: 15,
-      marginTop: 10,
-      marginLeft: 5,
-      backgroundColor: '#fff',
-   },
-   SubmitButton: {
+   verifyButton: {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#42A5F5',
-      height: 50,
-      width: 350,
+      width: '30%',
+      height: 45,
       marginTop: 15,
+   },
+   nextText: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+   },
+   headerContainer: {
+      width: '100%',
+      height: '10%',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+   },
+   headerText: {
+      fontSize: 17,
+      color: 'grey',
+   },
+   otpInputs: {
+      tintColor: '#42A5F5',
    },
 });

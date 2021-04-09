@@ -15,22 +15,28 @@ import RiderRegLog from '../screens/rider/RiderRegLog';
 import RiderHomeContents from '../screens/rider/RiderHomeContents';
 import RiderPickUp from '../screens/rider/RiderPickUp';
 const AuthStackRider = createStackNavigator({
-   Rider: { screen: RiderHome },
+   Login: { screen: RiderLogin },
+   Verify: { screen: RiderVerifyNumber },
+   Register: { screen: RiderRegister },
 });
 const AuthStackDriver = createStackNavigator({
    Driver: { screen: DriverHome },
 });
-const AuthStack = createAppContainer(
-   createStackNavigator({
-      Home: { screen: RiderHome },
-      RiderScreen: { screen: RiderRegLog },
-      RiderReg: { screen: RiderRegister },
-      RiderVerifyNum: { screen: RiderVerifyNumber },
-      RiderResetPassWord: { screen: RiderForgotPassword },
-      DriverScreen: { screen: DriverRegLog },
-      DriverLog: { screen: DriverLogin },
-      DriverReg: { screen: DriverRegister },
-   }),
+const AuthStackMain = createAppContainer(
+   createStackNavigator(
+      {
+         Home: { screen: RiderHomeContents, headerMode: 'none' },
+         RiderScreen: { screen: RiderRegLog },
+         RiderReg: { screen: RiderRegister },
+         RiderLogin: { screen: RiderLogin },
+         RiderVerifyNum: { screen: RiderVerifyNumber },
+         RiderResetPassWord: { screen: RiderForgotPassword },
+         RiderLog: { screen: RiderLogin },
+      },
+      {
+         headerMode: 'none',
+      },
+   ),
 );
 const RiderHomeStackNav = createStackNavigator(
    {
@@ -44,4 +50,4 @@ const RiderHomeStackNav = createStackNavigator(
       },
    },
 );
-export { AuthStack, AuthStackDriver, AuthStackRider, RiderHomeStackNav };
+export { AuthStackMain, AuthStackDriver, AuthStackRider, RiderHomeStackNav };
