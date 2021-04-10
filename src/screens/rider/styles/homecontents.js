@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
       backgroundColor: 'white',
       alignItems: 'center',
       paddingHorizontal: 10,
-      width: 320,
+      width: '90%',
       minHeight: 50,
       marginTop: 18,
       borderRadius: 10,
@@ -60,10 +60,71 @@ export default styles = StyleSheet.create({
    destinationTextContainer: {
       width: '100%',
       alignItems: 'flex-start',
-      paddingHorizontal: 47,
+      paddingHorizontal: 20,
    },
    destnationText: {
       fontSize: 18,
       fontWeight: 'bold',
+   },
+   headerContainer: {
+      backgroundColor: '#fff',
+      height: 50,
+   },
+   headerTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+   },
+   drawerButton: {
+      width: 50,
+      height: 50,
+      borderRadius: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+   },
+   tripContainer: {
+      width: '100%',
+      height: 'auto',
+      alignItems: 'center',
+      paddingHorizontal: 10,
+   },
+   carsContainer: {
+      flexDirection: 'row',
+      width: '100%',
+      height: '20%',
+   },
+   vehicle: {
+      width: '30%',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   type: {
+      width: '30%',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   priceRange: {
+      width: '40%',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   typeTitle: {
+      fontSize: 17,
+      fontWeight: 'bold',
+   },
+   typeTime: {
+      color: 'grey',
+   },
+   pricing: {
+      fontSize: 15,
+      fontWeight: 'bold',
+   },
+   closeButton: {
+      marginTop: 5,
+      fontSize: 30,
+   },
+   closeButtonContainer: {
+      borderStartColor: 'red',
+      alignSelf: 'flex-end',
    },
 });

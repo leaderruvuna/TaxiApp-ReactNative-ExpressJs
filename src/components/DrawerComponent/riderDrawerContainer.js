@@ -27,7 +27,7 @@ export default customDrawerContentComponent = props => (
                   fontSize: 20,
                }}
             >
-               Username
+               Leader ruvuna
             </Text>
          </Body>
       </Header>
