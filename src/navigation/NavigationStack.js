@@ -25,7 +25,7 @@ const AuthStackDriver = createStackNavigator({
 const AuthStackMain = createAppContainer(
    createStackNavigator(
       {
-         Home: { screen: RiderHomeContents, headerMode: 'none' },
+         Home: { screen: RiderHome },
          RiderScreen: { screen: RiderRegLog },
          RiderReg: { screen: RiderRegister },
          RiderLogin: { screen: RiderLogin },

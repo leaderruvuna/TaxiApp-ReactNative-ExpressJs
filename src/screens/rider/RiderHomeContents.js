@@ -8,6 +8,8 @@ import {
    AppRegistry,
    TextInput,
    TouchableOpacity,
+   Button,
+   ScrollView,
 } from 'react-native';
 import {
    Content,
@@ -20,7 +22,8 @@ import {
    Card,
 } from 'native-base';
 import { Entypo } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import MapView, { PROVIDER_GOOGLE, AnimatedRegion } from 'react-native-maps';
 import styles from './styles/homecontents';
 
@@ -42,9 +45,11 @@ export default RiderHomeContents = props => {
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
    });
+   const [dataSource, setDataSource] = useState(['XL', 'SM', 'L', 'XXL']);
    const [isModalVisible, setModalVisible] = useState(false);
    const [isConfirmButton, setConfirmButton] = useState(false);
    const [isMounted, setMounted] = useState(false);
+   const [isDestinationVisible, setDestinationVisible] = useState(true);
 
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(
@@ -101,6 +106,19 @@ export default RiderHomeContents = props => {
 
    return (
       <Container>
+         <Header style={styles.headerContainer}>
+            <Left>
+               <TouchableHighlight
+                  style={styles.drawerButton}
+                  onPress={() => props.navigation.toggleDrawer()}
+               >
+                  <MaterialCommunityIcons name="menu" size={24} color="black" />
+               </TouchableHighlight>
+            </Left>
+            <Body>
+               <Text style={styles.headerTitle}>Taxi App</Text>
+            </Body>
+         </Header>
          <Content>
             <View
                style={{
@@ -190,24 +208,70 @@ export default RiderHomeContents = props => {
             </View>
          </Content>
          <Footer style={styles.footer}>
-            <View style={styles.destinationContainer}>
-               <View style={styles.destinationTextContainer}>
-                  <Text style={styles.destnationText}>
-                     Where are you going ?
-                  </Text>
+            {!isDestinationVisible ? (
+               <View style={styles.destinationContainer}>
+                  <View style={styles.destinationTextContainer}>
+                     <Text style={styles.destnationText}>
+                        Where are you going ?
+                     </Text>
+                  </View>
+                  <Card style={styles.searchBoxView}>
+                     <Entypo name="location" size={24} color="black" />
+                     <TextInput
+                        style={styles.searchBox}
+                        placeholder=" Search destination"
+                        underlineColorAndroid="#ffffff"
+                        selectionColor="#42A5F5"
+                        placeholderTextColor="#000000"
+                        onFocus={() =>
+                           props.navigation.navigate('pickUpLocation')
+                        }
+                     />
+                  </Card>
                </View>
-               <Card style={styles.searchBoxView}>
-                  <Entypo name="location" size={24} color="black" />
-                  <TextInput
-                     style={styles.searchBox}
-                     placeholder="Search destination"
-                     underlineColorAndroid="#ffffff"
-                     selectionColor="#42A5F5"
-                     placeholderTextColor="#000000"
-                     onFocus={() => props.navigation.navigate('pickUpLocation')}
-                  />
-               </Card>
-            </View>
+            ) : (
+               <ScrollView contentContainerStyle={styles.tripContainer}>
+                  <View style={styles.closeButtonContainer}>
+                     <AntDesign
+                        style={styles.closeButton}
+                        onPress={() => {
+                           setDestinationVisible(false);
+                        }}
+                        name="closecircleo"
+                        size={24}
+                        color="black"
+                     />
+                  </View>
+                  {dataSource.map((item, index) => (
+                     <TouchableHighlight
+                        underlayColor="transparent"
+                        style={styles.carsContainer}
+                        onPress={() => {
+                           console.log('>>>>>>>>');
+                        }}
+                     >
+                        <View style={styles.carsContainer}>
+                           <View style={styles.vehicle}>
+                              <Image
+                                 source={require('../../assets/Images/taxi3.png')}
+                                 style={{
+                                    width: 80,
+                                    height: 80,
+                                 }}
+                              />
+                           </View>
+                           <View style={styles.type}>
+                              <Text style={styles.typeTitle}>XL</Text>
+                              <Text style={styles.typeTime}>2mins</Text>
+                           </View>
+                           <View style={styles.priceRange}>
+                              <Text style={styles.pricing}>UGX 5000-7000</Text>
+                           </View>
+                        </View>
+                     </TouchableHighlight>
+                  ))}
+               </ScrollView>
+            )}
          </Footer>
       </Container>
    );
