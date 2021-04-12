@@ -127,4 +127,95 @@ export default styles = StyleSheet.create({
       borderStartColor: 'red',
       alignSelf: 'flex-end',
    },
+   modelContainer:{
+      backgroundColor:'#fff',
+      width:'100%',
+      height:'50%'
+   },
+   modelHeader:{
+      width:'100%',
+      height:300,
+      backgroundColor:'green',
+      alignSelf:'flex-end'
+   },
+   modelFooter:{
+      width:'100%',
+      height:100,
+      backgroundColor:'#fff',
+      alignSelf:'flex-end',
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center'
+   },
+   acceptButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#42A5F5',
+      width: '30%',
+      height: 45,
+      marginTop: 15,
+      marginHorizontal:8,
+      borderRadius:8
+   },
+   cancelButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#42A5F5',
+      width: '30%',
+      height: 45,
+      marginTop: 15,
+      marginHorizontal:8,
+      borderRadius:8
+   },
+   acceptText: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+   },
+   cancelText: {
+      color: '#ffffff',
+      fontWeight: 'bold',
+   },
+   image: {
+      width: '22%',
+      height: '100%',
+      backgroundColor: '#D3D3D3',
+      borderRadius: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   imageContainer: {
+      width:'100%',
+      height:80,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor:'red'
+   },
+   driverName: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: '#D3D3D3',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   driverDetailsContainer: {
+      width:'100%',
+      height:80,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor:'red'
+   },
+   raiting: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: '#D3D3D3',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   raitingContainer: {
+      width:'100%',
+      height:80,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor:'red'
+   },
 });

@@ -21,10 +21,10 @@ import {
    Body,
    Card,
 } from 'native-base';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons , AntDesign ,Entypo } from '@expo/vector-icons';
+import { Rating } from 'react-native-ratings';
 import MapView, { PROVIDER_GOOGLE, AnimatedRegion } from 'react-native-maps';
+import Modal from 'react-native-modal';
 import styles from './styles/homecontents';
 
 const { width, height } = Dimensions.get('window');
@@ -50,6 +50,7 @@ export default RiderHomeContents = props => {
    const [isConfirmButton, setConfirmButton] = useState(false);
    const [isMounted, setMounted] = useState(false);
    const [isDestinationVisible, setDestinationVisible] = useState(true);
+   const [isModelVisible, setModelVisible] = useState(true);
 
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(
@@ -206,6 +207,51 @@ export default RiderHomeContents = props => {
                   ></Text>
                </MapView>
             </View>
+            <View>
+            <Modal isVisible={isModelVisible}>
+               <View style={styles.modelContainer}>
+                 <View style={styles.modelHeader}>
+                  <View style={styles.imageContainer}>
+                     <View style={styles.image}>
+                        <AntDesign name="user" size={30} color="black" />
+                     </View>
+                  </View>
+                  <View style={styles.driverDetailsContainer}>
+                     <View style={styles.driverName}>
+                        <Text>John ruvuna</Text>
+                     </View>
+                  </View>
+                  <View style={styles.raitingContainer}>
+                     <View style={styles.raiting}>
+                      <Rating
+                        showRating
+                        onFinishRating={()=>{console.log('>>>')}}
+                        style={{ paddingVertical: 10 }}
+                        />
+                     </View>
+                  </View>
+                 </View>
+                 <View style={styles.modelFooter}>
+                     <TouchableOpacity
+                        style={styles.cancelButton}
+                        onPress={() => {
+                           signInAsync(props);
+                        }}
+                     >
+                        <Text style={styles.cancelText}>CANCEL</Text>
+                     </TouchableOpacity>
+                     <TouchableOpacity
+                        style={styles.acceptButton}
+                        onPress={() => {
+                           signInAsync(props);
+                        }}
+                     >
+                        <Text style={styles.acceptText}>ACCEPT</Text>
+                     </TouchableOpacity>
+                 </View>
+               </View>
+            </Modal>
+         </View>
          </Content>
          <Footer style={styles.footer}>
             {!isDestinationVisible ? (
