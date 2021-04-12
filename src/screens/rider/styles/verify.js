@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: '#42A5F5',
       width: '30%',
-      height: 45,
+      height: '35%',
       marginTop: 15,
    },
    nextText: {

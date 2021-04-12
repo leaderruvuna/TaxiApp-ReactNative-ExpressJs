@@ -62,5 +62,6 @@ export default RiderLogin = props => {
 };
 
 signInAsync = props => {
+   console.log('>>>>>>>>>>>>>>>>');
    props.navigation.navigate('Verify');
 };

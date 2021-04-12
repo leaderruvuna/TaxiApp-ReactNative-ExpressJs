@@ -64,6 +64,7 @@
       "react-native-restart-android": "0.0.7",
       "react-native-screens": "^3.0.0",
       "react-native-simple-toast": "0.0.8",
+      "react-native-star-rating": "^1.1.0",
       "react-native-vector-icons": "^4.6.0",
       "react-native-web": "~0.13.12",
       "react-navigation": "^4.4.4",

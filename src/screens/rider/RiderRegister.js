@@ -14,10 +14,10 @@ import {
    ActivityIndicator,
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { MaterialIcons , AntDesign } from '@expo/vector-icons';
 import styles from './styles/register';
 
-export default RiderRegister = props => {
+export default RiderRegister = (props) => {
    const [firstname, setFirstname] = useState('');
    const [lastname, setLastname] = useState('');
    const [email, setEmail] = useState('');
@@ -26,16 +26,10 @@ export default RiderRegister = props => {
       <View style={styles.wrapper}>
          <View style={styles.container}>
             <View style={styles.headerContainer}>
-               <View style={styles.imageContainer}>
-                  <AntDesign name="user" size={30} color="black" />
-               </View>
-               <View>
-                  <MaterialIcons
-                     name="add-photo-alternate"
-                     size={28}
-                     color="black"
-                  />
-               </View>
+              <View style={styles.imageContainer}>
+                 <AntDesign name="user" size={30} color="black" />
+              </View>
+              <View><MaterialIcons name="add-photo-alternate" size={28} color="black" /></View>
             </View>
             <View style={styles.firstnameContainer}>
                <TextInput
