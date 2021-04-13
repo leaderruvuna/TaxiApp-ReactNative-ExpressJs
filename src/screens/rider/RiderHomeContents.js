@@ -21,10 +21,10 @@ import {
    Body,
    Card,
 } from 'native-base';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign, Entypo } from '@expo/vector-icons';
+import StarRating from 'react-native-star-rating';
 import MapView, { PROVIDER_GOOGLE, AnimatedRegion } from 'react-native-maps';
+import Modal from 'react-native-modal';
 import styles from './styles/homecontents';
 
 const { width, height } = Dimensions.get('window');
@@ -46,10 +46,13 @@ export default RiderHomeContents = props => {
       longitudeDelta: LONGITUDE_DELTA,
    });
    const [dataSource, setDataSource] = useState(['XL', 'SM', 'L', 'XXL']);
+   const [stars, setStars] = useState(['one', 'two', 'three', 'four', 'five']);
+   const [numStars, setNumStars] = useState(3);
    const [isModalVisible, setModalVisible] = useState(false);
    const [isConfirmButton, setConfirmButton] = useState(false);
    const [isMounted, setMounted] = useState(false);
    const [isDestinationVisible, setDestinationVisible] = useState(true);
+   const [isModelVisible, setModelVisible] = useState(false);
 
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(
@@ -121,9 +124,7 @@ export default RiderHomeContents = props => {
          </Header>
          <Content>
             <View
-               style={{
-                  justifyContent: 'center',
-               }}
+               style={styles.mapContainer}
             >
                <MapView
                   provider={PROVIDER_GOOGLE}
@@ -206,6 +207,61 @@ export default RiderHomeContents = props => {
                   ></Text>
                </MapView>
             </View>
+            <View>
+               <Modal isVisible={isModelVisible}>
+                  <View style={styles.modelContainer}>
+                     <View style={styles.modelHeader}>
+                        <View style={styles.imageContainer}>
+                           <View style={styles.image}>
+                              <AntDesign name="user" size={30} color="black" />
+                           </View>
+                        </View>
+                        <View style={styles.driverDetailsContainer}>
+                           <View style={styles.driverName}>
+                              <Text style={styles.nameText}>James Bond</Text>
+                           </View>
+                        </View>
+                        <View style={styles.raitingContainer}>
+                           <View style={styles.raiting}>
+                              {stars.map((element, index) =>
+                                 index + 1 <= numStars ? (
+                                    <AntDesign
+                                       name="star"
+                                       size={24}
+                                       color="orange"
+                                    />
+                                 ) : (
+                                    <AntDesign
+                                       name="star"
+                                       size={24}
+                                       color="grey"
+                                    />
+                                 ),
+                              )}
+                           </View>
+                        </View>
+                     </View>
+                     <View style={styles.modelFooter}>
+                        <TouchableOpacity
+                           style={styles.cancelButton}
+                           onPress={() => {
+                              setModalVisible(false);
+                           }}
+                        >
+                           <Text style={styles.cancelText}>CANCEL</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                           style={styles.acceptButton}
+                           onPress={() => {
+                              setModalVisible(false);
+                           }}
+                        >
+                           <Text style={styles.acceptText}>ACCEPT</Text>
+                        </TouchableOpacity>
+                     </View>
+                  </View>
+               </Modal>
+            </View>
          </Content>
          <Footer style={styles.footer}>
             {!isDestinationVisible ? (
@@ -247,7 +303,7 @@ export default RiderHomeContents = props => {
                         underlayColor="transparent"
                         style={styles.carsContainer}
                         onPress={() => {
-                           console.log('>>>>>>>>');
+                           setModalVisible(true);
                         }}
                      >
                         <View style={styles.carsContainer}>
