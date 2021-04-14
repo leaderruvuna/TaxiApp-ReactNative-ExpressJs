@@ -280,7 +280,7 @@ export default RiderHomeContents = props => {
                         selectionColor="#42A5F5"
                         placeholderTextColor="#000000"
                         onFocus={() =>
-                           props.navigation.navigate('pickUpLocation')
+                           props.navigation.navigate('RiderPickup')
                         }
                      />
                   </Card>

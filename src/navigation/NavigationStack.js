@@ -10,6 +10,7 @@ import DriverLogin from '../screens/driver/DriverLogin';
 import DriverRegister from '../screens/driver/DriverRegister';
 import AuthLoadingScreen from '../screens/main/AuthLoadingScreen';
 import RiderDriverScreenChoice from '../screens/main/RiderDriverScreenChoice';
+import Payments from '../screens/rider/RiderPayments';
 import RiderPickup from '../screens/rider/RiderPickUp';
 import RiderRegLog from '../screens/rider/RiderRegLog';
 import RiderHomeContents from '../screens/rider/RiderHomeContents';
@@ -25,13 +26,14 @@ const AuthStackDriver = createStackNavigator({
 const AuthStackMain = createAppContainer(
    createStackNavigator(
       {
-         Home: { screen: RiderPickup },
+         Home: { screen: RiderHome },
          RiderScreen: { screen: RiderRegLog },
          RiderReg: { screen: RiderRegister },
          RiderLogin: { screen: RiderLogin },
          RiderVerifyNum: { screen: RiderVerifyNumber },
          RiderResetPassWord: { screen: RiderForgotPassword },
          RiderLog: { screen: RiderLogin },
+         RiderPickUp: { screen: RiderPickup },
       },
       {
          headerMode: 'none',

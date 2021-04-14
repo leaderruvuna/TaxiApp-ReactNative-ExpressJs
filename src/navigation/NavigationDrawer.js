@@ -11,13 +11,9 @@ import RiderLogout from '../screens/rider/RiderLogout';
 import RiderHomeContents from '../screens/rider/RiderHomeContents';
 import RiderPickUp from '../screens/rider/RiderPickUp';
 import DriverHomeContents from '../screens/driver/DriverHomeContents';
-import DriverEarnings from '../screens/driver/DriverEarnings';
-import DriverRatings from '../screens/driver/DriverRatings';
 import DriverSettings from '../screens/driver/DriverSettings';
 import DriverLicence from '../screens/driver/DriverLicence';
-import DriverVehicle from '../screens/driver/DriverVehicle';
 import DriverLogout from '../screens/driver/DriverLogout';
-import RiderDriverScreenChoice from '../screens/main/RiderDriverScreenChoice';
 
 const RiderHomeStackNav = createStackNavigator(
    {
@@ -38,9 +34,6 @@ const RiderHomeDrawer = createAppContainer(
          Home: { screen: RiderHomeStackNav },
          Payments: { screen: RiderPayments },
          Settings: { screen: RiderSettings },
-         History: { screen: RiderHistory },
-         Notifications: { screen: RiderNotifications },
-         Help: { screen: RiderHelp },
          Logout: { screen: RiderLogout },
       },
       {
@@ -56,10 +49,7 @@ const RiderHomeDrawer = createAppContainer(
 const DriverHomeDrawer = createDrawerNavigator(
    {
       Home: DriverHomeContents,
-      Earnings: DriverEarnings,
       Settings: DriverSettings,
-      Ratings: DriverRatings,
-      Vehicle: DriverVehicle,
       Licence: DriverLicence,
       Logout: DriverLogout,
    },
