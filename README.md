@@ -1,13 +1,13 @@
 <div align="center">
-    <img src="/screenshots-current/home.png" width="250px"/> 
-    <img src="/screenshots-current/accept.png" width="250px"/> 
-    <img src="/screenshots-current/drawer.png" width="250px"/> 
-    <img src="/screenshots-current/home2.png" width="250px"/> 
-    <img src="/screenshots-current/location.png" width="250px"/> 
-    <img src="/screenshots-current/payments.png" width="250px"/> 
-    <img src="/screenshots-current/login.png" width="250px"/>
-    <img src="/screenshots-current/register.png" width="250px"/>
-    <img src="/screenshots-current/verify.png" width="250px"/>
+    <img src="/screenshots-current/home.PNG" width="250px"/> 
+    <img src="/screenshots-current/accept.PNG" width="250px"/> 
+    <img src="/screenshots-current/drawer.PNG" width="250px"/> 
+    <img src="/screenshots-current/home2.PNG" width="250px"/> 
+    <img src="/screenshots-current/location.PNG" width="250px"/> 
+    <img src="/screenshots-current/payments.PNG" width="250px"/> 
+    <img src="/screenshots-current/login.PNG" width="250px"/>
+    <img src="/screenshots-current/register.PNG" width="250px"/>
+    <img src="/screenshots-current/verify.PNG" width="250px"/>
 </div>
 
 
