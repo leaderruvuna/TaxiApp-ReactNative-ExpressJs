@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
-   container:{
-      flex:1
+   container: {
+      flex: 1,
    },
    containerView: {
       flex: 1,
@@ -20,51 +20,51 @@ export default styles = StyleSheet.create({
       width: '100%',
       marginTop: 160,
    },
-   header:{
+   header: {
       backgroundColor: '#42A5F5',
       height: 50,
    },
-   backButton:{
+   backButton: {
       width: 50,
       height: 50,
       borderRadius: 50,
       alignItems: 'center',
       justifyContent: 'center',
    },
-   headerText:{
+   headerText: {
       color: '#ffffff',
       fontSize: 20,
       fontWeight: 'bold',
    },
-   doneButtonContainer:{
-      width:'100%',
-      paddingHorizontal:10
+   doneButtonContainer: {
+      width: '100%',
+      paddingHorizontal: 10,
    },
-   cardItem:{ 
-      marginTop: 5
+   cardItem: {
+      marginTop: 5,
    },
-   body:{
+   body: {
       flexDirection: 'row',
    },
-   image:{
+   image: {
       height: 50,
       width: 50,
    },
-   paymentTypeText:{
+   paymentTypeText: {
       color: 'gray',
       fontSize: 20,
       marginTop: 5,
       marginLeft: 5,
    },
-   paymentChoice:{
+   paymentChoice: {
       padding: 10,
       position: 'absolute',
       left: 280,
       width: 50,
       height: 50,
    },
-   doneText:{
+   doneText: {
       color: '#ffffff',
       fontWeight: 'bold',
-   }
+   },
 });

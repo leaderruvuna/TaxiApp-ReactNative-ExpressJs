@@ -123,9 +123,7 @@ export default RiderHomeContents = props => {
             </Body>
          </Header>
          <Content>
-            <View
-               style={styles.mapContainer}
-            >
+            <View style={styles.mapContainer}>
                <MapView
                   provider={PROVIDER_GOOGLE}
                   style={styles.map}
@@ -279,9 +277,7 @@ export default RiderHomeContents = props => {
                         underlineColorAndroid="#ffffff"
                         selectionColor="#42A5F5"
                         placeholderTextColor="#000000"
-                        onFocus={() =>
-                           props.navigation.navigate('RiderPickup')
-                        }
+                        onFocus={() => props.navigation.navigate('RiderPickup')}
                      />
                   </Card>
                </View>

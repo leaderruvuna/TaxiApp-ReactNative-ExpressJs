@@ -46,50 +46,36 @@ export default RiderPickUp = props => {
 
    return (
       <Container style={styles.containerView}>
-         <Header
-            style={styles.header}
-         >
+         <Header style={styles.header}>
             <Left>
                <TouchableHighlight
                   style={styles.backButton}
                   onPress={() => props.navigation.navigate('Main')}
                >
-                 <Ionicons name="arrow-back-outline" size={24} color="white" />
+                  <Ionicons name="arrow-back-outline" size={24} color="white" />
                </TouchableHighlight>
             </Left>
             <Body>
-               <Text
-                  style={styles.headerText}
-               >
-                  Locations
-               </Text>
+               <Text style={styles.headerText}>Locations</Text>
             </Body>
             <Right></Right>
          </Header>
          <KeyboardAvoidingView style={{ flex: 1 }}>
             <Content>
-              <View style={styles.placesContainer}>
-               <View
-                     style={styles.currentLocation}
-                  >
+               <View style={styles.placesContainer}>
+                  <View style={styles.currentLocation}>
                      <GooglePlacesInput />
                   </View>
-                  <View
-                     style={styles.destination}
-                  >
+                  <View style={styles.destination}>
                      <GooglePlacesDropOff />
                   </View>
-              </View>
+               </View>
                <View style={styles.bookButtonContainer}>
                   <TouchableOpacity
                      style={styles.bookButton}
-                     onPress={()=>{}}
+                     onPress={() => {}}
                   >
-                     <Text
-                        style={styles.bookButtonText}
-                     >
-                        Confirm
-                     </Text>
+                     <Text style={styles.bookButtonText}>Confirm</Text>
                   </TouchableOpacity>
                </View>
             </Content>

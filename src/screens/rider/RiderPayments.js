@@ -32,41 +32,29 @@ export default RiderPayments = props => {
 
    return (
       <Container style={styles.cotainer}>
-         <Header
-            style={styles.header}
-         >
+         <Header style={styles.header}>
             <Left>
                <TouchableHighlight
                   style={styles.backButton}
                   onPress={() => props.navigation.navigate('Main')}
                >
-                 <Ionicons name="arrow-back-outline" size={24} color="white" />
+                  <Ionicons name="arrow-back-outline" size={24} color="white" />
                </TouchableHighlight>
             </Left>
             <Body>
-               <Text
-                  style={styles.headerText}
-               >
-                  Payments
-               </Text>
+               <Text style={styles.headerText}>Payments</Text>
             </Body>
             <Right></Right>
          </Header>
          <Content>
             <Card>
                <CardItem style={styles.cardItem}>
-                  <Body
-                     style={styles.body}
-                  >
+                  <Body style={styles.body}>
                      <Image
                         source={require('../../assets/Images/paypal.png')}
                         style={styles.image}
                      />
-                     <Text
-                        style={styles.paymentTypeText}
-                     >
-                        paypal
-                     </Text>
+                     <Text style={styles.paymentTypeText}>paypal</Text>
                      <CheckBox
                         style={styles.paymentChoice}
                         isChecked={paypal}
@@ -81,18 +69,12 @@ export default RiderPayments = props => {
             </Card>
             <Card>
                <CardItem style={styles.cardItem}>
-                  <Body
-                     style={styles.body}
-                  >
+                  <Body style={styles.body}>
                      <Image
                         source={require('../../assets/Images/mobileMoney.png')}
                         style={styles.image}
                      />
-                     <Text
-                        style={styles.paymentTypeText}
-                     >
-                        MOBILE MONEY
-                     </Text>
+                     <Text style={styles.paymentTypeText}>MOBILE MONEY</Text>
                      <CheckBox
                         style={styles.paymentChoice}
                         isChecked={mobileMoney}
@@ -107,18 +89,12 @@ export default RiderPayments = props => {
             </Card>
             <Card>
                <CardItem style={styles.cardItem}>
-                  <Body
-                     style={styles.body}
-                  >
+                  <Body style={styles.body}>
                      <Image
                         source={require('../../assets/Images/cash.png')}
                         style={styles.image}
                      />
-                     <Text
-                        style={styles.paymentTypeText}
-                     >
-                        Cash
-                     </Text>
+                     <Text style={styles.paymentTypeText}>Cash</Text>
                      <CheckBox
                         style={styles.paymentChoice}
                         onClick={() => setCash(cash)}
@@ -140,11 +116,7 @@ export default RiderPayments = props => {
                         source={require('../../assets/Images/bitcoin.png')}
                         style={styles.image}
                      />
-                     <Text
-                        style={styles.paymentTypeText}
-                     >
-                        bitcoin
-                     </Text>
+                     <Text style={styles.paymentTypeText}>bitcoin</Text>
                      <CheckBox
                         style={styles.paymentChoice}
                         onClick={() => setBitcoin(bitcoin)}
@@ -155,20 +127,11 @@ export default RiderPayments = props => {
                </CardItem>
             </Card>
             <View style={styles.doneButtonContainer}>
-               <TouchableOpacity
-                  style={styles.doneButton}
-                  onPress={()=>{}}
-               >
-                  <Text
-                     style={styles.doneText}
-                  >
-                     DONE
-                  </Text>
+               <TouchableOpacity style={styles.doneButton} onPress={() => {}}>
+                  <Text style={styles.doneText}>DONE</Text>
                </TouchableOpacity>
             </View>
          </Content>
       </Container>
    );
 };
-
-

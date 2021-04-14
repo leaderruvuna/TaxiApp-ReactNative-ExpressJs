@@ -8,18 +8,18 @@ export default styles = StyleSheet.create({
       height: 600,
       marginTop: 0,
    },
-   header:{
+   header: {
       backgroundColor: '#42A5F5',
       height: 50,
    },
-   backButton:{
+   backButton: {
       width: 50,
       height: 50,
       borderRadius: 50,
       alignItems: 'center',
       justifyContent: 'center',
    },
-   headerText:{
+   headerText: {
       color: '#ffffff',
       fontSize: 20,
       fontWeight: 'bold',

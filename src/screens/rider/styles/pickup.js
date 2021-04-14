@@ -3,7 +3,6 @@ export default styles = StyleSheet.create({
    containerView: {
       flex: 1,
       backgroundColor: '#F8F8F8',
-
    },
    map: {
       height: 600,
@@ -20,42 +19,42 @@ export default styles = StyleSheet.create({
       height: 50,
       width: '100%',
    },
-   header:{
+   header: {
       backgroundColor: '#42A5F5',
       height: 50,
    },
-   backButton:{
+   backButton: {
       width: 50,
       height: 50,
       borderRadius: 50,
       alignItems: 'center',
       justifyContent: 'center',
    },
-   headerText:{
+   headerText: {
       color: '#ffffff',
       fontSize: 20,
       fontWeight: 'bold',
    },
-   currentLocation:{
+   currentLocation: {
       width: '100%',
-      paddingHorizontal:10,
+      paddingHorizontal: 10,
    },
-   destination:{
+   destination: {
       width: '100%',
-      paddingHorizontal:10,
+      paddingHorizontal: 10,
    },
-   bookButtonText:{
+   bookButtonText: {
       color: '#ffffff',
       fontWeight: 'bold',
-      fontSize:18
+      fontSize: 18,
    },
-   bookButtonContainer:{
+   bookButtonContainer: {
       width: '100%',
-      paddingHorizontal:10,
-      marginTop:'50%'
+      paddingHorizontal: 10,
+      marginTop: '50%',
    },
-   placesContainer:{
-      flexDirection:'column',
-      marginTop:5
-   }
+   placesContainer: {
+      flexDirection: 'column',
+      marginTop: 5,
+   },
 });
