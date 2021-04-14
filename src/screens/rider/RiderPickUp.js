@@ -18,8 +18,10 @@ import {
    Body,
    Card,
    CardItem,
+   Right,
 } from 'native-base';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/pickup';
 import apiKey from '../../constants/ApiKeys';
@@ -43,79 +45,39 @@ export default RiderPickUp = props => {
    const [navigationOptions, setNavigationOptions] = useState({});
 
    return (
-      <Container style={{ flex: 1 }}>
-         <Header
-            style={{
-               backgroundColor: '#42A5F5',
-               height: 75,
-            }}
-         >
+      <Container style={styles.containerView}>
+         <Header style={styles.header}>
             <Left>
                <TouchableHighlight
-                  style={{
-                     width: 50,
-                     height: 50,
-                     borderRadius: 50,
-                     alignItems: 'center',
-                     justifyContent: 'center',
-                     marginTop: 20,
-                  }}
+                  style={styles.backButton}
                   onPress={() => props.navigation.navigate('Main')}
                >
-                  <Icon
-                     name="arrow-back"
-                     style={{
-                        color: '#ffffff',
-                     }}
-                  />
+                  <Ionicons name="arrow-back-outline" size={24} color="white" />
                </TouchableHighlight>
             </Left>
             <Body>
-               <Text
-                  style={{
-                     color: '#ffffff',
-                     fontSize: 20,
-                     fontWeight: 'bold',
-                     marginTop: 20,
-                  }}
-               >
-                  Locations
-               </Text>
+               <Text style={styles.headerText}>Locations</Text>
             </Body>
+            <Right></Right>
          </Header>
          <KeyboardAvoidingView style={{ flex: 1 }}>
             <Content>
-               <View
-                  style={{
-                     width: 400,
-                     minHeight: 120,
-                     maxHeight: 120,
-                  }}
-               >
-                  <GooglePlacesInput />
+               <View style={styles.placesContainer}>
+                  <View style={styles.currentLocation}>
+                     <GooglePlacesInput />
+                  </View>
+                  <View style={styles.destination}>
+                     <GooglePlacesDropOff />
+                  </View>
                </View>
-               <View
-                  style={{
-                     width: 400,
-                     minHeight: 120,
-                     maxHeight: 120,
-                  }}
-               >
-                  <GooglePlacesDropOff />
-               </View>
-               <TouchableOpacity
-                  style={styles.bookButton}
-                  onPress={this._validatePickUpAndDropOffLocations}
-               >
-                  <Text
-                     style={{
-                        color: '#ffffff',
-                        fontWeight: 'bold',
-                     }}
+               <View style={styles.bookButtonContainer}>
+                  <TouchableOpacity
+                     style={styles.bookButton}
+                     onPress={() => {}}
                   >
-                     REQUEST
-                  </Text>
-               </TouchableOpacity>
+                     <Text style={styles.bookButtonText}>Confirm</Text>
+                  </TouchableOpacity>
+               </View>
             </Content>
          </KeyboardAvoidingView>
       </Container>
@@ -140,74 +102,13 @@ _validatePickUpAndDropOffLocations = () => {
       return;
    }
    Toast.show('Good', Toast.SHORT, Toast.TOP);
-   this._getNearbyDrivers();
-};
-
-_getNearbyDrivers = () => {
-   var DriverKeys = [];
-   var counts = [];
-   var randomIndex;
-   var urlRef = firebase.database().ref('/Drivers/');
-   urlRef.once('value', snapshot => {
-      snapshot.forEach(function (child) {
-         DriverKeys.push(child.key);
-      });
-      for (i = 0; i < DriverKeys.length; i++) {
-         counts.push(DriverKeys[i]);
-      }
-      randomIndex = Math.floor(Math.random() * DriverKeys.length);
-      this._requestDriver(counts[randomIndex]);
-   });
-};
-
-_requestDriver = driverID => {
-   AsyncStorage.getItem('riderId')
-      .then(riderID =>
-         firebase
-            .database()
-            .ref('Ride_Request/' + riderID)
-            .set({
-               driverID: driverID,
-            })
-            .then(
-               () => {
-                  Toast.show('driver requested successful', Toast.SHORT);
-               },
-               error => {
-                  Toast.show(error.message, Toast.SHORT);
-               },
-            ),
-      )
-      .catch(e => console.log('err', e));
-
-   AsyncStorage.getItem('riderId')
-      .then(riderID =>
-         firebase
-            .database()
-            .ref('Ride_Request/' + driverID + '/')
-            .set({
-               riderID: riderID,
-               pickUpName: GooglePlacesInput.pickupName,
-               dropOffName: GooglePlacesDropOff.dropOffName,
-               pickupLatitude: GooglePlacesInput.pickupLatitude,
-               pickupLongitude: GooglePlacesInput.pickupLongitude,
-               dropOffLatitude: GooglePlacesDropOff.dropOffLatitude,
-               dropOffLongitude: GooglePlacesDropOff.dropOffLongitude,
-            })
-            .then(
-               () => {},
-               error => {
-                  console.error('error:' + error);
-               },
-            ),
-      )
-      .catch(e => console.log('err', e));
+   //this._getNearbyDrivers();
 };
 
 const GooglePlacesInput = () => {
    return (
       <GooglePlacesAutocomplete
-         placeholder="Pick Up Location"
+         placeholder="Where are you?"
          minLength={2}
          autoFocus={true}
          returnKeyType={'search'}
@@ -215,13 +116,13 @@ const GooglePlacesInput = () => {
          fetchDetails={true}
          renderDescription={row => row.description}
          onPress={(data, details = null) => {
-            console.log(data, details);
-            (pickupName = data.description),
-               (pickupLatitude = `${details.geometry.location.lat}`),
-               (pickupLongitude = `${details.geometry.location.lng}`),
-               (GooglePlacesInput.pickupLatitude = pickupLatitude),
-               (GooglePlacesInput.pickupName = pickupName),
-               (GooglePlacesInput.pickupLongitude = pickupLongitude);
+            // console.log(data, details);
+            // (pickupName = data.description),
+            //    (pickupLatitude = `${details.geometry.location.lat}`),
+            //    (pickupLongitude = `${details.geometry.location.lng}`),
+            //    (GooglePlacesInput.pickupLatitude = pickupLatitude),
+            //    (GooglePlacesInput.pickupName = pickupName),
+            //    (GooglePlacesInput.pickupLongitude = pickupLongitude);
          }}
          getDefaultValue={() => ''}
          query={{
@@ -239,11 +140,10 @@ const GooglePlacesInput = () => {
             },
             predefinedPlacesDescription: {
                color: '#ffffff',
-               height: 30,
             },
          }}
          currentLocation={true}
-         currentLocationLabel="Current location"
+         currentLocationLabel=""
          nearbyPlacesAPI="GooglePlacesSearch"
          GoogleReverseGeocodingQuery={{}}
          GooglePlacesSearchQuery={{
@@ -274,7 +174,7 @@ const GooglePlacesInput = () => {
 const GooglePlacesDropOff = () => {
    return (
       <GooglePlacesAutocomplete
-         placeholder="Drop Off Location"
+         placeholder="Where to?"
          minLength={2}
          autoFocus={false}
          returnKeyType={'search'}
@@ -282,12 +182,12 @@ const GooglePlacesDropOff = () => {
          fetchDetails={true}
          renderDescription={row => row.description}
          onPress={(data, details = null) => {
-            (dropOffName = data.description),
-               (dropOffLatitude = `${details.geometry.location.lat}`),
-               (dropOffLongitude = `${details.geometry.location.lng}`),
-               (GooglePlacesDropOff.dropOffLatitude = dropOffLatitude),
-               (GooglePlacesDropOff.dropOffName = dropOffName),
-               (GooglePlacesDropOff.dropOffLongitude = dropOffLongitude);
+            // (dropOffName = data.description),
+            //    (dropOffLatitude = `${details.geometry.location.lat}`),
+            //    (dropOffLongitude = `${details.geometry.location.lng}`),
+            //    (GooglePlacesDropOff.dropOffLatitude = dropOffLatitude),
+            //    (GooglePlacesDropOff.dropOffName = dropOffName),
+            //    (GooglePlacesDropOff.dropOffLongitude = dropOffLongitude);
          }}
          getDefaultValue={() => ''}
          query={{
@@ -308,7 +208,7 @@ const GooglePlacesDropOff = () => {
             },
          }}
          currentLocation={true}
-         currentLocationLabel="Current location"
+         currentLocationLabel=""
          nearbyPlacesAPI="GooglePlacesSearch"
          GoogleReverseGeocodingQuery={{}}
          GooglePlacesSearchQuery={{

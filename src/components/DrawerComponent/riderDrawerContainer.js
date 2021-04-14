@@ -1,34 +1,29 @@
 import React from 'react';
 import { DrawerItems } from 'react-navigation-drawer';
 import { Content, Container, Header, Body } from 'native-base';
-import { Image, Text } from 'react-native';
+import { Image, Text, View } from 'react-native';
+import styles from '../styles/drawer';
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 
 export default customDrawerContentComponent = props => (
    <Container>
-      <Header style={{ height: 200, backgroundColor: '#42A5F5' }}>
-         <Body
-            style={{
-               alignItems: 'center',
-               justifyContent: 'center',
-            }}
-         >
-            <Image
-               source={require('../../assets/Images/avatar.png')}
-               style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 100,
-               }}
-            />
-            <Text
-               style={{
-                  color: '#ffffff',
-                  fontWeight: 'bold',
-                  fontSize: 20,
-               }}
-            >
-               Leader ruvuna
-            </Text>
+      <Header style={styles.header}>
+         <Body style={styles.body}>
+            <View style={styles.headerContainer}>
+               <View style={styles.imageContainer}>
+                  <AntDesign name="user" size={30} color="black" />
+               </View>
+               <View>
+                  <MaterialIcons
+                     name="add-photo-alternate"
+                     size={28}
+                     color="black"
+                  />
+               </View>
+            </View>
+            <View style={styles.nameTextContainer}>
+               <Text style={styles.textName}>Leader ruvuna</Text>
+            </View>
          </Body>
       </Header>
       <Content>

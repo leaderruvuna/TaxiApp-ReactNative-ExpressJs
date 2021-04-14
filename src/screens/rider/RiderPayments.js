@@ -5,7 +5,7 @@ import {
    Image,
    TouchableHighlight,
    TouchableOpacity,
-   Alert,
+   View,
 } from 'react-native';
 import {
    Content,
@@ -14,6 +14,7 @@ import {
    Left,
    Icon,
    Footer,
+   Right,
    Body,
    Card,
    CardItem,
@@ -21,6 +22,7 @@ import {
 import CheckBox from 'react-native-check-box';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/payments';
+import { Ionicons } from '@expo/vector-icons';
 
 export default RiderPayments = props => {
    const [mobileMoney, setMobileMoney] = useState('');
@@ -28,89 +30,33 @@ export default RiderPayments = props => {
    const [bitcoin, setBitcoin] = useState('');
    const [paypal, setPaypal] = useState('');
 
-   const navigationOptions = {
-      drawerIcon: ({ tintColor }) => (
-         <Image
-            source={require('../../assets/Images/payments.png')}
-            style={{ width: 25, height: 25 }}
-         />
-      ),
-   };
-
    return (
-      <Container style={{ flex: 1 }}>
-         <Header
-            style={{
-               backgroundColor: '#42A5F5',
-               height: 75,
-            }}
-         >
+      <Container style={styles.cotainer}>
+         <Header style={styles.header}>
             <Left>
                <TouchableHighlight
-                  style={{
-                     width: 50,
-                     height: 50,
-                     borderRadius: 50,
-                     alignItems: 'center',
-                     justifyContent: 'center',
-                     marginTop: 20,
-                  }}
-                  onPress={() => props.navigation.navigate('Home')}
+                  style={styles.backButton}
+                  onPress={() => props.navigation.navigate('Main')}
                >
-                  <Icon
-                     name="arrow-back"
-                     style={{
-                        color: '#ffffff',
-                     }}
-                  />
+                  <Ionicons name="arrow-back-outline" size={24} color="white" />
                </TouchableHighlight>
             </Left>
             <Body>
-               <Text
-                  style={{
-                     color: '#ffffff',
-                     fontSize: 20,
-                     fontWeight: 'bold',
-                     marginTop: 20,
-                  }}
-               >
-                  Payments
-               </Text>
+               <Text style={styles.headerText}>Payments</Text>
             </Body>
+            <Right></Right>
          </Header>
          <Content>
             <Card>
-               <CardItem style={{ marginTop: 5 }}>
-                  <Body
-                     style={{
-                        flexDirection: 'row',
-                     }}
-                  >
+               <CardItem style={styles.cardItem}>
+                  <Body style={styles.body}>
                      <Image
                         source={require('../../assets/Images/paypal.png')}
-                        style={{
-                           height: 50,
-                           width: 50,
-                        }}
+                        style={styles.image}
                      />
-                     <Text
-                        style={{
-                           color: 'gray',
-                           fontSize: 20,
-                           marginTop: 5,
-                           marginLeft: 5,
-                        }}
-                     >
-                        paypal
-                     </Text>
+                     <Text style={styles.paymentTypeText}>paypal</Text>
                      <CheckBox
-                        style={{
-                           padding: 10,
-                           position: 'absolute',
-                           left: 280,
-                           width: 50,
-                           height: 50,
-                        }}
+                        style={styles.paymentChoice}
                         isChecked={paypal}
                         onClick={() => setPaypal(paypal)}
                         checkBoxColor="#42A5F5"
@@ -122,37 +68,15 @@ export default RiderPayments = props => {
                </CardItem>
             </Card>
             <Card>
-               <CardItem style={{ marginTop: 5 }}>
-                  <Body
-                     style={{
-                        flexDirection: 'row',
-                     }}
-                  >
+               <CardItem style={styles.cardItem}>
+                  <Body style={styles.body}>
                      <Image
                         source={require('../../assets/Images/mobileMoney.png')}
-                        style={{
-                           height: 50,
-                           width: 50,
-                        }}
+                        style={styles.image}
                      />
-                     <Text
-                        style={{
-                           color: 'gray',
-                           fontSize: 20,
-                           marginTop: 5,
-                           marginLeft: 5,
-                        }}
-                     >
-                        MOBILE MONEY
-                     </Text>
+                     <Text style={styles.paymentTypeText}>MOBILE MONEY</Text>
                      <CheckBox
-                        style={{
-                           padding: 10,
-                           position: 'absolute',
-                           left: 280,
-                           width: 50,
-                           height: 50,
-                        }}
+                        style={styles.paymentChoice}
                         isChecked={mobileMoney}
                         onClick={() => setMobileMoney(mobileMoney)}
                         checkBoxColor="#42A5F5"
@@ -164,37 +88,15 @@ export default RiderPayments = props => {
                </CardItem>
             </Card>
             <Card>
-               <CardItem style={{ marginTop: 5 }}>
-                  <Body
-                     style={{
-                        flexDirection: 'row',
-                     }}
-                  >
+               <CardItem style={styles.cardItem}>
+                  <Body style={styles.body}>
                      <Image
                         source={require('../../assets/Images/cash.png')}
-                        style={{
-                           height: 50,
-                           width: 50,
-                        }}
+                        style={styles.image}
                      />
-                     <Text
-                        style={{
-                           color: 'gray',
-                           fontSize: 20,
-                           marginTop: 5,
-                           marginLeft: 5,
-                        }}
-                     >
-                        cash
-                     </Text>
+                     <Text style={styles.paymentTypeText}>Cash</Text>
                      <CheckBox
-                        style={{
-                           padding: 10,
-                           position: 'absolute',
-                           left: 280,
-                           width: 50,
-                           height: 50,
-                        }}
+                        style={styles.paymentChoice}
                         onClick={() => setCash(cash)}
                         isChecked={cash}
                         checkBoxColor="#42A5F5"
@@ -204,7 +106,7 @@ export default RiderPayments = props => {
                </CardItem>
             </Card>
             <Card>
-               <CardItem style={{ marginTop: 5 }}>
+               <CardItem style={styles.cardItem}>
                   <Body
                      style={{
                         flexDirection: 'row',
@@ -212,29 +114,11 @@ export default RiderPayments = props => {
                   >
                      <Image
                         source={require('../../assets/Images/bitcoin.png')}
-                        style={{
-                           height: 50,
-                           width: 50,
-                        }}
+                        style={styles.image}
                      />
-                     <Text
-                        style={{
-                           color: 'gray',
-                           fontSize: 20,
-                           marginTop: 5,
-                           marginLeft: 5,
-                        }}
-                     >
-                        bitcoin
-                     </Text>
+                     <Text style={styles.paymentTypeText}>bitcoin</Text>
                      <CheckBox
-                        style={{
-                           padding: 10,
-                           position: 'absolute',
-                           left: 280,
-                           width: 50,
-                           height: 50,
-                        }}
+                        style={styles.paymentChoice}
                         onClick={() => setBitcoin(bitcoin)}
                         isChecked={bitcoin}
                         checkBoxColor="#42A5F5"
@@ -242,62 +126,12 @@ export default RiderPayments = props => {
                   </Body>
                </CardItem>
             </Card>
-            <TouchableOpacity
-               style={styles.DoneButton}
-               onPress={this._addPayments}
-            >
-               <Text
-                  style={{
-                     color: '#ffffff',
-                     fontWeight: 'bold',
-                  }}
-               >
-                  DONE
-               </Text>
-            </TouchableOpacity>
+            <View style={styles.doneButtonContainer}>
+               <TouchableOpacity style={styles.doneButton} onPress={() => {}}>
+                  <Text style={styles.doneText}>DONE</Text>
+               </TouchableOpacity>
+            </View>
          </Content>
       </Container>
    );
-};
-
-_addPayments = async () => {
-   Alert.alert(
-      'Payments Confirm',
-      'If you accept,your payments status is going to be updated ',
-      [
-         {
-            text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
-         },
-         {
-            text: 'OK',
-            onPress: this._addPaymentsToRiderDatabase,
-         },
-      ],
-      { cancelable: false },
-   );
-};
-
-_addPaymentsToRiderDatabase = async () => {
-   AsyncStorage.getItem('riderId')
-      .then(riderID =>
-         firebase
-            .database()
-            .ref(`Payments/${riderID}/PaymentsMode/`)
-            .set({
-               mobileMoney,
-               cash,
-               bitcoin,
-            })
-            .then(
-               () => {
-                  Toast.show('payments updated successfully', Toast.SHORT);
-               },
-               error => {
-                  Toast.show(error.message, Toast.SHORT);
-               },
-            ),
-      )
-      .catch(e => console.log('err', e));
 };
