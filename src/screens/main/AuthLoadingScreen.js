@@ -3,7 +3,7 @@ import { ActivityIndicator, StatusBar, View } from 'react-native';
 export default AuthLoadingScreen = props => {
    const [userToken, setUserToken] = useState(null);
    useEffect(() => {
-      props.navigation.navigate(userToken != null ? 'Main' : 'Main');
+      props.navigation.navigate(userToken != null ? 'Main' : 'Login');
    }, []);
 
    return (
