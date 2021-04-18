@@ -52,7 +52,6 @@ export default RiderHomeContents = props => {
    const [isConfirmButton, setConfirmButton] = useState(false);
    const [isMounted, setMounted] = useState(false);
    const [isDestinationVisible, setDestinationVisible] = useState(true);
-   const [isModelVisible, setModelVisible] = useState(false);
 
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(
@@ -82,10 +81,9 @@ export default RiderHomeContents = props => {
             });
          },
          //setWatchId(watchingId),
-         error =>
-            this.setState({
-               error: error.message,
-            }),
+         error => {
+            console.log(error.message);
+         },
          {
             enableHighAccuracy: true,
             timeout: 20000,
@@ -94,6 +92,46 @@ export default RiderHomeContents = props => {
          },
       );
    }, [region, watchId]);
+
+   useEffect(() => {
+      navigator.geolocation.getCurrentPosition(
+         position => {
+            setRegion({
+               latitude: position.coords.latitude,
+               longitude: position.coords.longitude,
+               latitudeDelta: LATITUDE_DELTA,
+               longitudeDelta: LONGITUDE_DELTA,
+            });
+         },
+         error => console.log(error.message),
+         {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 1000,
+         },
+      );
+
+      const watchingId = navigator.geolocation.watchPosition(
+         position => {
+            setRegion({
+               latitude: position.coords.latitude,
+               longitude: position.coords.longitude,
+               latitudeDelta: LATITUDE_DELTA,
+               longitudeDelta: LONGITUDE_DELTA,
+            });
+         },
+         //setWatchId(watchingId),
+         error => {
+            console.log(error.message);
+         },
+         {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 1000,
+            distanceFilter: 10,
+         },
+      );
+   });
 
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
@@ -143,70 +181,10 @@ export default RiderHomeContents = props => {
                         }}
                      />
                   </MapView.Marker>
-                  <Image
-                     source={require('../../assets/Images/driver_car.png')}
-                     style={{
-                        width: 30,
-                        height: 60,
-                        position: 'absolute',
-                        top: 150,
-                        left: 100,
-                     }}
-                  />
-                  <Text
-                     style={{
-                        width: 30,
-                        height: 60,
-                        position: 'absolute',
-                        top: 150,
-                        left: 100,
-                        elevation: 10,
-                     }}
-                  ></Text>
-                  <Image
-                     source={require('../../assets/Images/driver_car.png')}
-                     style={{
-                        width: 30,
-                        height: 60,
-                        position: 'absolute',
-                        top: 150,
-                        left: 250,
-                     }}
-                  />
-                  <Text
-                     style={{
-                        width: 30,
-                        height: 60,
-                        position: 'absolute',
-                        top: 150,
-                        left: 250,
-                        elevation: 10,
-                     }}
-                  ></Text>
-                  <Image
-                     source={require('../../assets/Images/driver_car.png')}
-                     style={{
-                        width: 30,
-                        height: 60,
-                        position: 'absolute',
-                        top: 250,
-                        left: 170,
-                     }}
-                  />
-                  <Text
-                     style={{
-                        width: 30,
-                        height: 60,
-                        position: 'absolute',
-                        top: 150,
-                        left: 250,
-                        elevation: 10,
-                     }}
-                  ></Text>
                </MapView>
             </View>
             <View>
-               <Modal isVisible={isModelVisible}>
+               <Modal isVisible={isModalVisible}>
                   <View style={styles.modelContainer}>
                      <View style={styles.modelHeader}>
                         <View style={styles.imageContainer}>
@@ -262,7 +240,7 @@ export default RiderHomeContents = props => {
             </View>
          </Content>
          <Footer style={styles.footer}>
-            {!isDestinationVisible ? (
+            {isDestinationVisible ? (
                <View style={styles.destinationContainer}>
                   <View style={styles.destinationTextContainer}>
                      <Text style={styles.destnationText}>
@@ -277,7 +255,9 @@ export default RiderHomeContents = props => {
                         underlineColorAndroid="#ffffff"
                         selectionColor="#42A5F5"
                         placeholderTextColor="#000000"
-                        onFocus={() => props.navigation.navigate('RiderPickup')}
+                        onFocus={() => {
+                            props.navigation.navigate('RiderPick');
+                        }}
                      />
                   </Card>
                </View>
