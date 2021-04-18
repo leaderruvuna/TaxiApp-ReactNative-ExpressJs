@@ -33,7 +33,7 @@ const AuthStackMain = createAppContainer(
          RiderVerifyNum: { screen: RiderVerifyNumber },
          RiderResetPassWord: { screen: RiderForgotPassword },
          RiderLog: { screen: RiderLogin },
-         RiderPickUp: { screen: RiderPickup },
+         RiderPick: { screen: RiderPickup },
       },
       {
          headerMode: 'none',
