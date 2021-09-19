@@ -5,7 +5,7 @@
 
 # dependencies
 /node_modules
-
+/API/node_modules
 # misc
 .env.local
 .env.development.local

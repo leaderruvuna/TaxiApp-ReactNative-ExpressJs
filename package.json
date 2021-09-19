@@ -63,7 +63,7 @@
       "react-native-screens": "^3.0.0",
       "react-native-simple-toast": "0.0.8",
       "react-native-vector-icons": "^4.6.0",
-      "react-native-web": "~0.13.12",
+      "react-native-web": "^0.17.1",
       "react-navigation": "^4.4.4",
       "react-navigation-drawer": "^2.7.0",
       "react-navigation-material-bottom-tabs": "^2.3.4",
