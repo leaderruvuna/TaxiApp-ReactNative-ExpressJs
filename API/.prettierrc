@@ -1,0 +1,21 @@
+{
+   "semi": true,
+   "trailingComma": "all",
+   "singleQuote": true,
+   "tabWidth": 3,
+   "endOfLine": "lf",
+   "overrides": [
+      {
+         "files": "*.test.js",
+         "options": {
+            "semi": true
+         }
+      },
+      {
+         "files": ["*.html", "legacy/**/*.js"],
+         "options": {
+            "tabWidth": 4
+         }
+      }
+   ]
+}
