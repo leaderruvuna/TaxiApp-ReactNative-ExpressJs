@@ -10,7 +10,16 @@
     <img src="/screenshots-current/verify.PNG" width="250px"/>
 </div>
 
-## prerequisites
+## SYSTEMS DESIGN
+
+High level diagram for the taxi booking app including client and API architecture.
+
+<div align="center">
+    <img src="/diagrams/system-diagram.png" width="600px"/>
+</div>
+
+
+## Prerequisites
 
 1. NodeJS installed(min v12.14.1)
 2. Expo CLI installed(min 4.3.2)
