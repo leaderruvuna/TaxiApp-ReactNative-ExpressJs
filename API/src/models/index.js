@@ -1,10 +1,8 @@
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-
-dotenv.config();
-
+import envCall from '../envCall/index';
+const { MONGODB_URI, MONGODB_URI_LOCAL } = envCall;
 const dbConnection = mongoose
-   .connect(process.env.MONGODB_URI || process.env.MONGODB_URI_LOCAL, {
+   .connect(MONGODB_URI || MONGODB_URI_LOCAL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
