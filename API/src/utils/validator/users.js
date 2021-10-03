@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export const driverValidator = (input) => {
+export const isDriverValid = (input) => {
    schema = {
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
@@ -17,7 +17,7 @@ export const driverValidator = (input) => {
    return result;
 };
 
-export const riderValidator = (input) => {
+export const isRiderValid = (input) => {
    schema = {
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
