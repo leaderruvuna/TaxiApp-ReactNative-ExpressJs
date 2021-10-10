@@ -1,4 +1,4 @@
-import DriverController from './driver';
-import RiderController from './rider';
-
-export { DriverController, RiderController };
+import DriverController from './driver/auth';
+import RiderController from './rider/auth';
+import RidesController from './rider/rides';
+export { DriverController, RiderController, RidesController };
