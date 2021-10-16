@@ -1,8 +1,11 @@
 import app from './app';
+import baseEnv from './src/envCall/index';
+
 /**
  * @param {int} val The port number.
  * @returns {int} The port number.
  */
+
 const normalizePort = (val) => {
 	const port = parseInt(val, 10);
 
@@ -17,7 +20,7 @@ const normalizePort = (val) => {
 	return false;
 };
 
-const port = normalizePort(process.env.PORT || '4000');
+const port = normalizePort(baseEnv.PORT || '4000');
 
 app.listen(port, () => {
 	process.stdout.write(`Server is running on port: ${port}\n`);

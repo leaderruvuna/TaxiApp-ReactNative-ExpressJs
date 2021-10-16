@@ -6,7 +6,6 @@ import ridesRoute from './rides/index';
 const apiVersion = '/api/v1/';
 
 const router = (app) => {
-   app.use(apiVersion);
    app.use(apiVersion, riderRoute);
    app.use(apiVersion, driverRoute);
    app.use(apiVersion, ridesRoute);

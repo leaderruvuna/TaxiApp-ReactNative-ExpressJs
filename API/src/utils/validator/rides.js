@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 export const isRideValid = (input) => {
-   schema = {
+   const schema = Joi.object({
       rider_id: Joi.string().required(),
       rider_names: Joi.string().required(),
       rider_phone_number: Joi.string().required(),
@@ -16,13 +16,13 @@ export const isRideValid = (input) => {
       price: Joi.number().required(),
       currency: Joi.string().required(),
       status: Joi.number().required(),
-      driver_id: Joi.string(),
-      driver_names: Joi.string(),
-      driver_phone_number: Joi.string(),
-      driver_lat: Joi.number(),
-      driver_long: Joi.number(),
+      // driver_id: Joi.string(),
+      // driver_names: Joi.string(),
+      // driver_phone_number: Joi.string(),
+      // driver_lat: Joi.number(),
+      // driver_long: Joi.number(),
       date: Joi.string().required(),
-   };
-   const result = Joi.valid(input, schema);
+   });
+   const result = schema.validate(input);
    return result;
 };
