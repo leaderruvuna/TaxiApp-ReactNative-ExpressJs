@@ -6,7 +6,7 @@ import {
    HTTP_OK,
    HTTP_BAD_REQUEST,
 } from '../../core/constants/httpStatus';
-import DriverModal from '../../models/driver';
+import RiderModal from '../../models/rider';
 import { isRiderValid } from '../../utils/validator/users';
 /**
  * Rider Controller
@@ -20,23 +20,16 @@ class RiderController {
     */
    static async create(req, res) {
       const data = req.body;
-      if (!isRiderValid(data)) {
-         return Res.handleError(HTTP_BAD_REQUEST, err, res);
+      const { error, value } = isRiderValid(data);
+      if (error) {
+         let errorMessage = error.details[0].message;
+         return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
-
-      let rider = new RiderModal({
-         firstname,
-         lastname,
-         nationality,
-         image,
-         phone_number,
-         email,
-         date,
-      });
+      let rider = new RiderModal(data);
       rider
          .save()
          .then((result) => {
-            return Res.handleOk(HTTP_CREATED, result, res);
+            return Res.handleSuccess(HTTP_CREATED,'RIDER SUCCESSFULLY CREATED', result, res);
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);
@@ -50,16 +43,13 @@ class RiderController {
     */
    static async login(req, res) {
       const { phone_number } = req.body;
-      DriverModal.find({ phone_number })
+      await RiderModal.find({ phone_number })
          .exec()
          .then((user) => {
-            if (user.length < 1) {
-               return Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+            if (user.length === 0) {
+               return Res.handleError(HTTP_SERVER_ERROR, 'NO USER FOUND', res);
             } else {
-               if (err) {
-                  return Res.handleError(HTTP_SERVER_ERROR, err, res);
-               }
-               if (result) {
+               if (user) {
                   const SECRET_KEY = 'YOUR_SECURE_PASSWORD';
                   const token = jwt.sign(
                      {
@@ -78,8 +68,8 @@ class RiderController {
                   );
                   return Res.handleSuccess(
                      HTTP_OK,
+                     'RIDER SUCCESSFULLY LOFFED IN',
                      token,
-                     { verified: user[0].verified },
                      res,
                   );
                }

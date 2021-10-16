@@ -6,7 +6,7 @@ import {
    HTTP_BAD_REQUEST,
 } from '../../core/constants/httpStatus';
 import RidesModal from '../../models/rides';
-import { isRideValid } from '../../utils/validator/users';
+import { isRideValid } from '../../utils/validator/rides';
 /**
  * Rides Controller
  */
@@ -19,8 +19,10 @@ class RidesController {
     */
    static async create(req, res) {
       const data = req.body;
-      if (!isRideValid(data)) {
-         return Res.handleError(HTTP_BAD_REQUEST, err, res);
+      const { error, value } = isRideValid(data);
+      if (error) {
+         let errorMessage=error.details[0].message;
+         return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
 
       let rides = new RidesModal(data);
@@ -41,8 +43,10 @@ class RidesController {
     */
    static async update(req, res) {
       const data = req.body;
-      if (!isRideValid(data)) {
-         return Res.handleError(HTTP_BAD_REQUEST, err, res);
+      const { error, value } = isRideValid(data);
+      if (error) {
+         let errorMessage=error.details[0].message;
+         return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
       RidesModal.findOneAndUpdate(
          { _id: req.params.ride_id },

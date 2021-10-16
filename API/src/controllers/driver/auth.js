@@ -22,16 +22,31 @@ class DriverController {
     */
    static async create(req, res) {
       const data = req.body;
-      if (!isDriverValid(data)) {
-         return Res.handleError(HTTP_BAD_REQUEST, err, res);
+      const { error, value } = isDriverValid(data);
+      if (error) {
+         let errorMessage = error.details[0].message;
+         return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
-      const { password } = data;
+      const {
+         password,
+         firstname,
+         lastname,
+         nationality,
+         image,
+         country_code,
+         phone_number,
+         driving_licence,
+         licence_number,
+         email,
+         date,
+      } = data;
       let hashPass = hashPassword(password);
       let driver = new DriverModal({
          firstname,
          lastname,
          nationality,
          image,
+         country_code,
          phone_number,
          driving_licence,
          licence_number,
@@ -56,7 +71,7 @@ class DriverController {
     */
    static async login(req, res) {
       const { email, password } = req.body;
-      DriverModal.find({ email })
+      await DriverModal.find({ email })
          .exec()
          .then((user) => {
             if (user.length < 1) {
@@ -89,8 +104,8 @@ class DriverController {
                      );
                      return Res.handleSuccess(
                         HTTP_OK,
+                        'DRIVER SUSCCESSFULLY LOGEDIN',
                         token,
-                        { verified: user[0].verified },
                         res,
                      );
                   }
