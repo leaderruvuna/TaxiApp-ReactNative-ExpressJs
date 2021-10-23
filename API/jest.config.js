@@ -11,9 +11,8 @@ module.exports = {
       'coverage',
       'src/index.js',
       'src/app.js',
-      'src/core/constantes/httpStatusCodes.js',
+      'src/core/constants/httpStatusCodes.js',
       'src/models/index.js',
-      'src/database/config/db.config.js',
       'src/database/models/*',
    ],
 };
