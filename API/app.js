@@ -1,4 +1,4 @@
-import dbConnection from './src/models/index';
+import './src/models/index';
 import express from 'express';
 import router from './src/routes/index';
 import cors from 'cors';

@@ -9,7 +9,7 @@
     "start": "babel-watch index.js",
     "dev": "babel-watch index.js",
     "debug": "babel-watch --inspect -- index.js",
-    "test": "jest --coverage --config=jest.config.js  --runInBand --detectOpenHandles --forceExit",
+    "test": "jest --coverage --config=jest.config.js --verbose   --runInBand --detectOpenHandles --forceExit",
     "test:CI": "CI=true npm test"
   },
   "keywords": [],
