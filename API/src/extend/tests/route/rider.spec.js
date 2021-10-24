@@ -21,7 +21,7 @@ beforeAll(async () => {
    await RiderModal.deleteMany();
 });
 
-describe('Test rider API', () => {
+describe('Test riders API', () => {
    test('Should register the rider with phone number', () => {
       request(app)
          .post(`${urlPrefix}/auth/rider/create`)
