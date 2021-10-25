@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt-nodejs';
 import Res from '../../helpers/responses';
+import ResponseView from '../../helpers/responseviews';
+import DriverModal from '../../models/driver';
 import {
    HTTP_SERVER_ERROR,
    HTTP_CREATED,
@@ -7,9 +10,9 @@ import {
    HTTP_BAD_REQUEST,
 } from '../../core/constants/httpStatus';
 import { hashPassword } from '../../utils/password';
-import DriverModal from '../../models/driver';
-import bcrypt from 'bcrypt-nodejs';
 import { isDriverValid } from '../../utils/validator/users';
+import { Verification } from '../helper/index';
+
 /**
  * Driver Controller
  */
@@ -57,6 +60,7 @@ class DriverController {
       driver
          .save()
          .then((result) => {
+            Verification.sendVerificationEmail(result);
             return Res.handleOk(HTTP_CREATED, result, res);
          })
          .catch((err) => {
@@ -114,6 +118,109 @@ class DriverController {
             }
          })
          .catch((err) => Res.handleError(HTTP_SERVER_ERROR, 'error', res));
+   }
+   /**
+    * verify user
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+   static async verifyUser(req, res) {
+      const { secret, userid } = req.params;
+      DriverModal.findOneAndUpdate(
+         { _id: userid },
+         { verified: true },
+         { new: true },
+         (err, user) => {
+            if (err) {
+               let failureMessage =
+                  'Your account verification failed.Try again later!';
+               ResponseView.failedVerification(failureMessage, res);
+            }
+            let successMessage = `${user.user_name} , Your account is successfully verified!<br> You can go and login.`;
+            ResponseView.successVerification(successMessage, res);
+         },
+      )
+         .where('secret')
+         .equals(secret);
+   }
+   /**
+    * find user before reset password
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+   static async findUserBeforeResetPassword(req, res) {
+      let resetConfirmCode = secretCode();
+      let updatedTime = new Date();
+      DriverModal.findOne({ email: req.params.email }, (err, user) => {
+         if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+         if (user == null) {
+            Res.handleError(HTTP_NOT_FOUND, 'User does not exist', res);
+         } else {
+            UserModel.findOneAndUpdate(
+               { _id: user._id },
+               { reset_code: resetConfirmCode, updated: updatedTime },
+               { new: true },
+               async (err, user) => {
+                  if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+                  await Verification.sendResetPasswordEmail(user);
+                  Res.handleOk(HTTP_OK, user, res);
+               },
+            );
+         }
+      });
+   }
+   /**
+    * confirm reset password
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+   static async confirmResetPassword(req, res) {
+      let actualTime = new Date();
+      DriverModal.findOne({ _id: req.params.userid }, (err, user) => {
+         if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+         if (user == null) {
+            Res.handleError(HTTP_NOT_FOUND, 'User does not exist', res);
+         } else {
+            let updatedTime = user.updated;
+            let hasCodeExpired = Verification.verifyCodeExpiration(
+               actualTime,
+               updatedTime,
+            );
+            if (hasCodeExpired) {
+               Res.handleError(HTTP_ACCESS_DENIED, 'Code has expired ', res);
+            } else {
+               if (req.params.resetCode === user.reset_code) {
+                  Res.handleOk(HTTP_OK, user, res);
+               } else {
+                  Res.handleError(HTTP_ACCESS_DENIED, 'Incorrect code', res);
+               }
+            }
+         }
+      });
+   }
+
+   /**
+    * reset password
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+
+   static async resetPassword(req, res) {
+      const { userid, password } = req.body;
+      let hashedPassword = hashPassword(password);
+      DriverModal.findOneAndUpdate(
+         { _id: userid },
+         { password: hashedPassword },
+         { new: true },
+         (err, user) => {
+            if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+            Res.handleOk(HTTP_OK, user, res);
+         },
+      );
    }
 }
 

@@ -21,8 +21,8 @@ beforeAll(async () => {
    await RiderModal.deleteMany();
 });
 
-describe('Test rider API', () => {
-   test('Should register the rider with phone number', () => {
+describe('Test riders API', () => {
+   test('Should register the rider with phone number', (done) => {
       request(app)
          .post(`${urlPrefix}/auth/rider/create`)
          .send(rider)
@@ -31,10 +31,10 @@ describe('Test rider API', () => {
             done();
          });
    });
-   test('Should login the rider with phone number', () => {
+   test('Should login the rider with phone number', (done) => {
     request(app)
        .post(`${urlPrefix}/auth/rider/login`)
-       .send(rider.phone_number)
+       .send({phone_number:rider.phone_number})
        .end((err, response) => {
           expect(response.status).equal(HTTP_OK)
           done();

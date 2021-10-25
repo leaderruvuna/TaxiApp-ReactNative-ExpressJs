@@ -29,7 +29,7 @@ class RidesController {
       rides
          .save()
          .then((result) => {
-            return Res.handleOk(HTTP_CREATED, result, res);
+            return Res.handleSuccess(HTTP_CREATED,'RIDE SUCCESSFULLY REQUESTED', result, res);
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);
@@ -54,7 +54,7 @@ class RidesController {
          { new: true },
          (err, ride) => {
             if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
-            Res.handleOk(HTTP_OK, ride, res);
+            Res.handleSuccess(HTTP_OK,'RIDE SUCCESSFULLY UPDATED', ride, res);
          },
       );
    }
