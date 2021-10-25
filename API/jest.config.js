@@ -1,6 +1,7 @@
 module.exports = {
    moduleFileExtensions: ['js', 'jsx', 'json', 'node'],
    testRegex: '(/test/.*|(\\.|/)(test|spec))\\.(js|ts)x?$',
+   "bail": true,
    testEnvironment: 'node',
    clearMocks: true,
    verbose: true,

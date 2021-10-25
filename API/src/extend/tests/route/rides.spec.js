@@ -19,35 +19,36 @@ beforeAll(async () => {
    });
    await RidesModal.deleteMany();
 });
-
+let rideId;
 describe('Test the rides API', () => {
-   test('Should request for new ride', () => {
+   test('Should request for new ride', (done) => {
       request(app)
          .post(`${urlPrefix}/rides/create`)
          .send(rides)
          .end((err, response) => {
             expect(response.status).equal(HTTP_CREATED);
+            rideId=response.body.data._id;
             done();
          });
    });
-   test('Should update ride', () => {
+   test('Should update ride', (done) => {
       request(app)
-         .put(`${urlPrefix}/rides/update/${rides.ride_id}`)
+         .put(`${urlPrefix}/rides/update/${rideId}`)
          .send(rides)
          .end((err, response) => {
             expect(response.status).equal(HTTP_OK);
             done();
          });
    });
-   test('Should list a ride', () => {
+   test('Should list a ride', (done) => {
       request(app)
-         .get(`${urlPrefix}/rides/find/${rides.ride_id}`)
+         .get(`${urlPrefix}/rides/find/${rideId}`)
          .end((err, response) => {
             expect(response.status).equal(HTTP_OK);
             done();
          });
    });
-   test('Should list all rides', () => {
+   test('Should list all rides', (done) => {
       request(app)
          .get(`${urlPrefix}/rides/findall`)
          .end((err, response) => {
@@ -55,9 +56,9 @@ describe('Test the rides API', () => {
             done();
          });
    });
-   test('Should delete ride', () => {
+   test('Should delete ride', (done) => {
       request(app)
-         .delete(`${urlPrefix}/rides/delete/${rides.ride_id}`)
+         .delete(`${urlPrefix}/rides/delete/${rideId}`)
          .end((err, response) => {
             expect(response.status).equal(HTTP_OK);
             done();

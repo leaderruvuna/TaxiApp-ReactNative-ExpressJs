@@ -9,7 +9,7 @@
     "start": "babel-watch index.js",
     "dev": "babel-watch index.js",
     "debug": "babel-watch --inspect -- index.js",
-    "test": "jest --coverage --config=jest.config.js  --runInBand --detectOpenHandles --forceExit",
+    "test": "jest --coverage --config=jest.config.js --verbose   --runInBand --detectOpenHandles --forceExit",
     "test:CI": "CI=true npm test"
   },
   "keywords": [],
@@ -54,7 +54,7 @@
     "babel-watch": "^7.4.1",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "jest": "^25.1.0",
+    "jest": "^27.3.1",
     "mongodb": "^3.5.4",
     "nodemon": "^2.0.2",
     "prettier": "2.2.1",

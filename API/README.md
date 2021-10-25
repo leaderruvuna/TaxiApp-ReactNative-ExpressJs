@@ -12,6 +12,12 @@ High level diagram for the taxi booking app including client and API architectur
     <img src="../diagrams/system-diagram.png" width="600px"/>
 </div>
 
+### UNIT TESTS CURRENT COVERAGE 
+
+<div align="center">
+    <img src="../diagrams/unit-tests-1.png" width="600px"/>
+</div>
+
 ### API REQUESTS SCREENSHOTS (driver signup and create rides req...)
 <div align="center">
     <img src="../diagrams/rides.png" width="600px"/>
