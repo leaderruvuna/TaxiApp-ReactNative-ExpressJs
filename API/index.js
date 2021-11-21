@@ -7,21 +7,21 @@ import baseEnv from './src/envCall/index';
  */
 
 const normalizePort = (val) => {
-	const port = parseInt(val, 10);
+   const port = parseInt(val, 10);
 
-	if (Number.isNaN(port)) {
-		return val;
-	}
+   if (Number.isNaN(port)) {
+      return val;
+   }
 
-	if (port >= 0) {
-		return port;
-	}
+   if (port >= 0) {
+      return port;
+   }
 
-	return false;
+   return false;
 };
 
-const port = normalizePort(baseEnv.PORT || '4000');
+const port = normalizePort(baseEnv.PORT || '6000');
 
 app.listen(port, () => {
-	process.stdout.write(`Server is running on port: ${port}\n`);
+   process.stdout.write(`Server is running on port: ${port}\n`);
 });

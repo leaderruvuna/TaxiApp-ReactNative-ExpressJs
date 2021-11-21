@@ -29,7 +29,12 @@ class RiderController {
       rider
          .save()
          .then((result) => {
-            return Res.handleSuccess(HTTP_CREATED,'RIDER SUCCESSFULLY CREATED', result, res);
+            return Res.handleSuccess(
+               HTTP_CREATED,
+               'RIDER SUCCESSFULLY CREATED',
+               result,
+               res,
+            );
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);
