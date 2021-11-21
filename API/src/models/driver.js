@@ -11,6 +11,8 @@ const driverSchema = new mongoose.Schema({
    licence_number: { type: String, required: true },
    email: { type: String, required: true, unique: true },
    password: { type: String, required: true },
+   secret: { type: String, required: true },
+   verified: { type: Boolean, required: true, default: false },
    date: { type: String, required: true },
 });
 export default mongoose.model('drivers', driverSchema);

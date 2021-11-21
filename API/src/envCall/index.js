@@ -10,5 +10,6 @@ const baseEnv = {
    RECEIVER_EMAIL: process.env.RECEIVER_EMAIL,
    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
    BASE_URL: process.env.BASE_URL,
+   PORT: process.env.PORT,
 };
 export default baseEnv;

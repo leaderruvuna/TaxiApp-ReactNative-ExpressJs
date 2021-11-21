@@ -12,7 +12,7 @@ import {
 import { hashPassword } from '../../utils/password';
 import { isDriverValid } from '../../utils/validator/users';
 import { Verification } from '../helper/index';
-
+import createSecret from '../../utils/secretCode'
 /**
  * Driver Controller
  */
@@ -44,6 +44,7 @@ class DriverController {
          date,
       } = data;
       let hashPass = hashPassword(password);
+      const secret=createSecret()
       let driver = new DriverModal({
          firstname,
          lastname,
@@ -55,12 +56,13 @@ class DriverController {
          licence_number,
          email,
          password: hashPass,
+         secret,
          date,
       });
       driver
          .save()
-         .then((result) => {
-            Verification.sendVerificationEmail(result);
+         .then(async(result) => {
+            await Verification.sendVerificationEmail(result);
             return Res.handleOk(HTTP_CREATED, result, res);
          })
          .catch((err) => {
@@ -120,6 +122,35 @@ class DriverController {
          .catch((err) => Res.handleError(HTTP_SERVER_ERROR, 'error', res));
    }
    /**
+    * read user
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+   static async findUser(req, res) {
+      DriverModal.findOne({ _id: req.params.userid }, (err, user) => {
+         if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+         Res.handleOk(HTTP_OK, user, res);
+      });
+   }
+   /**
+    * update user
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+   static async updateUser(req, res) {
+      DriverModal.findOneAndUpdate(
+         { _id: req.params.userid },
+         req.body,
+         { new: true },
+         (err, user) => {
+            if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+            Res.handleOk(HTTP_OK, user, res);
+         },
+      );
+   }
+   /**
     * verify user
     * @param {*} req
     * @param {*} res
@@ -137,7 +168,7 @@ class DriverController {
                   'Your account verification failed.Try again later!';
                ResponseView.failedVerification(failureMessage, res);
             }
-            let successMessage = `${user.user_name} , Your account is successfully verified!<br> You can go and login.`;
+            let successMessage = `${user.firstname}-${user.lastname} , Your account is successfully verified!<br> You can go and login.`;
             ResponseView.successVerification(successMessage, res);
          },
       )

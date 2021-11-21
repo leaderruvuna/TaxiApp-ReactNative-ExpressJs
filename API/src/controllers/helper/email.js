@@ -1,7 +1,7 @@
 import sendgrid from '@sendgrid/mail';
 import baseEnv from '../../envCall/index';
-import { HTTP_ACCESS_DENIED } from '../../core/constantes/httpStatusCodes';
-sendgrid.setApiKey(baseEnv.SENDGRID_API_KEY);
+import { HTTP_ACCESS_DENIED } from '../../core/constants/httpStatus';
+
 /**
  *
  * @class Verification
@@ -15,17 +15,19 @@ export default class Verification {
     * @param {string} payload.secret
     * @param {string} payload.email
     */
+
    static async sendVerificationEmail(payload) {
+      sendgrid.setApiKey(baseEnv.SENDGRID_API_KEY);
       const { _id, secret, email } = payload;
       let senderEmail = baseEnv.SENDER_EMAIL;
-      let receiverEmail = baseEnv.RECEIVER_EMAIL;
+      let receiverEmail = email;
       let driverId = _id;
       const msg = {
          to: `${receiverEmail}`,
          from: `${senderEmail}`,
          subject: 'TAXI APP account verification',
          text: `Email verification`,
-         html: `Verify your account with this link : ${process.env.BASE_URL}/auth/driver/verify/user-acccount/${driverId}/${secret}`,
+         html: `Verify your account with this link : ${process.env.BASE_URL}/api/v1/auth/driver/verify/user-acccount/${driverId}/${secret}`,
       };
       let result = await sendgrid
          .send(msg)
@@ -45,9 +47,10 @@ export default class Verification {
     * @param {string} payload.email
     */
    static async sendResetPasswordEmail(payload) {
+      sendgrid.setApiKey(baseEnv.SENDGRID_API_KEY);
       const { _id, reset_code, email } = payload;
       let senderEmail = baseEnv.SENDER_EMAIL;
-      let receiverEmail = baseEnv.RECEIVER_EMAIL;
+      let receiverEmail = email;
       const msg = {
          to: `${receiverEmail}`,
          from: `${senderEmail}`,
