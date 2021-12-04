@@ -11,7 +11,7 @@ import {
 } from '../../core/constants/httpStatus';
 import { hashPassword } from '../../utils/password';
 import { isDriverValid } from '../../utils/validator/users';
-import { Verification } from '../helper/index';
+import { EmailVerification } from '../helper/index';
 import createSecret from '../../utils/secretCode'
 /**
  * Driver Controller
@@ -62,7 +62,7 @@ class DriverController {
       driver
          .save()
          .then(async(result) => {
-            await Verification.sendVerificationEmail(result);
+            await EmailVerification.sendVerificationEmail(result);
             return Res.handleOk(HTTP_CREATED, result, res);
          })
          .catch((err) => {

@@ -4,10 +4,10 @@ import { HTTP_ACCESS_DENIED } from '../../core/constants/httpStatus';
 
 /**
  *
- * @class Verification
+ * @class EmailVerification
  */
 
-export default class Verification {
+export default class EmailVerification {
    /**
     * send email verification
     * @param {Object} payload
