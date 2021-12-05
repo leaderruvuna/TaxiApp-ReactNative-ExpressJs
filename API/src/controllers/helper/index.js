@@ -1,4 +1,6 @@
-import Verification  from "./email";
+import EmailVerification  from "./emailVerification";
+import PhoneVerification from "./phoneVerification";
 export{
-    Verification
+    EmailVerification,
+    PhoneVerification
 }

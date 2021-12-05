@@ -11,5 +11,8 @@ const baseEnv = {
    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
    BASE_URL: process.env.BASE_URL,
    PORT: process.env.PORT,
+   TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+   TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+   TWILIO_SENDER_NUMBER: process.env.TWILIO_SENDER_NUMBER,
 };
 export default baseEnv;

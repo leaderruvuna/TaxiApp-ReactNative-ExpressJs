@@ -5,9 +5,12 @@ import {
    HTTP_CREATED,
    HTTP_OK,
    HTTP_BAD_REQUEST,
+   HTTP_NOT_FOUND,
 } from '../../core/constants/httpStatus';
 import RiderModal from '../../models/rider';
 import { isRiderValid } from '../../utils/validator/users';
+import { PhoneVerification } from '../helper/index';
+import createSecret from '../../utils/secretCode'
 /**
  * Rider Controller
  */
@@ -25,20 +28,67 @@ class RiderController {
          let errorMessage = error.details[0].message;
          return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
-      let rider = new RiderModal(data);
+      const { phone_number } = data;
+      const secret=createSecret();
+      let rider = new RiderModal({
+         phone_number,
+         secret
+      });
       rider
          .save()
          .then((result) => {
-            return Res.handleSuccess(
-               HTTP_CREATED,
-               'RIDER SUCCESSFULLY CREATED',
-               result,
-               res,
-            );
+            let verification= await PhoneVerification.sendVerificationPhone(result);
+            if(verification.result==='success'){
+               return Res.handleSuccess(
+                  HTTP_CREATED,
+                  'RIDER ACCOUNT SUCCESSFULLY CREATED',
+                  result,
+                  res,
+               );
+            }else{
+               Res.handleError(HTTP_SERVER_ERROR, 'RIDER ACCOUNT VERIFCATION WAS NOT SENT', res);
+            }
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);
          });
+   }
+    /**
+    * veriy phone
+    * @param {*} req
+    * @param {*} res
+    * @returns {object}
+    */
+   static async verifyPhone(req, res) {
+     const data= req.body;
+     const { phone_number,secret }=data;
+     await RiderModal.find({ phone_number })
+         .exec()
+         .then((user) => {
+             if(user === null){
+               if (err) Res.handleError(HTTP_NOT_FOUND, 'NO RIDER FOUND', res);
+               return;
+             }
+             if(user.secret === secret){
+               RiderModal.findOneAndUpdate(
+                  { _id: user._id },
+                  {activated:true},
+                  { new: true },
+                  (err, user) => {
+                     if (err) {
+                        Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+                     }else{
+                     return Res.handleSuccess(
+                        HTTP_OK,
+                        'RIDER ACCOUNT SUCCESSFULLY VERIFIED',
+                        user,
+                        res,
+                     );
+                     }
+                  });
+              }
+         })
+     
    }
    /**
     * driver login
