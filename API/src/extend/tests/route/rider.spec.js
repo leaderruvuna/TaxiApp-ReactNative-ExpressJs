@@ -8,6 +8,7 @@ import {
    HTTP_CREATED,
    HTTP_EXIST,
    HTTP_OK,
+   HTTP_SERVER_ERROR,
 } from '../../../core/constants/httpStatus';
 import baseEnvCall from '../../../envCall/index';
 import { expect } from 'chai';
@@ -27,17 +28,35 @@ describe('Test riders API', () => {
          .post(`${urlPrefix}/auth/rider/create`)
          .send(rider)
          .end((err, response) => {
-            expect(response.status).equal(HTTP_CREATED)
+            expect(response.status).equal(HTTP_CREATED);
             done();
          });
    });
    test('Should login the rider with phone number', (done) => {
-    request(app)
-       .post(`${urlPrefix}/auth/rider/login`)
-       .send({phone_number:rider.phone_number})
-       .end((err, response) => {
-          expect(response.status).equal(HTTP_OK)
-          done();
-       });
- });
+      request(app)
+         .post(`${urlPrefix}/auth/rider/login`)
+         .send({ phone_number: rider.phone_number })
+         .end((err, response) => {
+            expect(response.status).equal(HTTP_OK);
+            done();
+         });
+   });
+   test('Should not register the rider without phone number', (done) => {
+      request(app)
+         .post(`${urlPrefix}/auth/rider/create`)
+         .send({ phone_number: '' })
+         .end((err, response) => {
+            expect(response.status).equal(HTTP_SERVER_ERROR);
+            done();
+         });
+   });
+   test('Should not login the rider with unregistered number', (done) => {
+      request(app)
+         .post(`${urlPrefix}/auth/rider/login`)
+         .send({ phone_number: rider.fk_phone_number })
+         .end((err, response) => {
+            expect(response.status).equal(HTTP_NOT_FOUND);
+            done();
+         });
+   });
 });

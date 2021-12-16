@@ -81,7 +81,7 @@ class DriverController {
          .exec()
          .then((user) => {
             if (user.length < 1) {
-               return Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+               return Res.handleError(HTTP_NOT_FOUND, 'error', res);
             } else {
                bcrypt.compare(password, user[0].password, (err, result) => {
                   if (err) {
