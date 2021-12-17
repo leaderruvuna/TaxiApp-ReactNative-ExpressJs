@@ -102,7 +102,7 @@ class RiderController {
          .exec()
          .then((user) => {
             if (user.length === 0) {
-               return Res.handleError(HTTP_SERVER_ERROR, 'NO USER FOUND', res);
+               return Res.handleError(HTTP_NOT_FOUND, 'NO USER FOUND', res);
             } else {
                if (user) {
                   const SECRET_KEY = 'YOUR_SECURE_PASSWORD';
@@ -123,7 +123,7 @@ class RiderController {
                   );
                   return Res.handleSuccess(
                      HTTP_OK,
-                     'RIDER SUCCESSFULLY LOFFED IN',
+                     'RIDER SUCCESSFULLY LOGGED IN',
                      token,
                      res,
                   );

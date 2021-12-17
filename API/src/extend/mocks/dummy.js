@@ -19,6 +19,7 @@ module.exports = {
       image: 'image.jpg',
       country_code:'256',
       phone_number: '256792056276',
+      fk_phone_number: '256792056276',
       email: 'leaderruvuna3@gmail.com',
       date: '25-10-2021',
    },
