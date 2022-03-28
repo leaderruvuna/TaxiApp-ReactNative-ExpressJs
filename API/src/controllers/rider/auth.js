@@ -36,7 +36,7 @@ class RiderController {
       });
       rider
          .save()
-         .then((result) => {
+         .then(async(result) => {
             let verification= await PhoneVerification.sendVerificationPhone(result);
             if(verification.result==='success'){
                return Res.handleSuccess(
