@@ -28,26 +28,33 @@ class RiderController {
          let errorMessage = error.details[0].message;
          return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
-      const { phone_number } = data;
+      const { phone_number , date } = data;
       const secret=createSecret();
       let rider = new RiderModal({
          phone_number,
-         secret
+         secret,
+         date
       });
       rider
          .save()
          .then(async(result) => {
-            let verification= await PhoneVerification.sendVerificationPhone(result);
-            if(verification.result==='success'){
-               return Res.handleSuccess(
-                  HTTP_CREATED,
-                  'RIDER ACCOUNT SUCCESSFULLY CREATED',
-                  result,
-                  res,
-               );
-            }else{
-               Res.handleError(HTTP_SERVER_ERROR, 'RIDER ACCOUNT VERIFCATION WAS NOT SENT', res);
-            }
+            // let verification= await PhoneVerification.sendVerificationPhone(result);
+            // if(verification.result==='success'){
+            //    return Res.handleSuccess(
+            //       HTTP_CREATED,
+            //       'RIDER ACCOUNT SUCCESSFULLY CREATED',
+            //       result,
+            //       res,
+            //    ); 
+            // }else{
+            //    Res.handleError(HTTP_SERVER_ERROR, 'RIDER ACCOUNT VERIFCATION WAS NOT SENT', res);
+            // }
+            return Res.handleSuccess(
+               HTTP_CREATED,
+               'RIDER ACCOUNT SUCCESSFULLY CREATED',
+               result,
+               res,
+            );
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);

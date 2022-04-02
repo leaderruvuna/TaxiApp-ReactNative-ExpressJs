@@ -14,5 +14,7 @@ const driverSchema = new mongoose.Schema({
    secret: { type: String, required: true },
    verified: { type: Boolean, required: true, default: false },
    date: { type: String, required: true },
+   lat: { type: Number },
+   long: { type: Number },
 });
 export default mongoose.model('drivers', driverSchema);

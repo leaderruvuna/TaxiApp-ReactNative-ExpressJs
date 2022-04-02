@@ -9,6 +9,7 @@ import {
    HTTP_EXIST,
    HTTP_OK,
    HTTP_SERVER_ERROR,
+   HTTP_NOT_FOUND
 } from '../../../core/constants/httpStatus';
 import baseEnvCall from '../../../envCall/index';
 import { expect } from 'chai';
@@ -59,4 +60,7 @@ describe('Test riders API', () => {
             done();
          });
    });
+});
+afterAll(async () => {
+   await RiderModal.deleteMany();
 });
