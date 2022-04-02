@@ -61,43 +61,6 @@ class RidesController {
          },
       );
    }
-   /**
-    * delete ride
-    * @param {*} req
-    * @param {*} res
-    * @returns {string|object}
-    */
-   static async deleteRide(req, res) {
-      RidesModal.deleteOne({ _id: req.params.ride_id }, (err) => {
-         if (err) res.send(err);
-         Res.handleOk(HTTP_OK, 'successfully deleted', res);
-      });
-   }
-
-   /**
-    * list rides
-    * @param {*} req
-    * @param {*} res
-    * @returns {string|object}
-    */
-   static async listRides(req, res) {
-      RidesModal.find({}, (err, rides) => {
-         if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
-         Res.handleOk(HTTP_OK, rides, res);
-      });
-   }
-   /**
-    * read ride
-    * @param {*} req
-    * @param {*} res
-    * @returns {string|object}
-    */
-   static async readRide(req, res) {
-      RidesModal.findById(req.params.ride_id, (err, ride) => {
-         if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
-         Res.handleOk(HTTP_OK, ride, res);
-      });
-   }
 }
 
 export default RidesController;
