@@ -13,6 +13,7 @@ export const isDriverValid = (input) => {
       email: Joi.string().required(),
       password: Joi.string().required(),
       date: Joi.string().required(),
+      location: Joi.array().required(),
    });
    let result = schema.validate(input);
    return result;

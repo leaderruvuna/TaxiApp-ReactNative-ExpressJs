@@ -42,6 +42,7 @@ class DriverController {
          licence_number,
          email,
          date,
+         location
       } = data;
       let hashPass = hashPassword(password);
       const secret=createSecret()
@@ -58,6 +59,7 @@ class DriverController {
          password: hashPass,
          secret,
          date,
+         location: { type: "Point", coordinates: [ location[0], location[1] ] },
       });
       driver
          .save()

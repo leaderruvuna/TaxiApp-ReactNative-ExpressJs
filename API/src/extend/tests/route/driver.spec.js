@@ -10,6 +10,8 @@ import {
    HTTP_EXIST,
    HTTP_OK,
    HTTP_SERVER_ERROR,
+   HTTP_NOT_FOUND,
+   HTTP_BAD_REQUEST
 } from '../../../core/constants/httpStatus';
 import baseEnvCall from '../../../envCall/index';
 import { expect } from 'chai';
@@ -41,7 +43,7 @@ describe('Test driver API', () => {
             password: '',
          })
          .end((err, response) => {
-            expect(response.status).equal(HTTP_SERVER_ERROR);
+            expect(response.status).equal(HTTP_BAD_REQUEST);
             done();
          });
    });
@@ -65,8 +67,11 @@ describe('Test driver API', () => {
             password: '',
          })
          .end((err, response) => {
-            expect(response.status).equal(HTTP_NOT_FOUND);
+            expect(response.status).equal(HTTP_SERVER_ERROR || HTTP_NOT_FOUND);
             done();
          });
    });
+});
+afterAll(async () => {
+   await DriverModal.deleteMany();
 });

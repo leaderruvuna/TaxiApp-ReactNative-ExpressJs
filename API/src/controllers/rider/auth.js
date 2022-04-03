@@ -28,11 +28,12 @@ class RiderController {
          let errorMessage = error.details[0].message;
          return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
-      const { phone_number } = data;
+      const { phone_number , date } = data;
       const secret=createSecret();
       let rider = new RiderModal({
          phone_number,
-         secret
+         secret,
+         date
       });
       rider
          .save()
@@ -44,7 +45,7 @@ class RiderController {
                   'RIDER ACCOUNT SUCCESSFULLY CREATED',
                   result,
                   res,
-               );
+               ); 
             }else{
                Res.handleError(HTTP_SERVER_ERROR, 'RIDER ACCOUNT VERIFCATION WAS NOT SENT', res);
             }

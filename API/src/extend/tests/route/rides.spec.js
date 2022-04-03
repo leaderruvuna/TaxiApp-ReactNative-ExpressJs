@@ -65,3 +65,6 @@ describe('Test the rides API', () => {
          });
    });
 });
+afterAll(async () => {
+   await RidesModal.deleteMany();
+});

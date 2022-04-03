@@ -29,6 +29,9 @@ class RidesController {
       rides
          .save()
          .then((result) => {
+            //find nearby drivers
+                   
+            //
             return Res.handleSuccess(HTTP_CREATED,'RIDE SUCCESSFULLY REQUESTED', result, res);
          })
          .catch((err) => {
@@ -59,25 +62,12 @@ class RidesController {
       );
    }
    /**
-    * delete ride
-    * @param {*} req
-    * @param {*} res
-    * @returns {string|object}
-    */
-   static async deleteRide(req, res) {
-      RidesModal.deleteOne({ _id: req.params.ride_id }, (err) => {
-         if (err) res.send(err);
-         Res.handleOk(HTTP_OK, 'successfully deleted', res);
-      });
-   }
-
-   /**
     * list rides
     * @param {*} req
     * @param {*} res
     * @returns {string|object}
     */
-   static async listRides(req, res) {
+    static async listRides(req, res) {
       RidesModal.find({}, (err, rides) => {
          if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
          Res.handleOk(HTTP_OK, rides, res);
@@ -93,6 +83,18 @@ class RidesController {
       RidesModal.findById(req.params.ride_id, (err, ride) => {
          if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
          Res.handleOk(HTTP_OK, ride, res);
+      });
+   }
+   /**
+    * delete ride
+    * @param {*} req
+    * @param {*} res
+    * @returns {string|object}
+    */
+    static async deleteRide(req, res) {
+      RidesModal.deleteOne({ _id: req.params.ride_id }, (err) => {
+         if (err) res.send(err);
+         Res.handleOk(HTTP_OK, 'successfully deleted', res);
       });
    }
 }
