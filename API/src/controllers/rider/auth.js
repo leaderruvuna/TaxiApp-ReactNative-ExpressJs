@@ -38,23 +38,17 @@ class RiderController {
       rider
          .save()
          .then(async(result) => {
-            // let verification= await PhoneVerification.sendVerificationPhone(result);
-            // if(verification.result==='success'){
-            //    return Res.handleSuccess(
-            //       HTTP_CREATED,
-            //       'RIDER ACCOUNT SUCCESSFULLY CREATED',
-            //       result,
-            //       res,
-            //    ); 
-            // }else{
-            //    Res.handleError(HTTP_SERVER_ERROR, 'RIDER ACCOUNT VERIFCATION WAS NOT SENT', res);
-            // }
-            return Res.handleSuccess(
-               HTTP_CREATED,
-               'RIDER ACCOUNT SUCCESSFULLY CREATED',
-               result,
-               res,
-            );
+            let verification= await PhoneVerification.sendVerificationPhone(result);
+            if(verification.result==='success'){
+               return Res.handleSuccess(
+                  HTTP_CREATED,
+                  'RIDER ACCOUNT SUCCESSFULLY CREATED',
+                  result,
+                  res,
+               ); 
+            }else{
+               Res.handleError(HTTP_SERVER_ERROR, 'RIDER ACCOUNT VERIFCATION WAS NOT SENT', res);
+            }
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);
