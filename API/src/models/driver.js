@@ -1,3 +1,4 @@
+import { any, object } from 'joi';
 import mongoose from 'mongoose';
 
 const driverSchema = new mongoose.Schema({
@@ -14,6 +15,7 @@ const driverSchema = new mongoose.Schema({
    secret: { type: String, required: true },
    verified: { type: Boolean, required: true, default: false },
    date: { type: String, required: true },
-   coordinates: { type: Array },
+   location: {},
 });
+driverSchema.index( { location: "2dsphere" } );
 export default mongoose.model('drivers', driverSchema);
