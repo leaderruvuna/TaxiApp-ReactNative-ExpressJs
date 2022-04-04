@@ -2,14 +2,14 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../../../../app';
 import RiderModal from '../../../models/rider';
-import { rider } from '../../mocks/dummy';
+import { rider, nearby } from '../../mocks/dummy';
 import { urlPrefix } from '../../mocks/variable';
 import {
    HTTP_CREATED,
    HTTP_EXIST,
    HTTP_OK,
    HTTP_SERVER_ERROR,
-   HTTP_NOT_FOUND
+   HTTP_NOT_FOUND,
 } from '../../../core/constants/httpStatus';
 import baseEnvCall from '../../../envCall/index';
 import { expect } from 'chai';
