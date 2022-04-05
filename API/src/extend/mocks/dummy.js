@@ -4,7 +4,7 @@ module.exports = {
       lastname: 'ruvuna',
       nationality: 'Uganda',
       image: 'img.png',
-      country_code:'256',
+      country_code: '256',
       phone_number: '256792056276',
       driving_licence: 'ULXPDF',
       licence_number: '12455',
@@ -17,7 +17,7 @@ module.exports = {
       lastname: 'ruvuna',
       nationality: 'ugandan',
       image: 'image.jpg',
-      country_code:'256',
+      country_code: '256',
       phone_number: '256792056276',
       fk_phone_number: '256792056276',
       email: 'leaderruvuna3@gmail.com',
@@ -39,5 +39,10 @@ module.exports = {
       currency: 'USD',
       status: 0,
       date: '10-16-2021',
+   },
+   nearby: {
+      lat: -73.99279,
+      long: 40.719296,
+      distance:2000
    },
 };
