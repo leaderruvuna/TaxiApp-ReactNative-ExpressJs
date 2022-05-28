@@ -1,6 +1,6 @@
 {
    "expo": {
-      "sdkVersion": "40.0.0",
+      "sdkVersion": "43.0.0",
       "platforms": ["android", "ios"],
       "android": {
          "package": "com.ruvunald.myTaxiApp1",
@@ -10,20 +10,16 @@
             "branch": {
                "apiKey": "AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY"
             },
-
             "googleMaps": {
                "apiKey": "AIzaSyCJd2JfeBR0Tft2E51ltbV4qRVJw23NBEU"
             },
-
             "googleSignIn": {
                "apiKey": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs",
-
                "certificateHash": "AIzaSyC6tVDBa1L6hwlkszkH0b5SGJPudR89sgs"
             }
          },
          "splash": {
             "backgroundColor": "#ffffff",
-
             "image": "./src/assets/Images/icon.png",
             "resizeMode": "cover"
          }
