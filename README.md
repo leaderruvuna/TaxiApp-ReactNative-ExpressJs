@@ -30,7 +30,7 @@ High level diagram for the taxi booking app including client and API architectur
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
 
-### `npm install`
+### Do not use `npm install`, use `yarn install --force` or `yarn install --legacy-peer-deps`
 
 Run this command to install all required dependencies
 
