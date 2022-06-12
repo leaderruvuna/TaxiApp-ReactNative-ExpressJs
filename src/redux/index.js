@@ -5,7 +5,7 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/es/integration/react';
+import { PersistGate } from 'redux-persist/integration/react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import Navigator from '../navigation';
