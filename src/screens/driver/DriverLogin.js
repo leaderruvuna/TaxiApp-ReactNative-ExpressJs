@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import PhoneInput from 'react-native-phone-input';
 import Toast from 'react-native-simple-toast';
-import * as firebase from 'firebase';
 import styles from './styles/login';
 
 export default DriverLogin = props => {
@@ -129,16 +128,5 @@ _signInAsync = async () => {
       Toast.show('INVALID EMAIL!', Toast.SHORT, Toast.TOP, ToastStyle);
       return;
    }
-   firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(
-         () => {
-            AsyncStorage.setItem('driverId', firebase.auth().currentUser.uid);
-            props.navigation.navigate('App2');
-         },
-         error => {
-            Toast.show('error:' + error.message, Toast.SHORT, Toast.TOP);
-         },
-      );
+   props.navigation.navigate('App2');
 };
