@@ -53,85 +53,50 @@ export default RiderHomeContents = props => {
    const [isMounted, setMounted] = useState(false);
    const [isDestinationVisible, setDestinationVisible] = useState(true);
 
+   useEffect(()=>{
+      (async()=>{
+         await navigator.geolocation.getCurrentPosition(
+            position => {
+               setRegion({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA,
+               });
+            },
+            error => console.log(error.message),
+            {
+               enableHighAccuracy: true,
+               timeout: 20000,
+               maximumAge: 1000,
+            },
+         );
+      })();
+   },[]);
    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(
-         position => {
-            setRegion({
-               latitude: position.coords.latitude,
-               longitude: position.coords.longitude,
-               latitudeDelta: LATITUDE_DELTA,
-               longitudeDelta: LONGITUDE_DELTA,
-            });
-         },
-         error => console.log(error.message),
-         {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-         },
-      );
-
-      const watchingId = navigator.geolocation.watchPosition(
-         position => {
-            setRegion({
-               latitude: position.coords.latitude,
-               longitude: position.coords.longitude,
-               latitudeDelta: LATITUDE_DELTA,
-               longitudeDelta: LONGITUDE_DELTA,
-            });
-         },
-         //setWatchId(watchingId),
-         error => {
-            console.log(error.message);
-         },
-         {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-            distanceFilter: 10,
-         },
-      );
+      (async()=>{
+         await navigator.geolocation.watchPosition(
+            position => {
+               setRegion({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA,
+               });
+            },
+            //setWatchId(watchingId),
+            error => {
+               console.log(error.message);
+            },
+            {
+               enableHighAccuracy: true,
+               timeout: 20000,
+               maximumAge: 1000,
+               distanceFilter: 10,
+            },
+         );
+      })();
    }, [region, watchId]);
-
-   useEffect(() => {
-      navigator.geolocation.getCurrentPosition(
-         position => {
-            setRegion({
-               latitude: position.coords.latitude,
-               longitude: position.coords.longitude,
-               latitudeDelta: LATITUDE_DELTA,
-               longitudeDelta: LONGITUDE_DELTA,
-            });
-         },
-         error => console.log(error.message),
-         {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-         },
-      );
-
-      const watchingId = navigator.geolocation.watchPosition(
-         position => {
-            setRegion({
-               latitude: position.coords.latitude,
-               longitude: position.coords.longitude,
-               latitudeDelta: LATITUDE_DELTA,
-               longitudeDelta: LONGITUDE_DELTA,
-            });
-         },
-         //setWatchId(watchingId),
-         error => {
-            console.log(error.message);
-         },
-         {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-            distanceFilter: 10,
-         },
-      );
-   });
 
    const navigationOptions = {
       drawerIcon: ({ tintColor }) => (
