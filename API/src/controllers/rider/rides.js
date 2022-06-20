@@ -29,9 +29,6 @@ class RidesController {
       rides
          .save()
          .then((result) => {
-            //find nearby drivers
-                   
-            //
             return Res.handleSuccess(HTTP_CREATED,'RIDE SUCCESSFULLY REQUESTED', result, res);
          })
          .catch((err) => {

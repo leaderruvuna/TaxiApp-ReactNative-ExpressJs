@@ -10,24 +10,25 @@ import {
    HTTP_OK,
    HTTP_SERVER_ERROR,
    HTTP_NOT_FOUND,
+   HTTP_BAD_REQUEST
 } from '../../../core/constants/httpStatus';
-import baseEnvCall from '../../../envCall/index';
+import {testDbConnect,testDbColse} from '../connection';
 import { expect } from 'chai';
 
 beforeAll(async () => {
-   const url = `${baseEnvCall.MONGODB_URI_TEST}`;
-   await mongoose.createConnection(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-   });
    await RiderModal.deleteMany();
+   await testDbConnect();
 });
+afterAll(async()=>{
+  await RiderModal.deleteMany();
+  await testDbColse();
+})
 
 describe('Test riders API', () => {
    test('Should register the rider with phone number', (done) => {
       request(app)
          .post(`${urlPrefix}/auth/rider/create`)
-         .send(rider)
+         .send(rider.realData)
          .end((err, response) => {
             expect(response.status).equal(HTTP_CREATED);
             done();
@@ -36,7 +37,7 @@ describe('Test riders API', () => {
    test('Should login the rider with phone number', (done) => {
       request(app)
          .post(`${urlPrefix}/auth/rider/login`)
-         .send({ phone_number: rider.phone_number })
+         .send({ phone_number: rider.realData.phone_number })
          .end((err, response) => {
             expect(response.status).equal(HTTP_OK);
             done();
@@ -47,20 +48,18 @@ describe('Test riders API', () => {
          .post(`${urlPrefix}/auth/rider/create`)
          .send({ phone_number: '' })
          .end((err, response) => {
-            expect(response.status).equal(HTTP_SERVER_ERROR);
+            expect(response.status).equal(HTTP_BAD_REQUEST);
             done();
          });
    });
    test('Should not login the rider with unregistered number', (done) => {
       request(app)
          .post(`${urlPrefix}/auth/rider/login`)
-         .send({ phone_number: rider.fk_phone_number })
+         .send({ phone_number: rider.fakeData.fk_phone_number })
          .end((err, response) => {
             expect(response.status).equal(HTTP_NOT_FOUND);
             done();
          });
    });
 });
-afterAll(async () => {
-   await RiderModal.deleteMany();
-});
+

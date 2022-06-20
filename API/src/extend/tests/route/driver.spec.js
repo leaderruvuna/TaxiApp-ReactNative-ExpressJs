@@ -13,19 +13,18 @@ import {
    HTTP_NOT_FOUND,
    HTTP_BAD_REQUEST
 } from '../../../core/constants/httpStatus';
-import baseEnvCall from '../../../envCall/index';
 import { expect } from 'chai';
-
-beforeAll(async () => {
-   const url = `${baseEnvCall.MONGODB_URI_TEST}`;
-   await mongoose.createConnection(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-   });
-   await DriverModal.deleteMany();
-});
-
+import {testDbConnect,testDbColse} from '../connection';
+import baseEnvCall from '../../../envCall/index';
 describe('Test driver API', () => {
+   beforeAll(async () => {
+      await DriverModal.deleteMany();
+      await testDbConnect();
+   });
+   afterAll(async()=>{
+     await DriverModal.deleteMany();
+     await testDbColse();
+   })
    test('Should register the driver with email and password,etc...', (done) => {
       request(app)
          .post(`${urlPrefix}/auth/driver/create`)
@@ -63,15 +62,12 @@ describe('Test driver API', () => {
       request(app)
          .post(`${urlPrefix}/auth/driver/login`)
          .send({
-            email: '',
+            email:'',
             password: '',
          })
          .end((err, response) => {
-            expect(response.status).equal(HTTP_SERVER_ERROR || HTTP_NOT_FOUND);
+            expect(response.status).equal(HTTP_SERVER_ERROR);
             done();
          });
    });
-});
-afterAll(async () => {
-   await DriverModal.deleteMany();
 });

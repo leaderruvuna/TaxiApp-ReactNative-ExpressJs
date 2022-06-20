@@ -11,8 +11,7 @@ import {
 } from '../../core/constants/httpStatus';
 import { hashPassword } from '../../utils/password';
 import { isDriverValid } from '../../utils/validator/users';
-import { EmailVerification } from '../helper/index';
-import createSecret from '../../utils/secretCode'
+import createSecret from '../../utils/secretCode';
 /**
  * Driver Controller
  */
@@ -25,46 +24,31 @@ class DriverController {
     */
    static async create(req, res) {
       const data = req.body;
-      const { error, value } = isDriverValid(data);
+      const { error } = isDriverValid(data);
       if (error) {
          let errorMessage = error.details[0].message;
          return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
       }
-      const {
-         password,
-         firstname,
-         lastname,
-         nationality,
-         image,
-         country_code,
-         phone_number,
-         driving_licence,
-         licence_number,
-         email,
-         date,
-         location
-      } = data;
-      let hashPass = hashPassword(password);
-      const secret=createSecret()
+      let hashPass = hashPassword(data.password);
+      const secret = createSecret();
       let driver = new DriverModal({
-         firstname,
-         lastname,
-         nationality,
-         image,
-         country_code,
-         phone_number,
-         driving_licence,
-         licence_number,
-         email,
+         firstname:data.firstname,
+         lastname:data.lastname,
+         nationality:data.nationality,
+         image:data.image,
+         country_code:data.country_code,
+         phone_number:data.phone_number,
+         driving_licence:data.driving_licence,
+         licence_number:data.licence_number,
+         email:data.email,
          password: hashPass,
          secret,
-         date,
-         location: { type: "Point", coordinates: [ location[0], location[1] ] },
+         date:data.date,
+         location: { type: 'Point', coordinates: [data.location[0], data.location[1]] },
       });
       driver
          .save()
-         .then(async(result) => {
-            await EmailVerification.sendVerificationEmail(result);
+         .then(async (result) => {
             return Res.handleOk(HTTP_CREATED, result, res);
          })
          .catch((err) => {

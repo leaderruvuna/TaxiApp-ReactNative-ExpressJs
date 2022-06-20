@@ -11,17 +11,22 @@ module.exports = {
       email: 'josin@gmail.com',
       password: '123456789',
       date: '10-16-2021',
+      location: [22.34, 68.9],
    },
    rider: {
-      firstname: 'leader',
-      lastname: 'ruvuna',
-      nationality: 'ugandan',
-      image: 'image.jpg',
-      country_code: '256',
-      phone_number: '256792056276',
-      fk_phone_number: '256792056276',
-      email: 'leaderruvuna3@gmail.com',
-      date: '25-10-2021',
+      realData: {
+         firstname: 'leader',
+         lastname: 'ruvuna',
+         nationality: 'ugandan',
+         image: 'image.jpg',
+         country_code: '256',
+         phone_number: '256792056276',
+         email: 'leaderruvuna3@gmail.com',
+         date: '25-10-2021',
+      },
+      fakeData: {
+         fk_phone_number: '256792056275',
+      },
    },
    rides: {
       rider_id: '616b2021bfcbe527d87105d4',
@@ -43,6 +48,6 @@ module.exports = {
    nearby: {
       lat: -73.99279,
       long: 40.719296,
-      distance:2000
+      distance: 2000,
    },
 };

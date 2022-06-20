@@ -6,16 +6,17 @@ import { rides, nearby } from '../../mocks/dummy';
 import { urlPrefix } from '../../mocks/variable';
 import { HTTP_CREATED, HTTP_OK } from '../../../core/constants/httpStatus';
 import baseEnvCall from '../../../envCall/index';
+import {testDbConnect,testDbColse} from '../connection';
 import { expect } from 'chai';
 
 beforeAll(async () => {
-   const url = `${baseEnvCall.MONGODB_URI_TEST}`;
-   await mongoose.createConnection(url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-   });
    await RidesModal.deleteMany();
+   await testDbConnect();
 });
+afterAll(async()=>{
+  await RidesModal.deleteMany();
+  await testDbColse();
+})
 let rideId;
 describe('Test the rides API', () => {
    test('Should request for new ride', (done) => {
@@ -70,7 +71,4 @@ describe('Test the rides API', () => {
             done();
          });
    });
-});
-afterAll(async () => {
-   await RidesModal.deleteMany();
 });
