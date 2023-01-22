@@ -1,6 +1,6 @@
 {
    "expo": {
-      "sdkVersion": "43.0.0",
+      "sdkVersion": "45.0.0",
       "platforms": ["android", "ios"],
       "android": {
          "package": "com.ruvunald.myTaxiApp1",
