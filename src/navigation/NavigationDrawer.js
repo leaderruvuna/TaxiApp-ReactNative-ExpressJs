@@ -1,15 +1,9 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native'
-import { createAppContainer } from 'react-navigation';
-// import { createDrawerNavigator } from 'react-navigation-drawer';
-// import { createStackNavigator } from 'react-navigation-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import customDrawerContentComponent from '../components/DrawerComponent/riderDrawerContainer';
-import RiderHistory from '../screens/rider/RiderHistory';
 import RiderSettings from '../screens/rider/RiderSettings';
 import RiderPayments from '../screens/rider/RiderPayments';
-import RiderNotifications from '../screens/rider/RiderNotifications';
-import RiderHelp from '../screens/rider/RiderHelp';
 import RiderLogout from '../screens/rider/RiderLogout';
 import RiderHomeContents from '../screens/rider/RiderHomeContents';
 import RiderPickUp from '../screens/rider/RiderPickUp';
@@ -24,8 +18,16 @@ const Stack = createStackNavigator();
 const RiderHomeStackNav = () => {
    return (
       <Stack.Navigator>
-         <Stack.Screen name="Main" component={RiderHomeContents} />
-         <Stack.Screen name="pickUpLocation" component={RiderPickUp} />
+         <Stack.Screen
+            name="Main"
+            component={RiderHomeContents}
+            options={{ headerShown: false }}
+         />
+         <Stack.Screen
+            name="pickUpLocation"
+            component={RiderPickUp}
+            options={{ headerShown: false }}
+         />
       </Stack.Navigator>
    );
 };
@@ -34,10 +36,26 @@ function RiderHomeDrawer() {
    return (
       <NavigationContainer>
          <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={RiderHomeStackNav} />
-            <Drawer.Screen name="Payments" component={RiderPayments} />
-            <Drawer.Screen name="Settings" component={RiderSettings} />
-            <Drawer.Screen name="Logout" component={RiderLogout} />
+            <Drawer.Screen
+               name="Home"
+               component={RiderHomeStackNav}
+               options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+               name="Payments"
+               component={RiderPayments}
+               options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+               name="Settings"
+               component={RiderSettings}
+               options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+               name="Logout"
+               component={RiderLogout}
+               options={{ headerShown: false }}
+            />
          </Drawer.Navigator>
       </NavigationContainer>
    );

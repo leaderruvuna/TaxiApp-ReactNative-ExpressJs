@@ -11,6 +11,7 @@
    "main": "node_modules/expo/AppEntry.js",
    "scripts": {
       "start": "expo start",
+      "start-clear": "expo start --clear",
       "android": "expo start --android",
       "ios": "expo start --ios",
       "web": "expo start --web",
@@ -32,7 +33,7 @@
       "@react-native-clipboard/clipboard": "^1.7.0",
       "@react-native-community/geolocation": "^2.1.0",
       "@react-native-community/masked-view": "^0.1.11",
-      "@react-navigation/drawer": "^6.5.7",
+      "@react-navigation/drawer": "6.4.4",
       "@react-navigation/native": "^6.1.2",
       "@react-navigation/stack": "^6.3.11",
       "babel-loader": "^8.2.2",

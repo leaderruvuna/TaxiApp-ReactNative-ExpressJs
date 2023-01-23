@@ -26,14 +26,12 @@ import StarRating from 'react-native-star-rating';
 import MapView, { PROVIDER_GOOGLE, AnimatedRegion } from 'react-native-maps';
 import Modal from 'react-native-modal';
 import styles from './styles/homecontents';
-
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE = 0;
 const LONGITUDE = 0;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
 export default RiderHomeContents = props => {
    const [firstName, setFristName] = useState('');
    const [lastName, setLastName] = useState('');
@@ -53,8 +51,8 @@ export default RiderHomeContents = props => {
    const [isMounted, setMounted] = useState(false);
    const [isDestinationVisible, setDestinationVisible] = useState(true);
 
-   useEffect(()=>{
-      (async()=>{
+   useEffect(() => {
+      (async () => {
          await navigator.geolocation.getCurrentPosition(
             position => {
                setRegion({
@@ -72,9 +70,9 @@ export default RiderHomeContents = props => {
             },
          );
       })();
-   },[]);
+   }, []);
    useEffect(() => {
-      (async()=>{
+      (async () => {
          await navigator.geolocation.watchPosition(
             position => {
                setRegion({
@@ -97,19 +95,6 @@ export default RiderHomeContents = props => {
          );
       })();
    }, [region, watchId]);
-
-   const navigationOptions = {
-      drawerIcon: ({ tintColor }) => (
-         <Image
-            source={require('../../assets/Images/home.png')}
-            style={{
-               width: 25,
-               height: 25,
-            }}
-         />
-      ),
-   };
-
    return (
       <Container>
          <Header style={styles.headerContainer}>
@@ -136,16 +121,6 @@ export default RiderHomeContents = props => {
                   onRegionChange={reg => setRegion(reg)}
                   onRegionChangeComplete={reg => setRegion(reg)}
                >
-                  <MapView.Marker coordinate={region} pinColor="#E91E63">
-                     <Image
-                        source={require('../../assets/Images/marker.png')}
-                        style={{
-                           width: 100,
-                           height: 100,
-                           borderRadius: 100,
-                        }}
-                     />
-                  </MapView.Marker>
                </MapView>
             </View>
             <View>
@@ -164,15 +139,17 @@ export default RiderHomeContents = props => {
                         </View>
                         <View style={styles.raitingContainer}>
                            <View style={styles.raiting}>
-                              {stars.map((element, index) =>
+                              {stars.map((_, index) =>
                                  index + 1 <= numStars ? (
                                     <AntDesign
+                                       key={index}
                                        name="star"
                                        size={24}
                                        color="orange"
                                     />
                                  ) : (
                                     <AntDesign
+                                       key={index}
                                        name="star"
                                        size={24}
                                        color="grey"
@@ -221,7 +198,7 @@ export default RiderHomeContents = props => {
                         selectionColor="#42A5F5"
                         placeholderTextColor="#000000"
                         onFocus={() => {
-                            props.navigation.navigate('RiderPick');
+                           props.navigation.navigate('RiderPick');
                         }}
                      />
                   </Card>
@@ -239,8 +216,9 @@ export default RiderHomeContents = props => {
                         color="black"
                      />
                   </View>
-                  {dataSource.map((item, index) => (
+                  {dataSource.map((_, index) => (
                      <TouchableHighlight
+                        key={index}
                         underlayColor="transparent"
                         style={styles.carsContainer}
                         onPress={() => {
