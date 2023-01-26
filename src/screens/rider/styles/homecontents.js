@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet,Dimensions } from 'react-native';
+const {width,height} = Dimensions.get('screen')
 export default styles = StyleSheet.create({
    containerView: {
       flex: 1,
@@ -20,11 +20,12 @@ export default styles = StyleSheet.create({
       flexDirection: 'row',
       backgroundColor: 'white',
       alignItems: 'center',
-      paddingHorizontal: 10,
-      width: '90%',
+      width:width-10,
       minHeight: 50,
-      marginTop: 18,
-      borderRadius: 10,
+      marginTop: 2,
+      paddingHorizontal:8,
+      paddingVertical:5,
+      borderWidth:1,
    },
    searchIcon: {
       color: '#42A5F5',
@@ -33,9 +34,8 @@ export default styles = StyleSheet.create({
    },
    searchBox: {
       alignSelf: 'stretch',
-      width: 280,
-      paddingLeft: 5,
       fontSize: 17,
+      width:'100%'
    },
    pickupImage: {
       marginLeft: 8,
@@ -85,12 +85,11 @@ export default styles = StyleSheet.create({
       width: '100%',
       height: 'auto',
       alignItems: 'center',
-      paddingHorizontal: 10,
    },
    carsContainer: {
       flexDirection: 'row',
       width: '100%',
-      height: '20%',
+      height: '22%',
    },
    vehicle: {
       width: '30%',
@@ -224,4 +223,28 @@ export default styles = StyleSheet.create({
    mapContainer: {
       justifyContent: 'center',
    },
+   bookButton:{
+      backgroundColor: '#000',
+      height: '50%',
+      alignItems: 'center',
+      justifyContent: 'center',
+   },
+   bookButtonContainer:{
+      width,
+      height: height / 8,
+      paddingHorizontal: 7,
+   },
+   bookText:{ color: 'white' },
+   bottomSheetContainer:{ 
+      flex: 1, 
+      alignItems: 'center'
+   },
+   bottomSheetHeader:{
+      width,
+      paddingHorizontal: 7,
+      marginVertical: 3,
+   },
+   carsList:{ 
+      marginTop: 50
+    }
 });

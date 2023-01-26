@@ -1,6 +1,7 @@
 <div align="center">
     <img src="/screenshots-current/home.PNG" width="250px"/> 
     <img src="/screenshots-current/accept.PNG" width="250px"/> 
+    <img src="/screenshots-current/Location2.PNG" width="250px"/> 
     <img src="/screenshots-current/drawer.PNG" width="250px"/> 
     <img src="/screenshots-current/home2.PNG" width="250px"/> 
     <img src="/screenshots-current/location.PNG" width="250px"/> 
