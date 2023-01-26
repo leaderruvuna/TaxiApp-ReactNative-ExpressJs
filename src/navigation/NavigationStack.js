@@ -1,55 +1,126 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import RiderHome from '../screens/rider/RiderHome';
 import RiderLogin from '../screens/rider/RiderLogin';
 import RiderRegister from '../screens/rider/RiderRegister';
 import RiderVerifyNumber from '../screens/rider/RiderVerifyNumber';
 import RiderForgotPassword from '../screens/rider/RiderForgotPassword';
 import DriverHome from '../screens/driver/DriverHome';
-import DriverLogin from '../screens/driver/DriverLogin';
-import DriverRegister from '../screens/driver/DriverRegister';
-import AuthLoadingScreen from '../screens/main/AuthLoadingScreen';
-import RiderDriverScreenChoice from '../screens/main/RiderDriverScreenChoice';
-import Payments from '../screens/rider/RiderPayments';
 import RiderPickup from '../screens/rider/RiderPickUp';
 import RiderRegLog from '../screens/rider/RiderRegLog';
 import RiderHomeContents from '../screens/rider/RiderHomeContents';
 import RiderPickUp from '../screens/rider/RiderPickUp';
-const AuthStackRider = createStackNavigator({
-   Login: { screen: RiderLogin },
-   Verify: { screen: RiderVerifyNumber },
-   Register: { screen: RiderRegister },
-});
-const AuthStackDriver = createStackNavigator({
-   Driver: { screen: DriverHome },
-});
-const AuthStackMain = createAppContainer(
-   createStackNavigator(
-      {
-         Home: { screen: RiderHome },
-         RiderScreen: { screen: RiderRegLog },
-         RiderReg: { screen: RiderRegister },
-         RiderLogin: { screen: RiderLogin },
-         RiderVerifyNum: { screen: RiderVerifyNumber },
-         RiderResetPassWord: { screen: RiderForgotPassword },
-         RiderLog: { screen: RiderLogin },
-         RiderPick: { screen: RiderPickup },
-      },
-      {
-         headerMode: 'none',
-      },
-   ),
-);
-const RiderHomeStackNav = createStackNavigator(
-   {
-      Main: { screen: RiderHomeContents },
-      pickUpLocation: { screen: RiderPickUp },
-   },
-   {
-      headerMode: 'none',
-      navigationOptions: {
-         headerVisible: false,
-      },
-   },
-);
+const Stack = createStackNavigator();
+const AuthStackRider = () => {
+   return (
+      <NavigationContainer>
+         <Stack.Navigator>
+            <Stack.Screen
+               name="Login"
+               component={RiderLogin}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="Verify"
+               component={RiderVerifyNumber}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="Register"
+               component={RiderRegister}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="Main"
+               component={RiderHomeContents}
+               options={{ headerShown: false }}
+            />
+         </Stack.Navigator>
+         
+      </NavigationContainer>
+   );
+};
+const AuthStackDriver = () => {
+   return (
+      <NavigationContainer>
+         <Stack.Navigator>
+            <Stack.Screen
+               name="Driver"
+               component={DriverHome}
+               options={{ headerShown: false }}
+            />
+         </Stack.Navigator>
+      </NavigationContainer>
+   );
+};
+const AuthStackMain = () => {
+   return (
+      <NavigationContainer>
+         <Stack.Navigator>
+            <Stack.Screen
+               name="Home"
+               component={RiderHome}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderScreen"
+               component={RiderRegLog}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderReg"
+               component={RiderRegister}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderLogin"
+               component={RiderLogin}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderVerifyNum"
+               component={RiderVerifyNumber}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderResetPassWord"
+               component={RiderForgotPassword}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderLog"
+               component={RiderLogin}
+               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+               name="RiderPick"
+               component={RiderPickup}
+               options={{ headerShown: false }}
+            />
+         </Stack.Navigator>
+      </NavigationContainer>
+   );
+};
+
+const RiderHomeStackNav = () => {
+   return (
+      <NavigationContainer>
+         <Stack.Navigator>
+            <Stack.Screen
+               name="Main"
+               component={RiderHomeContents}
+               options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+               name="pickUpLocation"
+               component={RiderPickUp}
+               options={{ headerShown: false }}
+            />
+         </Stack.Navigator>
+      </NavigationContainer>
+   );
+};
+
 export { AuthStackMain, AuthStackDriver, AuthStackRider, RiderHomeStackNav };

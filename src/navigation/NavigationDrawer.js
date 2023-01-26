@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import customDrawerContentComponent from '../components/DrawerComponent/riderDrawerContainer';
 import RiderSettings from '../screens/rider/RiderSettings';
 import RiderPayments from '../screens/rider/RiderPayments';
 import RiderLogout from '../screens/rider/RiderLogout';
@@ -65,10 +64,10 @@ function DriverHomeDrawer() {
    return (
       <NavigationContainer>
          <Drawer.Navigator>
-            <Drawer.Screen name="Home2" component={DriverHomeContents} />
-            <Drawer.Screen name="Settings2" component={DriverSettings} />
-            <Drawer.Screen name="Licence2" component={DriverLicence} />
-            <Drawer.Screen name="Logout2" component={DriverLogout} />
+            <Drawer.Screen name="Home" component={DriverHomeContents} />
+            <Drawer.Screen name="Settings" component={DriverSettings} />
+            <Drawer.Screen name="Licence" component={DriverLicence} />
+            <Drawer.Screen name="Logout" component={DriverLogout} />
          </Drawer.Navigator>
       </NavigationContainer>
    );
