@@ -18,23 +18,16 @@ import {
 } from 'react-native';
 import { AntDesign, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import BottomSheet from '@gorhom/bottom-sheet';
-import MapView, { PROVIDER_GOOGLE, Callout } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 import Modal from 'react-native-modal';
 import styles from './styles/homecontents';
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE = 0;
-const LONGITUDE = 0;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-export default RiderHomeContents = props => {
-   const [watchId, setWatchId] = useState({});
-   const [region, setRegion] = useState({
-      latitude: LATITUDE,
-      longitude: LONGITUDE,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
-   });
+const LATITUDE_DELTA = 0;
+const LONGITUDE_DELTA = 0;
+export default RiderHomeContents = ({ navigation }) => {
+   const [region, setRegion] =  useState(null);
    const [DATA, setDATA] = useState([
       { size: 'XL', time: '3mins', price: ' UGX 50000-70000', time: '2mins' },
       { size: 'SM', price: ' UGX 5000-7000', time: '1mins' },
@@ -47,7 +40,10 @@ export default RiderHomeContents = props => {
    const [isPickupSelected, setPickup] = useState(false);
    const [isDestinationSelected, setDestination] = useState(false);
    const bottomSheetRef = useRef(null);
-   const snapPoints = useMemo(() => ['22%', '90%'], []);
+   const [location, setLocation] = useState(null);
+   const [errorMsg, setErrorMsg] = useState(null);
+
+   const snapPoints = useMemo(() => ['25%', '90%'], []);
    const handleSheetChanges = useCallback(index => {
       console.log('handleSheetChanges', index);
    }, []);
@@ -55,64 +51,78 @@ export default RiderHomeContents = props => {
       bottomSheetRef.current?.snapToIndex(index);
    }, []);
 
-   async function getCurrentPositionFnc() {
-      await navigator.geolocation.getCurrentPosition(
-         position => {
-            setRegion({
-               latitude: position.coords.latitude,
-               longitude: position.coords.longitude,
-               latitudeDelta: LATITUDE_DELTA,
-               longitudeDelta: LONGITUDE_DELTA,
-            });
-         },
-         error => console.log(error.message),
-         {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-         },
-      );
-   }
-   async function watchPositionFnc() {
-      await navigator.geolocation.watchPosition(
-         position => {
-            setRegion({
-               latitude: position.coords.latitude,
-               longitude: position.coords.longitude,
-               latitudeDelta: LATITUDE_DELTA,
-               longitudeDelta: LONGITUDE_DELTA,
-            });
-         },
-         //setWatchId(watchingId),
-         error => {
-            console.log(error.message);
-         },
-         {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 1000,
-            distanceFilter: 10,
-         },
-      );
-   }
+   const checkGPS = async () => {
+      const status = await Location.getProviderStatusAsync();
+      if (status.locationServicesEnabled) {
+         console.log('GPS is enabled');
+      } else {
+         console.log('GPS is disabled');
+      }
+   };
    useEffect(() => {
-      getCurrentPositionFnc();
-   }, []);
-   useEffect(() => {
-      watchPositionFnc();
-   }, [region, watchId]);
+      checkGPS();
+      (async () => {
+         let { status } = await Location.requestForegroundPermissionsAsync();
+         if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+         }
+         let location = await Location.getCurrentPositionAsync({}).catch(
+            error => {
+               console.error('>>>>>>>>>>> err:', error);
+            },
+         );
+         setLocation(location);
+         setRegion({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+         });
+      })();
+   }, [location]);
    return (
       <View>
          <View style={styles.mapContainer}>
-            <MapView
-               provider={PROVIDER_GOOGLE}
-               style={styles.map}
-               showsUserLocation={true}
-               showsBuildings={true}
-               region={region}
-               onRegionChange={reg => setRegion(reg)}
-               onRegionChangeComplete={reg => setRegion(reg)}
-            ></MapView>
+            <View>
+               <MapView
+                  provider={PROVIDER_GOOGLE}
+                  style={styles.map}
+                  showsUserLocation={true}
+                  showsBuildings={true}
+                  region={region}
+                  // region={region}
+                  // onRegionChange={reg => setRegion(reg)}
+                  // onRegionChangeComplete={reg => setRegion(reg)}
+               >
+                  {region? (
+                     <Marker
+                        coordinate={{
+                           latitude: region.latitude,
+                           longitude: region.longitude,
+                        }}
+                        pinColor="#E91E63"
+                     >
+                        <Image
+                           source={require('../../assets/Images/marker.png')}
+                           style={{
+                              width: 100,
+                              height: 100,
+                              borderRadius: 100,
+                           }}
+                        />
+                     </Marker>
+                  ) : (
+                     <View />
+                  )}
+               </MapView>
+               <TouchableHighlight
+                  style={styles.drawerButton}
+                  onPress={() => navigation.toggleDrawer()}
+               >
+                  <MaterialCommunityIcons name="menu" size={24} color="black" />
+               </TouchableHighlight>
+            </View>
             <BottomSheet
                ref={bottomSheetRef}
                index={1}

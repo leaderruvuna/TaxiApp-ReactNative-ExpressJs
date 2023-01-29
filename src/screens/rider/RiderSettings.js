@@ -25,7 +25,7 @@ export default RiderSettings = props => {
             <Left>
                <TouchableHighlight
                   style={styles.backButton}
-                  onPress={() => props.navigation.navigate('Main')}
+                  onPress={() => props.navigation.goBack()}
                >
                   <Ionicons name="arrow-back-outline" size={24} color="white" />
                </TouchableHighlight>

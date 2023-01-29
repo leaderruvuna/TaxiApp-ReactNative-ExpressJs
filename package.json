@@ -40,6 +40,7 @@
       "babel-loader": "^8.2.2",
       "cleanup-dependencies": "0.0.6",
       "expo": "^45.0.5",
+      "expo-location": "~14.2.2",
       "expo-status-bar": "~1.0.3",
       "firebase": "^9.8.3",
       "native-base": "^2.15.2",

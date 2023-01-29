@@ -20,7 +20,6 @@
          },
          "splash": {
             "backgroundColor": "#ffffff",
-            "image": "./src/assets/Images/icon.png",
             "resizeMode": "cover"
          }
       }

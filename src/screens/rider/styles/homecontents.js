@@ -75,6 +75,7 @@ export default styles = StyleSheet.create({
       fontWeight: 'bold',
    },
    drawerButton: {
+      position:'absolute',
       width: 50,
       height: 50,
       borderRadius: 50,

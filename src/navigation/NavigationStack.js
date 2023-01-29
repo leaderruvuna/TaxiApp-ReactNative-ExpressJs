@@ -33,7 +33,7 @@ const AuthStackRider = () => {
             />
             <Stack.Screen
                name="Main"
-               component={RiderHomeContents}
+               component={RiderHome}
                options={{ headerShown: false }}
             />
          </Stack.Navigator>
@@ -109,7 +109,7 @@ const RiderHomeStackNav = () => {
          <Stack.Navigator>
             <Stack.Screen
                name="Main"
-               component={RiderHomeContents}
+               component={RiderHomeStackNav}
                options={{ headerShown: false }}
             />
 
