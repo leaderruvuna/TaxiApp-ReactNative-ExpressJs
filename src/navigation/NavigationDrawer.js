@@ -19,7 +19,7 @@ const RiderHomeStackNav = () => {
       <Stack.Navigator>
          <Stack.Screen
             name="Main"
-            component={RiderHomeContents}
+            component={props => <RiderHomeContents {...props} />}
             options={{ headerShown: false }}
          />
          <Stack.Screen
@@ -33,30 +33,28 @@ const RiderHomeStackNav = () => {
 
 function RiderHomeDrawer() {
    return (
-      <NavigationContainer>
-         <Drawer.Navigator>
-            <Drawer.Screen
-               name="Home"
-               component={RiderHomeStackNav}
-               options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-               name="Payments"
-               component={RiderPayments}
-               options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-               name="Settings"
-               component={RiderSettings}
-               options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-               name="Logout"
-               component={RiderLogout}
-               options={{ headerShown: false }}
-            />
-         </Drawer.Navigator>
-      </NavigationContainer>
+      <Drawer.Navigator>
+         <Drawer.Screen
+            name="Home"
+            component={RiderHomeContents}
+            options={{ headerShown: false }}
+         />
+         <Drawer.Screen
+            name="Payments"
+            component={RiderPayments}
+            options={{ headerShown: false }}
+         />
+         <Drawer.Screen
+            name="Settings"
+            component={RiderSettings}
+            options={{ headerShown: false }}
+         />
+         <Drawer.Screen
+            name="Logout"
+            component={RiderLogout}
+            options={{ headerShown: false }}
+         />
+      </Drawer.Navigator>
    );
 }
 
