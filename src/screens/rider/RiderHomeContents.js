@@ -16,18 +16,24 @@ import {
    TouchableOpacity,
    ScrollView,
 } from 'react-native';
+import * as Location from 'expo-location';
+import Modal from 'react-native-modal';
 import { AntDesign, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import BottomSheet from '@gorhom/bottom-sheet';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
-import Modal from 'react-native-modal';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 import styles from './styles/homecontents';
+const marker = require('../../assets/Images/marker.png');
+const taxiImage = require('../../assets/Images/taxi3.png');
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
+const API_KEY = 'AIzaSyANWRmdcfG4hksdtmVYxnqKCIsfW__rsVY';
 const LATITUDE_DELTA = 0;
 const LONGITUDE_DELTA = 0;
+
 export default RiderHomeContents = ({ navigation }) => {
-   const [region, setRegion] =  useState(null);
+   const [region, setRegion] = useState(null);
    const [DATA, setDATA] = useState([
       { size: 'XL', time: '3mins', price: ' UGX 50000-70000', time: '2mins' },
       { size: 'SM', price: ' UGX 5000-7000', time: '1mins' },
@@ -59,28 +65,30 @@ export default RiderHomeContents = ({ navigation }) => {
          console.log('GPS is disabled');
       }
    };
+   const getLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+         setErrorMsg('Permission to access location was denied');
+         return;
+      }
+      const location = await Location.getCurrentPositionAsync({
+         accuracy: Location.Accuracy.Highest,
+         maximumAge: 10000,
+      }).catch(err => {
+         console.log(err);
+      });
+      setLocation(location);
+      setRegion({
+         latitude: location.coords.latitude,
+         longitude: location.coords.longitude,
+         latitudeDelta: LATITUDE_DELTA,
+         longitudeDelta: LONGITUDE_DELTA,
+      });
+   };
    useEffect(() => {
       checkGPS();
-      (async () => {
-         let { status } = await Location.requestForegroundPermissionsAsync();
-         if (status !== 'granted') {
-            setErrorMsg('Permission to access location was denied');
-            return;
-         }
-         let location = await Location.getCurrentPositionAsync({}).catch(
-            error => {
-               console.error('>>>>>>>>>>> err:', error);
-            },
-         );
-         setLocation(location);
-         setRegion({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-         });
-      })();
-   }, [location]);
+      getLocation();
+   }, []);
    return (
       <View>
          <View style={styles.mapContainer}>
@@ -95,7 +103,7 @@ export default RiderHomeContents = ({ navigation }) => {
                   // onRegionChange={reg => setRegion(reg)}
                   // onRegionChangeComplete={reg => setRegion(reg)}
                >
-                  {region? (
+                  {region ? (
                      <Marker
                         coordinate={{
                            latitude: region.latitude,
@@ -104,7 +112,7 @@ export default RiderHomeContents = ({ navigation }) => {
                         pinColor="#E91E63"
                      >
                         <Image
-                           source={require('../../assets/Images/marker.png')}
+                           source={marker}
                            style={{
                               width: 100,
                               height: 100,
@@ -135,7 +143,11 @@ export default RiderHomeContents = ({ navigation }) => {
                         Where are you going?
                      </Text>
                   </View>
-                  <ScrollView contentContainerStyle={styles.tripContainer}>
+                  <ScrollView
+                     contentContainerStyle={styles.tripContainer}
+                     horizontal={false}
+                     keyboardShouldPersistTaps="handled"
+                  >
                      <View
                         style={{
                            ...styles.searchBoxView,
@@ -143,26 +155,34 @@ export default RiderHomeContents = ({ navigation }) => {
                         }}
                      >
                         <Entypo
+                           style={{ marginTop: 13 }}
                            name="circle"
                            size={20}
                            color={isPickupSelected ? 'green' : 'black'}
                         />
-                        <TextInput
-                           style={styles.searchBox}
-                           placeholder=" Search pick up location"
-                           underlineColorAndroid="#ffffff"
-                           selectionColor="#42A5F5"
-                           placeholderTextColor="#000000"
-                           onFocus={() => {
-                              setPickup(true);
-                              setDestination(false);
-                              handleSnapPress(1);
+                        <ScrollView
+                           contentContainerStyle={{
+                              flex: 1,
+                              width: '100%',
+                              height: '70%',
                            }}
-                           onBlur={() => {
-                              setPickup(false);
-                              setDestination(false);
-                           }}
-                        />
+                           horizontal={true}
+                           keyboardShouldPersistTaps="handled"
+                        >
+                           <GooglePlacesAutocomplete
+                              placeholder="Pick up location"
+                              keyboardShouldPersistTaps="handled"
+                              listViewDisplayed={false}
+                              onPress={(data, details = null) => {
+                                 // 'details' is provided when fetchDetails = true
+                                 console.log(data, details);
+                              }}
+                              query={{
+                                 key: API_KEY,
+                                 language: 'en',
+                              }}
+                           />
+                        </ScrollView>
                      </View>
                      <View
                         style={{
@@ -173,62 +193,39 @@ export default RiderHomeContents = ({ navigation }) => {
                         }}
                      >
                         <Entypo
+                           style={{ marginTop: 13 }}
                            name="circle"
                            size={20}
                            color={isDestinationSelected ? 'green' : 'black'}
                         />
-                        <TextInput
-                           style={styles.searchBox}
-                           placeholder=" Search destination"
-                           underlineColorAndroid="#ffffff"
-                           selectionColor="#42A5F5"
-                           placeholderTextColor="#000000"
-                           onFocus={() => {
-                              setDestination(true);
-                              setPickup(false);
+                        <ScrollView
+                           contentContainerStyle={{
+                              flex: 1,
+                              width: '100%',
+                              height: '70%',
                            }}
-                           onBlur={() => {
-                              setDestination(false);
-                              setPickup(false);
-                           }}
-                        />
+                           keyboardShouldPersistTaps="handled"
+                           horizontal={true}
+                        >
+                           <GooglePlacesAutocomplete
+                              keyboardShouldPersistTaps="handled"
+                              placeholder="Destination"
+                              listViewDisplayed={false}
+                              onPress={(data, details = null) => {
+                                 // 'details' is provided when fetchDetails = true
+                                 console.log(data, details);
+                              }}
+                              query={{
+                                 key: API_KEY,
+                                 language: 'en',
+                              }}
+                           />
+                        </ScrollView>
                      </View>
                      <View style={styles.carsList}>
-                        {DATA.map((item, index) => (
-                           <TouchableHighlight
-                              key={index}
-                              underlayColor="transparent"
-                              style={styles.carsContainer}
-                              onPress={() => {
-                                 setModalVisible(true);
-                              }}
-                           >
-                              <View style={styles.carsContainer}>
-                                 <View style={styles.vehicle}>
-                                    <Image
-                                       source={require('../../assets/Images/taxi3.png')}
-                                       style={{
-                                          width: 80,
-                                          height: 80,
-                                       }}
-                                    />
-                                 </View>
-                                 <View style={styles.type}>
-                                    <Text style={styles.typeTitle}>
-                                       {item.size}
-                                    </Text>
-                                    <Text style={styles.typeTime}>
-                                       {item.time}
-                                    </Text>
-                                 </View>
-                                 <View style={styles.priceRange}>
-                                    <Text style={styles.pricing}>
-                                       {item.price}
-                                    </Text>
-                                 </View>
-                              </View>
-                           </TouchableHighlight>
-                        ))}
+                        {/* {DATA.map((item, index) => (
+                           
+                        ))} */}
                      </View>
                   </ScrollView>
                   <View style={styles.bookButtonContainer}>
@@ -299,5 +296,33 @@ export default RiderHomeContents = ({ navigation }) => {
       </View>
    );
 };
-
+const CarItem = ({}) => {
+   return (
+      <TouchableHighlight
+         key={index}
+         underlayColor="transparent"
+         style={styles.carsContainer}
+         onPress={() => {}}
+      >
+         <View style={styles.carsContainer}>
+            <View style={styles.vehicle}>
+               <Image
+                  source={taxiImage}
+                  style={{
+                     width: 80,
+                     height: 80,
+                  }}
+               />
+            </View>
+            <View style={styles.type}>
+               <Text style={styles.typeTitle}>{item.size}</Text>
+               <Text style={styles.typeTime}>{item.time}</Text>
+            </View>
+            <View style={styles.priceRange}>
+               <Text style={styles.pricing}>{item.price}</Text>
+            </View>
+         </View>
+      </TouchableHighlight>
+   );
+};
 AppRegistry.registerComponent('RiderHomeContents', () => RiderHomeContents);

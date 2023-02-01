@@ -19,12 +19,10 @@ export default styles = StyleSheet.create({
    searchBoxView: {
       flexDirection: 'row',
       backgroundColor: 'white',
-      alignItems: 'center',
       width:width-10,
       minHeight: 50,
       marginTop: 2,
       paddingHorizontal:8,
-      paddingVertical:5,
       borderWidth:1,
    },
    searchIcon: {
@@ -83,9 +81,9 @@ export default styles = StyleSheet.create({
       justifyContent: 'center',
    },
    tripContainer: {
-      width: '100%',
-      height: 'auto',
+      width,
       alignItems: 'center',
+      justifyContent:'center',
    },
    carsContainer: {
       flexDirection: 'row',
@@ -234,6 +232,8 @@ export default styles = StyleSheet.create({
       width,
       height: height / 8,
       paddingHorizontal: 7,
+      position:'absolute',
+      top:height-160
    },
    bookText:{ color: 'white' },
    bottomSheetContainer:{ 
@@ -246,6 +246,8 @@ export default styles = StyleSheet.create({
       marginVertical: 3,
    },
    carsList:{ 
-      marginTop: 50
+      marginTop: 50,
+      position:'relative',
+      width
     }
 });
