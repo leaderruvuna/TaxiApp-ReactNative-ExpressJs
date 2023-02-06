@@ -20,15 +20,14 @@ export const isDriverValid = (input) => {
 };
 
 export const isRiderValid = (input) => {
-   
-   const schema =Joi.object({
-      firstname: Joi.string().required(),
-      lastname: Joi.string().required(),
-      nationality:Joi.string().required(),
-      country_code: Joi.string().required(),
+   const schema = Joi.object({
+      firstname: Joi.string(),
+      lastname: Joi.string(),
+      nationality: Joi.string(),
+      country_code: Joi.string(),
       phone_number: Joi.string().required(),
-      image: Joi.string().required(),
-      email: Joi.string().required(),
+      image: Joi.string(),
+      email: Joi.string(),
       date: Joi.string().required(),
    });
    const result = schema.validate(input);

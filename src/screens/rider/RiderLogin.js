@@ -1,46 +1,82 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
-   StyleSheet,
    Text,
    View,
-   Button,
-   AsyncStorage,
    TouchableOpacity,
    TextInput,
-   KeyboardAvoidingView,
-   Image,
    ActivityIndicator,
 } from 'react-native';
+import { CountryPicker } from 'react-native-country-codes-picker';
 import PhoneInput from 'react-native-phone-input';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/login';
+import { BASE_URL } from '../../constants/urls';
+import { httpFactory } from '../../factory/httpFactory';
 
-export default RiderLogin = props => {
-   const [email, setEmail] = useState('');
-   const [password, setPassword] = useState('');
-   const [color, setColor] = useState('');
-
+export default RiderLogin = ({ pnavigation }) => {
+   const [phoneNumber, setPhone] = useState('');
+   const [isLoading, setLoading] = useState(0);
+   const [isFieldRequired, setRequired] = useState(0);
+   const [show, setShow] = useState(false);
+   const [countryCode, setCountryCode] = useState('+1');
+   const phoneRef = useRef(null);
+   const signIn = async phoneNumber => {
+      if (!phoneNumber) {
+         setRequired(1);
+         Toast.show('All fields are required!');
+         return;
+      }
+      setRequired(0);
+      setLoading(1);
+      await httpFactory
+         .post(`${BASE_URL}auth/rider/create`, {
+            phone_number: `${countryCode}${PhoneInput}`,
+            date: Date.now(),
+         })
+         .then(() => {
+            pnavigation.navigate('Verify');
+            setLoading(0);
+         })
+         .catch(() => {
+            setLoading(0);
+         });
+   };
    return (
       <View style={styles.wrapper}>
          <View style={styles.container}>
             <View style={styles.headerContainer}>
                <Text style={styles.headerText}>
-                  Select your country code and provide you phone
+                  Select your country code and provide your phone number.Please!
                </Text>
-               <Text style={styles.headerText}>number.Please!</Text>
+               <Text style={styles.headerText}></Text>
             </View>
             <View style={styles.mobileContainer}>
-               <PhoneInput
-                  allowZeroAfterCountryCode={true}
-                  style={styles.countrCode}
-               />
+               <View style={styles.contryContainer}>
+                  <TouchableOpacity
+                     onPress={() => setShow(true)}
+                     style={styles.contryButton}
+                  >
+                     <Text style={styles.countryCodeText}>{countryCode}</Text>
+                  </TouchableOpacity>
+                  <CountryPicker
+                     lang={'en'}
+                     show={show}
+                     pickerButtonOnPress={item => {
+                        setCountryCode(item.dial_code);
+                        setShow(false);
+                     }}
+                  />
+               </View>
                <TextInput
-                  style={styles.textInputMobile}
+                  ref={phoneRef}
+                  style={{
+                     ...styles.textInputMobile,
+                     borderColor: isFieldRequired ? '#C72C41' : '#42A5F5',
+                  }}
                   placeholder="Phone Number"
                   keyboardType="numeric"
                   maxLength={40}
-                  onChangeText={email => setEmail(email)}
-                  underlineColorAndroid="#c0c0c0"
+                  onChangeText={phone => setPhone(phone)}
                   selectionColor="#42A5F5"
                />
             </View>
@@ -48,19 +84,14 @@ export default RiderLogin = props => {
                <TouchableOpacity
                   style={styles.LoginButton}
                   onPress={() => {
-                     signInAsync(props);
+                     signIn(phoneNumber);
                   }}
                >
                   <Text style={styles.loginText}>NEXT</Text>
+                  {isLoading ? <ActivityIndicator color={'white'} /> : <View />}
                </TouchableOpacity>
             </View>
-
-            {/* <ActivityIndicator size="large" color={color} /> */}
          </View>
       </View>
    );
-};
-
-signInAsync = props => {
-   props.navigation.navigate('Verify');
 };

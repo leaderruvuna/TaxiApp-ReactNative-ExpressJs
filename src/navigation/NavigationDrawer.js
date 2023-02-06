@@ -65,10 +65,10 @@ function DriverHomeDrawer() {
    return (
       <NavigationContainer>
          <Drawer.Navigator>
-            <Drawer.Screen name="Home2" component={DriverHomeContents} />
-            <Drawer.Screen name="Settings2" component={DriverSettings} />
-            <Drawer.Screen name="Licence2" component={DriverLicence} />
-            <Drawer.Screen name="Logout2" component={DriverLogout} />
+            <Drawer.Screen name="Home" component={DriverHomeContents} />
+            <Drawer.Screen name="Settings" component={DriverSettings} />
+            <Drawer.Screen name="Licence" component={DriverLicence} />
+            <Drawer.Screen name="Logout" component={DriverLogout} />
          </Drawer.Navigator>
       </NavigationContainer>
    );

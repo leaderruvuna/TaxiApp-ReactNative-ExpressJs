@@ -12,12 +12,13 @@ export default styles = StyleSheet.create({
    },
    textInputMobile: {
       alignSelf: 'stretch',
-      width: '90%',
+      width: '80%',
       paddingLeft: 10,
-      paddingBottom: 15,
+      paddingVertical: 6,
       marginTop: 10,
       marginLeft: 5,
       backgroundColor: '#fff',
+      borderWidth: 1,
    },
    countrCode: {
       width: '10%',
@@ -26,9 +27,10 @@ export default styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#42A5F5',
+      flexDirection: 'row',
       width: '30%',
       height: 45,
-      marginTop: 15,
+      // marginTop: 15,
    },
    passwordForgotten: {
       backgroundColor: '#ffffff',
@@ -55,17 +57,31 @@ export default styles = StyleSheet.create({
       flexDirection: 'row',
       paddingHorizontal: 10,
       paddingVertical: 5,
-      marginTop: '5%',
+      justifyContent: 'center',
+      alignItems: 'center',
    },
    headerContainer: {
       width: '100%',
-      height: '10%',
       flexDirection: 'column',
       paddingHorizontal: 10,
-      paddingVertical: 5,
    },
    headerText: {
-      fontSize: 17,
+      fontSize: 18,
       color: 'grey',
    },
+   countryContainer: {
+      width: '20%',
+      alignItems: 'center',
+   },
+   contryButton: {
+      width: 60,
+      height: 40,
+      backgroundColor: 'grey',
+      padding: 10,
+      marginTop: 10,
+   },
+   countryCodeText:{
+      color: 'white',
+      fontSize: 14,
+   }
 });
