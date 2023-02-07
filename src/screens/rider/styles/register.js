@@ -36,10 +36,10 @@ export default styles = StyleSheet.create({
       marginTop: 5,
    },
    imageContainer: {
-      width: '22%',
-      height: '100%',
+      width: 80,
+      height: 80,
       backgroundColor: '#D3D3D3',
-      borderRadius: 50,
+      borderRadius: 80,
       justifyContent: 'center',
       alignItems: 'center',
    },

@@ -10,6 +10,7 @@ import {
 import RiderModal from '../../models/rider';
 import { isRiderValid } from '../../utils/validator/users';
 import createSecret from '../../utils/secretCode';
+import PhoneVerification from '../helper/phoneVerification';
 /**
  * Rider Controller
  */
@@ -37,12 +38,22 @@ class RiderController {
       rider
          .save()
          .then(async (result) => {
-            return Res.handleSuccess(
-               HTTP_CREATED,
-               'RIDER ACCOUNT SUCCESSFULLY CREATED',
-               result,
-               res,
-            );
+            await PhoneVerification.sendVerificationPhone(result)
+               .then((data) => {
+                  const { result: phoneResult } = data;
+                  if (phoneResult === 'success') {
+                     return Res.handleSuccess(
+                        HTTP_CREATED,
+                        'RIDER ACCOUNT SUCCESSFULLY CREATED',
+                        result,
+                        res,
+                     );
+                  }
+                  return Res.handleError(HTTP_SERVER_ERROR, phoneResult, res);
+               })
+               .catch((err) => {
+                  return Res.handleError(HTTP_SERVER_ERROR, err, res);
+               });
          })
          .catch((err) => {
             return Res.handleError(HTTP_SERVER_ERROR, err, res);
