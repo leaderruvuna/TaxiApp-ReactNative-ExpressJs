@@ -43,7 +43,7 @@ class RidesController {
     */
    static async update(req, res) {
       const data = req.body;
-      const { error, value } = isRideValid(data);
+      const { error } = isRideValid(data);
       if (error) {
          let errorMessage=error.details[0].message;
          return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
