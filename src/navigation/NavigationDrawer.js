@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import customDrawerContentComponent from '../components/DrawerComponent/riderDrawerContainer';
 import RiderSettings from '../screens/rider/RiderSettings';
 import RiderPayments from '../screens/rider/RiderPayments';
 import RiderLogout from '../screens/rider/RiderLogout';

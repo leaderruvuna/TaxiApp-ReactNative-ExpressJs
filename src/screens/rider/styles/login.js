@@ -83,5 +83,8 @@ export default styles = StyleSheet.create({
    countryCodeText:{
       color: 'white',
       fontSize: 14,
+   },
+   loginHeaderText:{
+      fontSize:22
    }
 });

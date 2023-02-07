@@ -13,17 +13,17 @@ import styles from './styles/login';
 import { BASE_URL } from '../../constants/urls';
 import { httpFactory } from '../../factory/httpFactory';
 
-export default RiderLogin = ({ pnavigation }) => {
+export default RiderLogin = ({ navigation }) => {
    const [phoneNumber, setPhone] = useState('');
    const [isLoading, setLoading] = useState(0);
    const [isFieldRequired, setRequired] = useState(0);
    const [show, setShow] = useState(false);
-   const [countryCode, setCountryCode] = useState('+1');
+   const [countryCode, setCountryCode] = useState('+256');
    const phoneRef = useRef(null);
    const signIn = async phoneNumber => {
       if (!phoneNumber) {
          setRequired(1);
-         Toast.show('All fields are required!');
+         Toast.show('Phone number is required!');
          return;
       }
       setRequired(0);
@@ -34,10 +34,11 @@ export default RiderLogin = ({ pnavigation }) => {
             date: Date.now(),
          })
          .then(() => {
-            pnavigation.navigate('Verify');
+            navigation.navigate('Verify');
             setLoading(0);
          })
          .catch(() => {
+            Toast.show('Network Error!');
             setLoading(0);
          });
    };
@@ -45,6 +46,7 @@ export default RiderLogin = ({ pnavigation }) => {
       <View style={styles.wrapper}>
          <View style={styles.container}>
             <View style={styles.headerContainer}>
+               <Text style={styles.loginHeaderText}>Login</Text>
                <Text style={styles.headerText}>
                   Select your country code and provide your phone number.Please!
                </Text>
