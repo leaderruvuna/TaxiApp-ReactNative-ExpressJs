@@ -12,6 +12,7 @@ import Toast from 'react-native-simple-toast';
 import styles from './styles/login';
 import { BASE_URL } from '../../constants/urls';
 import { httpFactory } from '../../factory/httpFactory';
+import axios from 'axios';
 
 export default RiderLogin = ({ navigation }) => {
    const [phoneNumber, setPhone] = useState('');
@@ -28,19 +29,22 @@ export default RiderLogin = ({ navigation }) => {
       }
       setRequired(0);
       setLoading(1);
-      await httpFactory
-         .post(`${BASE_URL}auth/rider/create`, {
-            phone_number: `${countryCode}${PhoneInput}`,
-            date: Date.now(),
-         })
-         .then(() => {
+      try {
+         const { data } = await httpFactory.post(`auth/rider/create`, {
+            phone_number: `${countryCode}${phoneNumber}`,
+            date: `${Date.now()}`,
+         });
+         if (data) {
             navigation.navigate('Verify');
             setLoading(0);
-         })
-         .catch(() => {
-            Toast.show('Network Error!');
+         } else {
+            Toast.show('Network error!');
             setLoading(0);
-         });
+         }
+      } catch {
+         Toast.show('Network error!');
+         setLoading(0);
+      }
    };
    return (
       <View style={styles.wrapper}>

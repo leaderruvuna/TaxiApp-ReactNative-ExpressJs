@@ -23,7 +23,7 @@ class RiderController {
     */
    static async create(req, res) {
       const data = req.body;
-      const { error, value } = isRiderValid(data);
+      const { error } = isRiderValid(data);
       if (error) {
          let errorMessage = error.details[0].message;
          return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
@@ -35,28 +35,58 @@ class RiderController {
          secret,
          date,
       });
-      rider
-         .save()
-         .then(async (result) => {
-            await PhoneVerification.sendVerificationPhone(result)
-               .then((data) => {
-                  const { result: phoneResult } = data;
-                  if (phoneResult === 'success') {
-                     return Res.handleSuccess(
-                        HTTP_CREATED,
-                        'RIDER ACCOUNT SUCCESSFULLY CREATED',
-                        result,
+      await RiderModal.find({ phone_number })
+         .exec()
+         .then(async (user) => {
+            if (user.length === 1) {
+               RiderModal.findOneAndUpdate(
+                  { _id: user._id },
+                  { secret },
+                  { new: true },
+                  (err, rider) => {
+                     if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+                     Res.handleSuccess(
+                        HTTP_OK,
+                        'RIDER SUCCESSFULLY UPDATED',
+                        rider,
                         res,
                      );
-                  }
-                  return Res.handleError(HTTP_SERVER_ERROR, phoneResult, res);
-               })
-               .catch((err) => {
-                  return Res.handleError(HTTP_SERVER_ERROR, err, res);
-               });
-         })
-         .catch((err) => {
-            return Res.handleError(HTTP_SERVER_ERROR, err, res);
+                  },
+               );
+            } else {
+               await PhoneVerification.sendVerificationPhone(rider)
+                  .then((data) => {
+                     const { result: phoneResult } = data;
+                     if (phoneResult === 'success') {
+                        rider
+                           .save()
+                           .then((result) => {
+                              return Res.handleSuccess(
+                                 HTTP_CREATED,
+                                 'RIDER ACCOUNT SUCCESSFULLY CREATED',
+                                 result,
+                                 res,
+                              );
+                           })
+                           .catch((err) => {
+                              return Res.handleError(
+                                 HTTP_SERVER_ERROR,
+                                 err,
+                                 res,
+                              );
+                           });
+                     } else {
+                        return Res.handleError(
+                           HTTP_SERVER_ERROR,
+                           'VERIFICATION ERROR',
+                           res,
+                        );
+                     }
+                  })
+                  .catch((err) => {
+                     return Res.handleError(HTTP_SERVER_ERROR, err, res);
+                  });
+            }
          });
    }
    /**
