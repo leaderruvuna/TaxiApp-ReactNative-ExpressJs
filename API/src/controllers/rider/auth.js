@@ -11,6 +11,8 @@ import RiderModal from '../../models/rider';
 import { isRiderValid } from '../../utils/validator/users';
 import createSecret from '../../utils/secretCode';
 import PhoneVerification from '../helper/phoneVerification';
+import { createToken } from '../../utils/token';
+const TOKEN_SECRET_KEY = 'YOUR_SECURE_PASSWORD';
 /**
  * Rider Controller
  */
@@ -35,20 +37,22 @@ class RiderController {
          secret,
          date,
       });
+
       await RiderModal.find({ phone_number })
          .exec()
          .then(async (user) => {
+            const token=createToken(user,TOKEN_SECRET_KEY)
             if (user.length === 1) {
                RiderModal.findOneAndUpdate(
                   { _id: user._id },
                   { secret },
                   { new: true },
-                  (err, rider) => {
+                  (err, _) => {
                      if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
                      Res.handleSuccess(
                         HTTP_OK,
-                        'RIDER SUCCESSFULLY UPDATED',
-                        rider,
+                        'RIDER SUCCESSFULLY CONNECTED',
+                        token,
                         res,
                      );
                   },
@@ -60,11 +64,11 @@ class RiderController {
                      if (phoneResult === 'success') {
                         rider
                            .save()
-                           .then((result) => {
+                           .then(() => {
                               return Res.handleSuccess(
                                  HTTP_CREATED,
                                  'RIDER ACCOUNT SUCCESSFULLY CREATED',
-                                 result,
+                                 token,
                                  res,
                               );
                            })
@@ -141,7 +145,6 @@ class RiderController {
                return Res.handleError(HTTP_NOT_FOUND, 'NO USER FOUND', res);
             } else {
                if (user) {
-                  const SECRET_KEY = 'YOUR_SECURE_PASSWORD';
                   const token = jwt.sign(
                      {
                         firstname: user[0].firstname,
@@ -152,7 +155,7 @@ class RiderController {
                         email: user[0].email,
                         date: user[0].date,
                      },
-                     SECRET_KEY,
+                     TOKEN_SECRET_KEY,
                      {
                         expiresIn: '24h',
                      },
