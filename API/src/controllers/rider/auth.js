@@ -41,7 +41,7 @@ class RiderController {
       await RiderModal.find({ phone_number })
          .exec()
          .then(async (user) => {
-            const token=createToken(user,TOKEN_SECRET_KEY)
+            const token = createToken(user, TOKEN_SECRET_KEY);
             if (user.length === 1) {
                RiderModal.findOneAndUpdate(
                   { _id: user._id },
@@ -109,29 +109,20 @@ class RiderController {
                if (err) Res.handleError(HTTP_NOT_FOUND, 'NO RIDER FOUND', res);
                return;
             }
-            if (user.secret === secret) {
-               RiderModal.findOneAndUpdate(
-                  { _id: user._id },
-                  { activated: true },
-                  { new: true },
-                  (err, user) => {
-                     if (err) {
-                        Res.handleError(HTTP_SERVER_ERROR, 'error', res);
-                     } else {
-                        return Res.handleSuccess(
-                           HTTP_OK,
-                           'RIDER ACCOUNT SUCCESSFULLY VERIFIED',
-                           user,
-                           res,
-                        );
-                     }
-                  },
+            if (user[0].secret === secret) {
+               return Res.handleSuccess(
+                  HTTP_OK,
+                  'RIDER ACCOUNT SUCCESSFULLY VERIFIED',
+                  user,
+                  res,
                );
+            }else{
+               Res.handleError(HTTP_NOT_FOUND, 'RIDER ACCOUNT NOT VERIFIED', res);
             }
          });
    }
    /**
-    * driver login
+    * rider login
     * @param {*} req
     * @param {*} res
     * @returns {string|object}

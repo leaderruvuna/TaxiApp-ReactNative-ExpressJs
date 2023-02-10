@@ -7,12 +7,9 @@ import {
    ActivityIndicator,
 } from 'react-native';
 import { CountryPicker } from 'react-native-country-codes-picker';
-import PhoneInput from 'react-native-phone-input';
+import { httpFactory } from '../../factory/httpFactory';
 import Toast from 'react-native-simple-toast';
 import styles from './styles/login';
-import { BASE_URL } from '../../constants/urls';
-import { httpFactory } from '../../factory/httpFactory';
-import axios from 'axios';
 
 export default RiderLogin = ({ navigation }) => {
    const [phoneNumber, setPhone] = useState('');
@@ -35,13 +32,15 @@ export default RiderLogin = ({ navigation }) => {
             date: `${Date.now()}`,
          });
          if (data) {
-            navigation.navigate('Verify');
+            navigation.navigate('Verify', { phone: `${countryCode}${phoneNumber}` });
             setLoading(0);
          } else {
+            console.log(data)
             Toast.show('Network error!');
             setLoading(0);
          }
-      } catch {
+      } catch(error) {
+         console.log(error)
          Toast.show('Network error!');
          setLoading(0);
       }
