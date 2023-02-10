@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-
+import { Dimensions, StyleSheet } from 'react-native';
+const { width } = Dimensions.get('screen');
 export default styles = StyleSheet.create({
    wrapper: {
       flex: 1,
@@ -22,6 +22,7 @@ export default styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#42A5F5',
+      flexDirection: 'row',
       width: '30%',
       height: 45,
       marginTop: 15,
@@ -45,5 +46,8 @@ export default styles = StyleSheet.create({
    },
    otpInputs: {
       tintColor: '#42A5F5',
+   },
+   otpContainer: {
+      // width:'80%',
    },
 });
