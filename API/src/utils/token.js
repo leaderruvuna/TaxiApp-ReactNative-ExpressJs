@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 export const createToken = (user,SECRET_KEY) => {
    return jwt.sign(
       {
+         user_id:user[0]?._id,
          firstname: user[0]?.firstname,
          lastname: user[0]?.lastname,
          nationality: user[0]?.nationality,

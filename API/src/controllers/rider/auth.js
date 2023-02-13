@@ -7,11 +7,12 @@ import {
    HTTP_BAD_REQUEST,
    HTTP_NOT_FOUND,
 } from '../../core/constants/httpStatus';
+import { isRiderProfileValid, isRiderValid } from '../../utils/validator/users';
+import { createToken } from '../../utils/token';
 import RiderModal from '../../models/rider';
-import { isRiderValid } from '../../utils/validator/users';
 import createSecret from '../../utils/secretCode';
 import PhoneVerification from '../helper/phoneVerification';
-import { createToken } from '../../utils/token';
+
 const TOKEN_SECRET_KEY = 'YOUR_SECURE_PASSWORD';
 /**
  * Rider Controller
@@ -37,38 +38,39 @@ class RiderController {
          secret,
          date,
       });
-
       await RiderModal.find({ phone_number })
          .exec()
          .then(async (user) => {
             const token = createToken(user, TOKEN_SECRET_KEY);
             if (user.length === 1) {
-               RiderModal.findOneAndUpdate(
-                  { _id: user._id },
-                  { secret },
-                  { new: true },
-                  (err, _) => {
-                     if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
-                     Res.handleSuccess(
-                        HTTP_OK,
-                        'RIDER SUCCESSFULLY CONNECTED',
-                        token,
-                        res,
+               await PhoneVerification.sendVerificationPhone(rider)
+                  .then(async () => {
+                     await RiderModal.findOneAndUpdate(
+                        { _id: user[0]?._id },
+                        { secret },
+                        { new: true },
+                        (err, result) => {
+                           if (err)
+                              Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+                           Res.handleSuccess(HTTP_OK, token, result, res);
+                        },
                      );
-                  },
-               );
+                  })
+                  .catch((err) => {
+                     return Res.handleError(HTTP_SERVER_ERROR, err, res);
+                  });
             } else {
                await PhoneVerification.sendVerificationPhone(rider)
-                  .then((data) => {
+                  .then(async (data) => {
                      const { result: phoneResult } = data;
                      if (phoneResult === 'success') {
-                        rider
+                        await rider
                            .save()
-                           .then(() => {
+                           .then((result) => {
                               return Res.handleSuccess(
                                  HTTP_CREATED,
-                                 'RIDER ACCOUNT SUCCESSFULLY CREATED',
                                  token,
+                                 result,
                                  res,
                               );
                            })
@@ -116,8 +118,12 @@ class RiderController {
                   user,
                   res,
                );
-            }else{
-               Res.handleError(HTTP_NOT_FOUND, 'RIDER ACCOUNT NOT VERIFIED', res);
+            } else {
+               Res.handleError(
+                  HTTP_NOT_FOUND,
+                  'RIDER ACCOUNT NOT VERIFIED',
+                  res,
+               );
             }
          });
    }
@@ -138,6 +144,7 @@ class RiderController {
                if (user) {
                   const token = jwt.sign(
                      {
+                        user_id: user[0]._id,
                         firstname: user[0].firstname,
                         lastname: user[0].lastname,
                         nationality: user[0].nationality,
@@ -161,7 +168,36 @@ class RiderController {
                return Res.handleError(HTTP_SERVER_ERROR, 'error', res);
             }
          })
-         .catch((err) => Res.handleError(HTTP_SERVER_ERROR, 'error', res));
+         .catch(() => Res.handleError(HTTP_SERVER_ERROR, 'error', res));
+   }
+   /**
+    *
+    * @param {*} req
+    * @param {*} res
+    * @returns {object}
+    */
+   static async updateProfile(req, res) {
+      const data = req.body;
+      const { error } = isRiderProfileValid(data);
+      if (error) {
+         let errorMessage = error.details[0].message;
+         return Res.handleError(HTTP_BAD_REQUEST, `${errorMessage}`, res);
+      }
+      const { user_id } = data;
+      await RiderModal.findOneAndUpdate(
+         { _id: user_id },
+         data,
+         { new: true },
+         (err, result) => {
+            if (err) Res.handleError(HTTP_SERVER_ERROR, 'error', res);
+            Res.handleSuccess(
+               HTTP_OK,
+               'RIDER SUCCESSFULLY UPDATED',
+               result,
+               res,
+            );
+         },
+      );
    }
 }
 
