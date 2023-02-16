@@ -37,7 +37,7 @@ export default RiderVerifyNumber = ({ navigation }) => {
          if (data?.status === 200) {
             setRequired(0);
             setLoading(0);
-            navigation.navigate('Register', { userId: data?._id });
+            navigation.navigate('Register', { userId: data.data[0]._id });
          } else {
             setRequired(0);
             setLoading(0);

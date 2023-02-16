@@ -5,14 +5,16 @@ import {
    TouchableOpacity,
    TextInput,
    ActivityIndicator,
-   Image
+   Image,
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { useRoute } from '@react-navigation/native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
-import { httpFactory } from '../../factory/httpFactory';
+import { httpCloudFactory, httpFactory } from '../../factory/httpFactory';
 import styles from './styles/register';
 import * as ImagePicker from 'expo-image-picker';
+
+const apiUrl = 'https://api.cloudinary.com/v1_1/leadertech/image/upload';
 
 export default RiderRegister = ({ navigation }) => {
    const [firstname, setFirstname] = useState('');
@@ -21,6 +23,7 @@ export default RiderRegister = ({ navigation }) => {
    const [isRequired, setRequired] = useState(0);
    const [isLoading, setLoading] = useState(0);
    const [image, setImage] = useState(null);
+   const [imageData, setImageData] = useState(null);
    const router = useRoute();
    const { userId } = router.params;
    useEffect(() => {
@@ -43,8 +46,15 @@ export default RiderRegister = ({ navigation }) => {
          allowsEditing: true,
          aspect: [4, 3],
          quality: 1,
+         base64: true,
       });
+      let base64Img = `data:image/jpg;base64,${result.base64}`;
+      let data = {
+         file: base64Img,
+         upload_preset: 'taxi_app_images_preset',
+      };
       if (!result.cancelled) {
+         setImageData(data);
          setImage(result.uri);
       }
    };
@@ -56,18 +66,23 @@ export default RiderRegister = ({ navigation }) => {
       }
       setLoading(1);
       try {
-         const { data } = await httpFactory.post(`auth/rider/profile/update`, {
+         const imageUrl = await httpCloudFactory
+            .post('image/upload', imageData)
+            .then(res => res.data.url)
+            .catch(err => err.message);
+            console.log(imageUrl)
+         const { data } = await httpFactory.put(`auth/rider/profile/update`, {
             user_id: userId,
             firstname,
             lastname,
             email,
             date: `${Date.now()}`,
+            image:`${imageUrl}`
          });
          if (data?.status === 200) {
             setRequired(0);
             setLoading(0);
             navigation.navigate('Main');
-            Toast.show('');
          } else {
             setRequired(0);
             setLoading(0);
@@ -76,6 +91,7 @@ export default RiderRegister = ({ navigation }) => {
       } catch (err) {
          setRequired(0);
          setLoading(0);
+         console.log(err.message)
          Toast.show('Netwok Error!');
       }
    };
@@ -87,12 +103,18 @@ export default RiderRegister = ({ navigation }) => {
                   style={styles.imageContainer}
                   onPress={pickImage}
                >
-                  {image?(
+                  {image ? (
                      <Image
                         source={{ uri: image }}
-                        style={{ width: '100%', height: '100%',borderRadius: 80}}
+                        style={{
+                           width: '100%',
+                           height: '100%',
+                           borderRadius: 80,
+                        }}
                      />
-                  ):(<AntDesign name="user" size={30} color="black" />)}
+                  ) : (
+                     <AntDesign name="user" size={30} color="black" />
+                  )}
                </TouchableOpacity>
                <TouchableOpacity onPress={pickImage}>
                   <MaterialIcons
