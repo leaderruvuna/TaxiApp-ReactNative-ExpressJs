@@ -14,8 +14,6 @@ import { httpCloudFactory, httpFactory } from '../../factory/httpFactory';
 import styles from './styles/register';
 import * as ImagePicker from 'expo-image-picker';
 
-const apiUrl = 'https://api.cloudinary.com/v1_1/leadertech/image/upload';
-
 export default RiderRegister = ({ navigation }) => {
    const [firstname, setFirstname] = useState('');
    const [lastname, setLastname] = useState('');
