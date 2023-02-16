@@ -2,6 +2,18 @@
    "expo": {
       "sdkVersion": "45.0.0",
       "platforms": ["android", "ios"],
+      "plugins": [
+         [
+           "expo-image-picker",
+           {
+             "photosPermission": "custom photos permission",
+             "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+   
+             "//": "Disables the microphone permission",
+             "microphonePermission": false
+           }
+         ]
+       ],
       "android": {
          "package": "com.ruvunald.myTaxiApp1",
          "versionCode": 1,

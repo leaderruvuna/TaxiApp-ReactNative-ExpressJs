@@ -18,7 +18,6 @@ export default RiderVerifyNumber = ({ navigation }) => {
    const router = useRoute();
    const { phone: phoneNumber } = router.params;
    const goNext = async otp => {
-      console.log(phoneNumber)
       if (!otp) {
          setRequired(1);
          Toast.show('Phone number is required!');
@@ -29,7 +28,7 @@ export default RiderVerifyNumber = ({ navigation }) => {
          Toast.show('Invalid OTP');
          return;
       }
-      setLoading(1)
+      setLoading(1);
       try {
          const { data } = await httpFactory.post(`auth/rider/verify`, {
             secret: `${otp}`,
@@ -38,7 +37,7 @@ export default RiderVerifyNumber = ({ navigation }) => {
          if (data?.status === 200) {
             setRequired(0);
             setLoading(0);
-            navigation.navigate('Register');
+            navigation.navigate('Register', { userId: data.data[0]._id });
          } else {
             setRequired(0);
             setLoading(0);
@@ -61,7 +60,7 @@ export default RiderVerifyNumber = ({ navigation }) => {
                <OTPTextInput
                   inputCount={6}
                   tintColor={isRequired ? '#C72C41' : '#42A5F5'}
-                  textInputStyle={{width:40}}
+                  textInputStyle={{ width: 40 }}
                   handleTextChange={value => {
                      setOtp(value);
                   }}
@@ -69,6 +68,7 @@ export default RiderVerifyNumber = ({ navigation }) => {
             </View>
             <View style={styles.verifyContainer}>
                <TouchableOpacity
+                  disabled={isLoading}
                   style={styles.verifyButton}
                   onPress={() => {
                      goNext(otp);

@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { join } from 'path';
 
 export const isDriverValid = (input) => {
    const schema = Joi.object({
@@ -28,6 +29,21 @@ export const isRiderValid = (input) => {
       phone_number: Joi.string().required(),
       image: Joi.string(),
       email: Joi.string(),
+      date: Joi.string().required(),
+   });
+   const result = schema.validate(input);
+   return result;
+};
+export const isRiderProfileValid = (input) => {
+   const schema = Joi.object({
+      user_id: Joi.string().required(),
+      firstname: Joi.string().required(),
+      lastname: Joi.string().required(),
+      nationality: Joi.string(),
+      country_code: Joi.string(),
+      phone_number: Joi.string(),
+      image: Joi.string(),
+      email: Joi.string().required(),
       date: Joi.string().required(),
    });
    const result = schema.validate(input);
